@@ -25,6 +25,10 @@ export function DisplayWidget(controller: AccordionController) {
         model,
         enable_search: false,
         css_name: "display-mode-selector",
+        vexpand: false,
+        hexpand: false,
+        halign: Gtk.Align.CENTER,
+        widthRequest: 150
     });
 
     dropdown.connect("map", () => {
@@ -45,7 +49,7 @@ export function DisplayWidget(controller: AccordionController) {
     });
 
     const applyButton = (
-        <button cssName="display-apply-button" label="Apply" />
+        <button cssName="pill-content-button" label="Apply" vexpand={false} hexpand={false} halign={Gtk.Align.CENTER} />
     ) as Gtk.Button;
 
     applyButton.connect("clicked", () => {
@@ -57,7 +61,7 @@ export function DisplayWidget(controller: AccordionController) {
 
     const content = (
         <box orientation={Gtk.Orientation.VERTICAL} spacing={12} cssName="pill-content">
-            <label label="Display Mode" cssName="pill-section-title" />
+            <label label="Display Mode" cssName={"pill-content-header"} />
             {dropdown}
             {applyButton}
         </box>

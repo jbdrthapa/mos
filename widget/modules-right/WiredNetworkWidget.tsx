@@ -2,42 +2,40 @@ import Gtk from "gi://Gtk?version=4.0";
 import { AccordionController } from "./AccordionController";
 import { PillWidget } from "./PillWidget";
 import { createBinding, createComputed } from "gnim";
-import Network from "gi://AstalNetwork"
-import Utils from "../../Utils";
+import Network from "gi://AstalNetwork";
 
 export function WiredNetworkWidget(controller: AccordionController) {
 
-    const CONFIG_DIR = `${Utils.GetUserConfigDirectory()}/ags`;
 
-    const NM_STATE: Record<number, [string, string]> = {
-        0: [`${CONFIG_DIR}/assets/network/state/nmdevice_unknown_0.svg`, "Unknown"],
-        10: [`${CONFIG_DIR}/assets/network/state/nmdevice_unmanaged_10.svg`, "Unmanaged"],
-        20: [`${CONFIG_DIR}/assets/network/state/nmdevice_unavailable_20.svg`, "Unavailable"],
-        30: [`${CONFIG_DIR}/assets/network/state/nmdevice_disconnected_30.svg`, "Disconnected"],
-        40: [`${CONFIG_DIR}/assets/network/state/nmdevice_prepare_40.svg`, "Prepare"],
-        50: [`${CONFIG_DIR}/assets/network/state/nmdevice_config_50.svg`, "Config"],
-        60: [`${CONFIG_DIR}/assets/network/state/nmdevice_need_auth_60.svg`, "Need Auth"],
-        70: [`${CONFIG_DIR}/assets/network/state/nmdevice_ip_config_70.svg`, "IP Config"],
-        80: [`${CONFIG_DIR}/assets/network/state/nmdevice_ip_check_80.svg`, "IP Check"],
-        90: [`${CONFIG_DIR}/assets/network/state/nmdevice_secondaries_90.svg`, "Secondaries"],
-        100: [`${CONFIG_DIR}/assets/network/state/nmdevice_activated_100.svg`, "Activated"],
-        110: [`${CONFIG_DIR}/assets/network/state/nmdevice_deactivating_110.svg`, "Deactivating"],
-        120: [`${CONFIG_DIR}/assets/network/state/nmdevice_failed_120.svg`, "Failed"]
+    const NM_STATE: Record<number, string> = {
+        0: "Unknown",
+        10: "Unmanaged",
+        20: "Unavailable",
+        30: "Disconnected",
+        40: "Prepare",
+        50: "Config",
+        60: "Need Auth",
+        70: "IP Config",
+        80: "IP Check",
+        90: "Secondaries",
+        100: "Activated",
+        110: "Deactivating",
+        120: "Failed"
     };
 
-    const NM_SPEED: Record<number, [string, string]> = {
+    const NM_SPEED: Record<number, string> = {
         // Unknown / link down
-        0: [`${CONFIG_DIR}/assets/network/wired/speed/nmdevice_speed_unknown_0.svg`, "Unknown"],
-        10: [`${CONFIG_DIR}/assets/network/wired/speed/nmdevice_speed_10.svg`, "10 Mbps"],
-        100: [`${CONFIG_DIR}/assets/network/wired/speed/nmdevice_speed_100.svg`, "100 Mbps"],
-        1000: [`${CONFIG_DIR}/assets/network/wired/speed/nmdevice_speed_1g_1000.svg`, "1 Gbps"],
+        0: "Unknown",
+        10: "10 Mbps",
+        100: "100 Mbps",
+        1000: "1 Gbps",
         // Multi‑Gig speeds (AstalNetwork / NMDeviceEthernet raw values)
-        2500: [`${CONFIG_DIR}/assets/network/wired/speed/nmdevice_speed_2_5g_2500.svg`, "2.5 Gbps"],
-        5000: [`${CONFIG_DIR}/assets/network/wired/speed/nmdevice_speed_5g_5000.svg`, "5 Gbps"],
+        2500: "2.5 Gbps",
+        5000: "5 Gbps",
         // High‑speed NICs
-        10000: [`${CONFIG_DIR}/assets/network/wired/speed/nmdevice_speed_10g_10000.svg`, "10 Gbps"],
-        25000: [`${CONFIG_DIR}/assets/network/wired/speed/nmdevice_speed_25g_25000.svg`, "25 Gbps"],
-        100000: [`${CONFIG_DIR}/assets/network/wired/speed/nmdevice_speed_100g_100000.svg`, "100 Gbps"]
+        10000: "10 Gbps",
+        25000: "25 Gbps",
+        100000: "100 Gbps"
     };
 
     let detail = "";
@@ -69,25 +67,19 @@ export function WiredNetworkWidget(controller: AccordionController) {
 
     const rawState = createBinding(wired, "state");
     const state = createComputed(() => {
-        return NM_STATE[rawState()][1] ?? "?";
-    });
-    const stateIconPath = createComputed(() => {
-        return NM_STATE[rawState()][0] ?? "?";
+        return NM_STATE[rawState()] ?? "?";
     });
 
     const rawSpeed = createBinding(wired, "speed");
     const speed = createComputed(() => {
-        return NM_SPEED[rawSpeed()][1] ?? "?";
-    });
-    const speedIconPath = createComputed(() => {
-        return NM_SPEED[rawSpeed()][0] ?? "?";
+        return NM_SPEED[rawSpeed()] ?? "?";
     });
 
     const content = (
         <box orientation={Gtk.Orientation.VERTICAL} cssName="pill-content" spacing={10}>
-            <box orientation={Gtk.Orientation.HORIZONTAL}>
-                <image iconSize={Gtk.IconSize.NORMAL} iconName={iconName} />
-                <label label={deviceInterface} halign={Gtk.Align.START} />
+            <box orientation={Gtk.Orientation.HORIZONTAL} spacing={20} marginStart={15} marginTop={10} marginBottom={10}>
+                <image iconSize={Gtk.IconSize.NORMAL} iconName={iconName} cssName={"pill-content-header"} />
+                <label label={deviceInterface} cssName={"pill-content-header"} halign={Gtk.Align.START} />
             </box>
             <box orientation={Gtk.Orientation.HORIZONTAL}>
                 <label label="MAC" xalign={0} cssName="pill-param-caption" halign={Gtk.Align.START} />
@@ -96,12 +88,10 @@ export function WiredNetworkWidget(controller: AccordionController) {
             <box orientation={Gtk.Orientation.HORIZONTAL}>
                 <label label="State" xalign={0} cssName="pill-param-caption" halign={Gtk.Align.START} />
                 <label label={state} cssName="pill-param-value" halign={Gtk.Align.START} />
-                <image file={stateIconPath} tooltipText={state} pixelSize={24} halign={Gtk.Align.START} />
             </box>
             <box orientation={Gtk.Orientation.HORIZONTAL}>
                 <label label="Speed" xalign={0} cssName="pill-param-caption" halign={Gtk.Align.START} />
                 <label label={speed} cssName="pill-param-value" halign={Gtk.Align.START} />
-                <image file={speedIconPath} tooltipText={speed} pixelSize={24} halign={Gtk.Align.START} />
             </box>
         </box>
     ) as Gtk.Box;

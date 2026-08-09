@@ -37,7 +37,7 @@ export function SystemInfoWidget() {
     });
 
     return (
-        <box orientation={Gtk.Orientation.HORIZONTAL} cssName="system-info-container" spacing={0}>
+        <box orientation={Gtk.Orientation.HORIZONTAL} cssName="system-info-container">
             <box hexpand={true} halign={Gtk.Align.START} cssName="user-avatar" css={dynamicGtkCss} />
             <box hexpand={true} halign={Gtk.Align.START}>
                 <box orientation={Gtk.Orientation.VERTICAL} vexpand={false} valign={Gtk.Align.CENTER}>

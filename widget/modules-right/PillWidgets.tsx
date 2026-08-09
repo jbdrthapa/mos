@@ -1,24 +1,43 @@
 import Gtk from "gi://Gtk?version=4.0";
-import { WirelessPillWidget } from "./WirelessPillWidget";
+import { DisplayWidget } from "./DisplayWidget";
+import { BluetoothWidget } from "./BluetoothWidget";
+import { WiredNetworkWidget } from "./WiredNetworkWidget";
+import { WirelessNetworkWidget } from "./WirelessNetworkWidget";
+import { AccordionController } from "./AccordionController";
+
+const accordion = new AccordionController();
 
 export function PillWidgets() {
 
-    const wirelessPillWidget1 = WirelessPillWidget();
-    const wirelessPillWidget2 = WirelessPillWidget();
-    const wirelessPillWidget3 = WirelessPillWidget();
-    const wirelessPillWidget4 = WirelessPillWidget();
-
-
+    const displayWidget = DisplayWidget(accordion);
+    const bluetoothWidget = BluetoothWidget(accordion);
+    const wiredNetworkWidget = WiredNetworkWidget(accordion);
+    const wirelessNetworkWidget = WirelessNetworkWidget(accordion);
 
     return (
-        <box orientation={Gtk.Orientation.VERTICAL} >
-            <box orientation={Gtk.Orientation.HORIZONTAL} halign={Gtk.Align.CENTER} cssName="pill-container">
-                {wirelessPillWidget1}
-                {wirelessPillWidget2}
+        <box orientation={Gtk.Orientation.VERTICAL} spacing={10}>
+            <box orientation={Gtk.Orientation.VERTICAL} spacing={10}>
+                <box orientation={Gtk.Orientation.HORIZONTAL}>
+                    <box orientation={Gtk.Orientation.VERTICAL}>
+                        {displayWidget}
+                    </box>
+
+                    <box orientation={Gtk.Orientation.VERTICAL}>
+                        {bluetoothWidget}
+                    </box>
+                </box>
             </box>
-            <box orientation={Gtk.Orientation.HORIZONTAL} halign={Gtk.Align.CENTER} cssName="pill-container">
-                {wirelessPillWidget3}
-                {wirelessPillWidget4}
+            <box orientation={Gtk.Orientation.VERTICAL} spacing={10}>
+                <box orientation={Gtk.Orientation.HORIZONTAL}>
+                    <box orientation={Gtk.Orientation.VERTICAL}>
+                        {wiredNetworkWidget}
+                    </box>
+
+                    <box orientation={Gtk.Orientation.VERTICAL}>
+                        {wirelessNetworkWidget}
+                    </box>
+                </box>
+
             </box>
         </box>
     );

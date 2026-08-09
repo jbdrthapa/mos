@@ -4,7 +4,7 @@ modules-right-container {
   background-color: $base-transparent;
   border: 2px solid $base;
   border-radius: $border-radius;
-  min-height: 700px;
+  min-height: 1000px;
   padding: 20px;
 }
 
@@ -18,5 +18,6 @@ system-info-pill-container {
   background-color: $crust-transparent;
   border: 1px solid $surface0;
   border-radius: $border-radius;
+  min-width: 500px;
   padding: 10px;
 }

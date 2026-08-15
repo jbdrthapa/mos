@@ -28,7 +28,7 @@ export function ModulesRight() {
     const powerButtonsWidget = PowerButtonsWidget();
 
     const button = (
-        <box cssName={"app-launcher-background-right"}>
+        <box>
             <button onClicked={() => ModulesRightPopup.toggle()} cssName={"bar-module-button-right"}>
                 <label label={"󰣇"} />
             </button>

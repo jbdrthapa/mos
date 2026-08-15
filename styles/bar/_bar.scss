@@ -4,5 +4,6 @@ bar {
   font-family: "Inter", "JetBrainsMono Nerd Font Propo", "Noto Sans CJK JP", "Noto Sans CJK KR";
   font-size: 18px;
   color: $overlay0;
-  border-radius: 99px;
+  background-color: $crust-transparent;
+  border-bottom: 2px solid $surface0;
 }

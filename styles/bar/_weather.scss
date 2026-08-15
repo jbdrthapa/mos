@@ -5,23 +5,16 @@ weather-container {
   border-radius: $border-radius;
 }
 
-bar-weather {
-  font-weight: 600;
-  color: $text;
-  padding-left: 0px;
-  padding-right: 15px;
-}
-
 bar-weather-icon {
-  font-size: 16px;
-  font-weight:900;
-  color: $text;
+  font-weight: 800;
+  color: $overlay0;
   padding-left: 10px;
   padding-right: 10px;
 }
 
 bar-weather-temperature {
-  color: $text;
+  font-weight: 800;
+  color: $overlay0;
 }
 
 detail-weather-icon {

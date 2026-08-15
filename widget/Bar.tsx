@@ -84,12 +84,12 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
         <box $type="start" spacing={10}>
           {modulesLeft}
           {dock}
-          {workspaceWidget}
         </box>
         <box $type="center">
           {modulesCenter}
         </box>
         <box $type="end" spacing={10}>
+          {workspaceWidget}
           {powerProfileWidget}
           {graphicsWidget}
           {batteryWidget}

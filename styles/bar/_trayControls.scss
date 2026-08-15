@@ -1,8 +1,6 @@
 @use "theme" as *;
 
-tray-container {
-
-}
+tray-container {}
 
 tray-module-button {
   border-radius: $border-radius;
@@ -21,5 +19,6 @@ tray-module-button:hover {
 
 tray-module-button-image {
   background-color: transparent;
+  color: $overlay1;
   -gtk-icon-size: 22px;
 }

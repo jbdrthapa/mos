@@ -6,35 +6,35 @@ weather-container {
 }
 
 bar-weather-icon {
-  font-weight: 800;
-  color: $overlay0;
+  font-weight: 600;
+  color: $overlay1;
   padding-left: 10px;
   padding-right: 10px;
 }
 
 bar-weather-temperature {
-  font-weight: 800;
-  color: $overlay0;
+  font-weight: 600;
+  color: $overlay1;
 }
 
 detail-weather-icon {
-  color: $overlay0;
+  color: $overlay1;
   font-size: 32px;
 }
 
 detail-weather-temp {
-  color: $overlay0;
+  color: $overlay1;
   font-size: 32px;
 }
 
 detail-weather-details-label {
-  color: $overlay0;
+  color: $overlay1;
   min-width: 160px;
   font-size: 16px;
 }
 
 detail-weather-details-value {
-  color: $overlay0;
+  color: $overlay1;
   background-color: $mantle-transparent;
   min-width: 100px;
   padding: 10px;

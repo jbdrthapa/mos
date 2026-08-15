@@ -7,3 +7,30 @@ bar {
   background-color: $crust-transparent;
   border-bottom: 2px solid $surface0;
 }
+
+.discrete-graphics-icon {
+  font-size: 28px;
+  font-weight: 800;
+  padding: 5px;
+  color: $overlay1;
+}
+
+.discrete-graphics-icon-suspended {
+  @extend .discrete-graphics-icon;
+  color: $green;
+}
+
+.discrete-graphics-icon-active {
+  @extend .discrete-graphics-icon;
+  color: $red;
+}
+
+.discrete-graphics-icon-resuming {
+  @extend .discrete-graphics-icon;
+  color: $orange;
+}
+
+.discrete-graphics-icon-suspending {
+  @extend .discrete-graphics-icon;
+  color: $orange;
+}

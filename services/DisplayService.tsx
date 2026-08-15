@@ -92,7 +92,6 @@ class InternalDisplayService extends GObject.Object {
 
         GLib.timeout_add(GLib.PRIORITY_DEFAULT, checkTimer, () => {
             this.updateBrightnessPercent();
-            this.updateDisplayMode();
             return GLib.SOURCE_CONTINUE;
         });
 
@@ -158,9 +157,6 @@ class InternalDisplayService extends GObject.Object {
 
             const block = text.slice(blockStart, blockEnd + 1);
 
-            //
-            // Detect HDR inside THIS block only
-            //
             const hdrMatch = block.match(/reference-luminance\s+(\d+)/);
 
             let mode = "SDR";
@@ -277,7 +273,6 @@ class InternalDisplayService extends GObject.Object {
             if (mode !== "SDR") {
                 const luminance = luminanceMap[mode] ?? 84;
 
-                // Remove trailing whitespace before final brace
                 newBlock = newBlock.replace(/\s*}$/, "");
 
                 // Ensure a clean newline before HDR block
@@ -286,8 +281,8 @@ class InternalDisplayService extends GObject.Object {
                     `        reference-luminance ${luminance}\n` +
                     `    }\n`;
 
-                // Insert HDR block cleanly
-                newBlock += hdrBlock + "}\n";
+                newBlock += hdrBlock + "}";
+
             }
 
             //
@@ -314,6 +309,8 @@ class InternalDisplayService extends GObject.Object {
         } catch (err) {
             print("apply_display_mode failed:", err);
         }
+
+        this.updateDisplayMode();
     }
 
 

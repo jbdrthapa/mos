@@ -54,10 +54,18 @@ export function AudioSliderWidget({
     });
 
     const button = (
-        <button cssName="audio-slider-button">
-            <SliderSet endpoint={endPoint} />
+        <button vexpand={true} valign={Gtk.Align.CENTER} cssName="audio-slider-button">
+            <label label="󰬧" cssName="slider-content-extender" />
         </button>
     ) as Gtk.Button;
+
+
+    const sliderWidget = (
+        <box>
+            <SliderSet endpoint={endPoint} />
+            {button}
+        </box>
+    );
 
     button.connect("clicked", () => {
         const newState = !revealer.get_reveal_child();
@@ -73,7 +81,7 @@ export function AudioSliderWidget({
     return (
 
         <box orientation={Gtk.Orientation.VERTICAL} cssName="pill-container">
-            {button}
+            {sliderWidget}
             {revealer}
         </box>
     );

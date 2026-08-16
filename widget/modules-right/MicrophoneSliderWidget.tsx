@@ -9,7 +9,7 @@ export function MicrophoneSliderWidget(controller: SliderAccordionController) {
 
     const content = (
         <box orientation={Gtk.Orientation.VERTICAL} cssName="slider-content">
-            <label label="Microphones" cssName="slider-content-header" />
+            <label label="M I C R O P H O N E S" cssName="slider-content-header" />
         </box>
     ) as Gtk.Box;
 

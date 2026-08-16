@@ -15,8 +15,7 @@ export function DisplayControlsWidget() {
                 <slider
                     cssClasses={["slider-control"]}
                     tooltipText={createBinding(displayService, "brightness_percent").as((value) => String(value))}
-                    widthRequest={380}
-                    heightRequest={40}
+                    widthRequest={320}
                     min={0}
                     max={100}
                     value={createBinding(displayService, "brightness_percent")}

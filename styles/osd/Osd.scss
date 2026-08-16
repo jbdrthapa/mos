@@ -19,7 +19,7 @@ osd-box {
     padding: 15px;
     padding-left: 35px;
     padding-right: 35px;
-    border: 2px solid $accent-background;
+    border: 2px solid $surface1;
     min-width: 520px;
 }
 
@@ -57,11 +57,11 @@ osd-box levelbar {
     }
 
     >trough block.high {
-        background-color: $peach;
+        background-color: $yellow;
     }
 
     >trough block.full {
-        background-color: $red;
+        background-color: $peach;
     }
 
     >trough block.empty {

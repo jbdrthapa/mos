@@ -23,7 +23,7 @@ export function AudioControlsWidget() {
                 <slider
                     cssClasses={["slider-control"]}
                     tooltipText={volumeText}
-                    widthRequest={380}
+                    widthRequest={320}
                     onChangeValue={({ value }) => endpoint.set_volume(value)}
                     value={createBinding(endpoint, "volume")} />
             </box>

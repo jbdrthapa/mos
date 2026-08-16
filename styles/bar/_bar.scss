@@ -6,6 +6,8 @@ bar {
   color: $overlay0;
   background-color: $crust-transparent;
   border-bottom: 2px solid $surface0;
+  margin: 0 0px 3px 0px; 
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.4), 0 2px 2px -1px rgba(0, 0, 0, 0.3);
 }
 
 .discrete-graphics-icon {

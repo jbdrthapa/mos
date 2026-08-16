@@ -13,7 +13,7 @@ pill-button {
   border-radius: 99px;
   border: 2px solid $surface1-transparent;
   transition: all 600ms cubic-bezier(0.4, 0, 0.2, 1);
-  min-width: 220px;
+  min-width: 200px;
   min-height: 50px;
   margin: 10px;
 }
@@ -40,7 +40,7 @@ pill-button-name {
 
 pill-button-detail {
   background-color: transparent;
-  color: $overlay2;
+  color: $accent-background;
   font-weight: 400;
   font-size: 14px;
 }

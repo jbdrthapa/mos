@@ -34,6 +34,13 @@ const DisplayServiceProperties = {
         'Display Mode string',
         GObject.ParamFlags.READWRITE,
         ''
+    ),
+    'display-device': GObject.ParamSpec.string(
+        'display-device',
+        'Display Device',
+        'Display Device string',
+        GObject.ParamFlags.READWRITE,
+        ''
     )
 };
 
@@ -50,6 +57,7 @@ class InternalDisplayService extends GObject.Object {
     private last_brightness_percent = 0;
     private brightness_percent = 0;
     private brightness_icon = "\u{f0cb5}";
+    private display_device = "";
     private last_display_mode = "";
     private display_mode = "";
     private adjustment_value = 5;
@@ -357,6 +365,9 @@ class InternalDisplayService extends GObject.Object {
                 } else {
                     console.log("No AMD or Intel backlight device found.");
                 }
+
+                this.display_device = displayDevice ?? "";
+                this.notify("display-device");
             })
             .catch(print);
     }

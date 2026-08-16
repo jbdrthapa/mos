@@ -81,6 +81,13 @@ desktop-menu-button label:hover {
   color: $accent-background;
 }
 
+slider-device-name{
+    color: $overlay1;
+    font-size: 16px;
+    font-weight: 600;
+    margin-left: 15px;
+}
+
 /* The main slider container */
 .slider-control {
   margin: 0px;

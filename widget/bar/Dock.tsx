@@ -9,8 +9,9 @@ const DOCK_LAUNCHERS = Config.GetDockLaunchers();
 
 export default function Dock() {
     return (
-        <box cssName="dock-container" halign={Gtk.Align.CENTER}>
+        <box halign={Gtk.Align.CENTER}>
             <button
+                vexpand={true}
                 valign={Gtk.Align.CENTER}
                 cssClasses={["dock-button", "close"]}
                 onClicked={() => {

@@ -3,8 +3,8 @@
 battery-percent {
     background: none;
     font-size: 14px;
-    font-weight: 600;
-    color: $text;
+    font-weight: 800;
+    color: $overlay1;
     text-shadow:
         2px 2px 0 $crust,
         -2px -2px 0 $crust,
@@ -13,7 +13,7 @@ battery-percent {
 }
 
 battery-bar {
-    padding-bottom: 3px;
+    padding-bottom: 2px;
     >trough {
         border-radius: $border-radius;
         padding: 6px;
@@ -28,7 +28,7 @@ battery-bar {
 
     >trough block.high {
         border-radius: $border-radius;
-        background-color: $peach;
+        background-color: $orange;
     }
 
     >trough block.full {

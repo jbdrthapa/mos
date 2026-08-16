@@ -33,13 +33,15 @@ pill-button-image {
 
 pill-button-name {
   background-color: transparent;
-  font-weight: 800;
+  font-weight: 700;
   font-size: 18px;
+  margin-top: 5px;
 }
 
 pill-button-detail {
   background-color: transparent;
-  font-weight: 500;
+  color: $overlay2;
+  font-weight: 400;
   font-size: 14px;
 }
 

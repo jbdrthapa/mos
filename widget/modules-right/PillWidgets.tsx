@@ -15,24 +15,22 @@ export function PillWidgets() {
     const wirelessNetworkWidget = WirelessNetworkWidget(accordion);
 
     return (
-        <box orientation={Gtk.Orientation.VERTICAL} spacing={10}>
-            <box orientation={Gtk.Orientation.VERTICAL} spacing={10}>
+        <box orientation={Gtk.Orientation.VERTICAL}>
+            <box orientation={Gtk.Orientation.VERTICAL}>
                 <box orientation={Gtk.Orientation.HORIZONTAL}>
                     <box orientation={Gtk.Orientation.VERTICAL}>
                         {displayWidget}
                     </box>
-
                     <box orientation={Gtk.Orientation.VERTICAL}>
                         {bluetoothWidget}
                     </box>
                 </box>
             </box>
-            <box orientation={Gtk.Orientation.VERTICAL} spacing={10}>
+            <box orientation={Gtk.Orientation.VERTICAL}>
                 <box orientation={Gtk.Orientation.HORIZONTAL}>
                     <box orientation={Gtk.Orientation.VERTICAL}>
                         {wiredNetworkWidget}
                     </box>
-
                     <box orientation={Gtk.Orientation.VERTICAL}>
                         {wirelessNetworkWidget}
                     </box>

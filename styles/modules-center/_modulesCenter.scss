@@ -13,7 +13,7 @@ date-time-weather-container button {
 }
 
 bar-date-time {
-  font-weight: 600;
+  font-weight: 700;
   color: $overlay1;
   padding-left: 5px;
   padding-right: 5px;
@@ -21,7 +21,7 @@ bar-date-time {
 
 bar-date-time-delim {
   @extend bar-date-time;
-  color: $surface0;
+  color: $surface2;
 }
 
 time-container {

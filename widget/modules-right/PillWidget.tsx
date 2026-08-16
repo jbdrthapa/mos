@@ -33,7 +33,7 @@ export function PillWidget({
 
     const button = (
         <button cssName="pill-button">
-            <box orientation={Gtk.Orientation.HORIZONTAL} spacing={8}>
+            <box orientation={Gtk.Orientation.HORIZONTAL} spacing={12}>
                 <label label={iconName} cssName="pill-button-image" />
                 <box orientation={Gtk.Orientation.VERTICAL}>
                     <label xalign={0} label={title} cssName="pill-button-name" />

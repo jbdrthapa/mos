@@ -22,15 +22,15 @@ bar {
 
 .discrete-graphics-icon-active {
   @extend .discrete-graphics-icon;
-  color: $red;
+  color: $peach;
 }
 
 .discrete-graphics-icon-resuming {
   @extend .discrete-graphics-icon;
-  color: $orange;
+  color: $yellow;
 }
 
 .discrete-graphics-icon-suspending {
   @extend .discrete-graphics-icon;
-  color: $orange;
+  color: $yellow;
 }

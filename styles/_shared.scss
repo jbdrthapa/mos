@@ -25,7 +25,8 @@ popup-window-style {
 
 tooltip {
   background-color: $mantle-transparent;
-  color: $overlay0;
+  color: $overlay1;
+  font-size: 16px;
   border-radius: $border-radius;
   border: 2px solid $surface1;
   padding: 10px;

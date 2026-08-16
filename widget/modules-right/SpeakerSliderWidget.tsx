@@ -8,8 +8,8 @@ export function SpeakerSliderWidget(controller: SliderAccordionController) {
     const { defaultSpeaker: speaker } = AstalWp.get_default()!
 
     const content = (
-        <box orientation={Gtk.Orientation.VERTICAL} cssName="pill-content">
-            <label label="Speakers" />
+        <box orientation={Gtk.Orientation.VERTICAL} cssName="slider-content">
+            <label label="Speakers" cssName="slider-content-header" />
         </box>
     ) as Gtk.Box;
 

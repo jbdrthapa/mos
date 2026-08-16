@@ -8,8 +8,8 @@ export function MicrophoneSliderWidget(controller: SliderAccordionController) {
     const { defaultMicrophone: microphone } = AstalWp.get_default()!
 
     const content = (
-        <box orientation={Gtk.Orientation.VERTICAL} cssName="pill-content">
-            <label label="Microphones" />
+        <box orientation={Gtk.Orientation.VERTICAL} cssName="slider-content">
+            <label label="Microphones" cssName="slider-content-header" />
         </box>
     ) as Gtk.Box;
 

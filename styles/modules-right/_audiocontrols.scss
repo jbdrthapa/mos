@@ -22,6 +22,21 @@ audio-percent {
     margin-right: 10px;
 }
 
-audio-slider-button{
+audio-slider-button {
     background: none;
+}
+
+slider-content-header {
+    color: $overlay1;
+}
+
+slider-content {
+    background-color: $base-transparent;
+    border-top: 2px solid $surface2;
+    margin: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    min-height: 100px;
+    font-size: 14px;
+    padding: 10px;
 }

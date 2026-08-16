@@ -55,7 +55,7 @@ export function AudioSliderWidget({
 
     const button = (
         <button vexpand={true} valign={Gtk.Align.CENTER} cssName="audio-slider-button">
-            <label label="󰬧" cssName="slider-content-extender" />
+            <label label="" cssName="slider-content-extender" />
         </button>
     ) as Gtk.Button;
 

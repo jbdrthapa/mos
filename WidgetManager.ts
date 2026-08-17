@@ -1,12 +1,24 @@
+import { createRoot } from "ags"
 import { Settings } from "./widget/settings/Settings"
 
-let settingsInstance: any | undefined;
+let settingsInstance: ReturnType<typeof Settings> | undefined;
+let dispose: (() => void) | undefined;
+
 
 export function GetSettingsWindow() {
-    if (settingsInstance === undefined) {
-        settingsInstance = Settings();
+    if (!settingsInstance) {
+        dispose = createRoot((d) => {
+            settingsInstance = Settings()
+            return d;
+        })
     }
     return settingsInstance;
+}
+
+export function DisposeSettingsWindow() {
+    dispose?.()
+    dispose = undefined
+    settingsInstance = undefined
 }
 
 const WidgetManager = {

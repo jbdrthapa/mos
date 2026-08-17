@@ -31,7 +31,7 @@ export function MprisWidget() {
 
     function MediaInfo({ mprisPlayer }: { mprisPlayer: AstalMpris.Player }) {
 
-        const textWidth = 16;
+        const textWidth = 27;
 
         const title = createBinding(mprisPlayer, "title")
 
@@ -90,23 +90,24 @@ export function MprisWidget() {
 
 
     return (
+        <box marginBottom={40} marginStart={20} marginEnd={20}>
+            <box spacing={20} orientation={Gtk.Orientation.VERTICAL}>
+                <For each={players}>
+                    {(player) => (
 
-        <box spacing={20} orientation={Gtk.Orientation.VERTICAL}>
-            <For each={players}>
-                {(player) => (
+                        <box>
+                            {/* Cover art */}
+                            {MediaCoverArt({ mprisPlayer: player })}
 
-                    <box>
-                        {/* Cover art */}
-                        {MediaCoverArt({ mprisPlayer: player })}
+                            {/* Title and Artist */}
+                            {MediaInfo({ mprisPlayer: player })}
 
-                        {/* Title and Artist */}
-                        {MediaInfo({ mprisPlayer: player })}
-
-                        {/* Previous, Play/Pause, Next buttons */}
-                        {MediaPlaybackButtons({ mprisPlayer: player })}
-                    </box>
-                )}
-            </For>
+                            {/* Previous, Play/Pause, Next buttons */}
+                            {MediaPlaybackButtons({ mprisPlayer: player })}
+                        </box>
+                    )}
+                </For>
+            </box>
         </box>
     );
 }

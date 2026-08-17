@@ -8,7 +8,7 @@ app.set_application_id("org.js-shell")
 app.version = "1.0"
 
 app.start({
-  instanceName:"js-shell",
+  instanceName: "js-shell",
   css: style,
   main() {
     for (const monitor of app.get_monitors()) {

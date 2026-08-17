@@ -16,13 +16,14 @@ import Dock from "./bar/Dock"
 import IPCService from "../services/IPCService"
 import WidgetManager from "../WidgetManager"
 import PopupWindow from "./PopupWindow"
+import { createRoot } from "ags"
 
 let modulesLeft: any;
 let modulesCenter: any;
 let modulesRight: any;
 let settings: typeof PopupWindow;
 let dock: any;
-let desktopMenu = DesktopMenu();
+let desktopMenu = createRoot(() => DesktopMenu());
 
 const windowName = WindowName.bar;
 

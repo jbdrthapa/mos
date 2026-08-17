@@ -20,20 +20,20 @@ export function DesktopMenu() {
 
                 <button cssName="desktop-menu-button" onClicked={() => {
                     let settings = WidgetManager.GetSettingsWindow();
-                    settings.Display();
-                    settings.toggle();
+                    settings?.Display();
+                    settings?.toggle();
                 }}>Display</button>
 
                 <button cssName="desktop-menu-button" onClicked={() => {
                     let settings = WidgetManager.GetSettingsWindow();
-                    settings.Wallpaper();
-                    settings.toggle();
+                    settings?.Wallpaper();
+                    settings?.toggle();
                 }}>Wallpaper</button>
 
                 <button cssName="desktop-menu-button" onClicked={() => {
                     let settings = WidgetManager.GetSettingsWindow();
-                    settings.Settings();
-                    settings.toggle();
+                    settings?.Settings();
+                    settings?.toggle();
 
                 }}>Settings</button>
 

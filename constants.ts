@@ -5,5 +5,6 @@ export const WindowName = {
     bar: "bar-background",
     settings: "js-shell-modules-settings",
     osd: "js-shell-osd",
-    desktopMenu: "js-shell-desktopmenu"
+    desktopMenu: "js-shell-desktopmenu",
+    lockScreen: "js-shell-lockscreen"
 } as const;

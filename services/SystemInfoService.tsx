@@ -2,6 +2,7 @@ import GObject from "gi://GObject";
 import { execAsync } from "ags/process";
 import GLib from "gi://GLib";
 import Gio from "gi://Gio";
+import Auth from "gi://AstalAuth"
 
 const SystemInfoServiceProperties = {
     'host-info': GObject.ParamSpec.string(
@@ -24,6 +25,13 @@ const SystemInfoServiceProperties = {
         'Avatar',
         GObject.ParamFlags.READWRITE,
         ' '
+    ),
+    'auth-message': GObject.ParamSpec.string(
+        'auth-message',
+        'AuthMessage',
+        'Auth Message',
+        GObject.ParamFlags.READWRITE,
+        ''
     )
 };
 
@@ -41,6 +49,7 @@ class InternalSystemInfoService extends GObject.Object {
     host_info = '';
     uptime_info = '';
     avatar = '';
+    auth_message = '';
 
     constructor() {
         super();
@@ -98,6 +107,39 @@ class InternalSystemInfoService extends GObject.Object {
         this.avatar = "avatar-default";
     }
 
+    authenticate(password: string, onSuccess: () => void) {
+        let message = "";
+        Auth.Pam.authenticate(password, (_, task) => {
+            try {
+                Auth.Pam.authenticate_finish(task)
+                message = "Authentication Successful";
+                this.auth_message = message;
+                this.notify("auth-message");
+
+                GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1000, () => {
+                    this.auth_message = "";
+                    this.notify("auth-message");
+                    
+                    onSuccess();
+
+                    return GLib.SOURCE_REMOVE;
+                });
+
+                
+            }
+            catch (error) {
+                message = "Authentication Failed";
+                this.auth_message = message;
+                this.notify("auth-message");
+
+                GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1000, () => {
+                    this.auth_message = "";
+                    this.notify("auth-message");
+                    return GLib.SOURCE_REMOVE;
+                });
+            }
+        })
+    }
 }
 
 const SystemInfoService = GObject.registerClass({ Properties: SystemInfoServiceProperties, }, InternalSystemInfoService);

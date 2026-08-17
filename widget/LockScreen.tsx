@@ -48,7 +48,7 @@ export function LockScreen() {
             application={app}
             cssName={""}
         >
-            <box valign={Gtk.Align.CENTER} orientation={Gtk.Orientation.VERTICAL} css="background-color:$red;" spacing={20}>
+            <box valign={Gtk.Align.CENTER} orientation={Gtk.Orientation.VERTICAL} spacing={20}>
                 <box hexpand={true} halign={Gtk.Align.CENTER} cssName="user-avatar-lockscreen" css={dynamicGtkCss} />
                 <label label={hostInfo} cssName="host-info" />
                 <label label={uptime} cssName="uptime-info" />

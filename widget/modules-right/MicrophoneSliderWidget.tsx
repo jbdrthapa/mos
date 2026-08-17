@@ -3,6 +3,7 @@ import AstalWp from "gi://AstalWp?version=0.1";
 import { For, createBinding, createComputed } from "gnim";
 import { SliderAccordionController } from "./SliderAccordionController";
 import { AudioSliderWidget } from "./AudioSliderWidget";
+import { execAsync } from "ags/process";
 
 export function MicrophoneSliderWidget(controller: SliderAccordionController) {
 
@@ -36,7 +37,17 @@ export function MicrophoneSliderWidget(controller: SliderAccordionController) {
                                         halign={Gtk.Align.END}
                                         valign={Gtk.Align.CENTER}
                                         onNotifyActive={(self) => {
-                                            microphone.isDefault = self.active;
+                                            if (self.active) {
+                                                const id_Accessor = createBinding(mic, "id");
+                                                const id = id_Accessor();
+                                                execAsync(`wpctl set-default ${id}`)
+                                                    .then(() => {
+                                                        console.log(`Successfully set microphone ${id} as default.`);
+                                                    })
+                                                    .catch(err => {
+                                                        console.error(`wpctl failed to set default mic: ${err}`);
+                                                    });
+                                            }
                                         }} />
                                     <label label={description} cssName="slider-content-param" />
                                 </box>

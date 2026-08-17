@@ -2,6 +2,7 @@ import AstalWp from "gi://AstalWp?version=0.1";
 import Gtk from "gi://Gtk?version=4.0";
 import { createBinding } from "gnim";
 import { SliderAccordionController } from "./SliderAccordionController";
+import { execAsync } from "ags/process";
 
 export function AudioSliderWidget({
     id,
@@ -14,6 +15,20 @@ export function AudioSliderWidget({
     endPoint: AstalWp.Endpoint;
     content: Gtk.Widget;
 }) {
+
+    let soundCooldown = false;
+
+    function playVolumeSound() {
+        if (soundCooldown) return;
+        soundCooldown = true;
+        execAsync(['canberra-gtk-play', '--id=audio-volume-change'])
+            .catch(err => console.error(err))
+            .finally(() => {
+                setTimeout(() => {
+                    soundCooldown = false;
+                }, 5);
+            });
+    }
 
     function SliderSet({ endpoint }: { endpoint: AstalWp.Endpoint }) {
         const descriptionTooltip = createBinding(endpoint, "description").as(d => d ?? "");
@@ -37,7 +52,12 @@ export function AudioSliderWidget({
                         cssClasses={["slider-control"]}
                         tooltipText={volumeText}
                         widthRequest={320}
-                        onChangeValue={({ value }) => endpoint.set_volume(value)}
+                        onChangeValue={({ value }) => {
+                            endpoint.set_volume(value);
+                            if (id == "speaker") {
+                                playVolumeSound();
+                            }
+                        }}
                         value={createBinding(endpoint, "volume")} />
                 </box>
             </box>

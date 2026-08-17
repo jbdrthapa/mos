@@ -1,10 +1,6 @@
 @use "theme" as *;
 
-tray-container {
-  background-color: $crust-transparent;
-  border-radius: 99px;
-  border: 2px solid $surface2;
-}
+tray-container {}
 
 tray-module-button {
   border-radius: $border-radius;
@@ -23,5 +19,6 @@ tray-module-button:hover {
 
 tray-module-button-image {
   background-color: transparent;
+  color: $overlay1;
   -gtk-icon-size: 22px;
 }

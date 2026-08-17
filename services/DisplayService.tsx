@@ -34,6 +34,13 @@ const DisplayServiceProperties = {
         'Display Mode string',
         GObject.ParamFlags.READWRITE,
         ''
+    ),
+    'display-device': GObject.ParamSpec.string(
+        'display-device',
+        'Display Device',
+        'Display Device string',
+        GObject.ParamFlags.READWRITE,
+        ''
     )
 };
 
@@ -50,6 +57,7 @@ class InternalDisplayService extends GObject.Object {
     private last_brightness_percent = 0;
     private brightness_percent = 0;
     private brightness_icon = "\u{f0cb5}";
+    private display_device = "";
     private last_display_mode = "";
     private display_mode = "";
     private adjustment_value = 5;
@@ -92,7 +100,6 @@ class InternalDisplayService extends GObject.Object {
 
         GLib.timeout_add(GLib.PRIORITY_DEFAULT, checkTimer, () => {
             this.updateBrightnessPercent();
-            this.updateDisplayMode();
             return GLib.SOURCE_CONTINUE;
         });
 
@@ -158,9 +165,6 @@ class InternalDisplayService extends GObject.Object {
 
             const block = text.slice(blockStart, blockEnd + 1);
 
-            //
-            // Detect HDR inside THIS block only
-            //
             const hdrMatch = block.match(/reference-luminance\s+(\d+)/);
 
             let mode = "SDR";
@@ -277,7 +281,6 @@ class InternalDisplayService extends GObject.Object {
             if (mode !== "SDR") {
                 const luminance = luminanceMap[mode] ?? 84;
 
-                // Remove trailing whitespace before final brace
                 newBlock = newBlock.replace(/\s*}$/, "");
 
                 // Ensure a clean newline before HDR block
@@ -286,8 +289,8 @@ class InternalDisplayService extends GObject.Object {
                     `        reference-luminance ${luminance}\n` +
                     `    }\n`;
 
-                // Insert HDR block cleanly
-                newBlock += hdrBlock + "}\n";
+                newBlock += hdrBlock + "}";
+
             }
 
             //
@@ -314,6 +317,8 @@ class InternalDisplayService extends GObject.Object {
         } catch (err) {
             print("apply_display_mode failed:", err);
         }
+
+        this.updateDisplayMode();
     }
 
 
@@ -360,6 +365,9 @@ class InternalDisplayService extends GObject.Object {
                 } else {
                     console.log("No AMD or Intel backlight device found.");
                 }
+
+                this.display_device = displayDevice ?? "";
+                this.notify("display-device");
             })
             .catch(print);
     }

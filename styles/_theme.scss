@@ -9,58 +9,58 @@ $border: #414868;
 $hover-background: #9aa5ce;
 $hover-foreground: #1a1b26;
 
-$text: #cdd6f4;
-$subtext0: #a6adc8;
-$subtext1: #bac2de;
+$text: #c0caf5;
+$subtext0: #a9b1d6;
+$subtext1: #9aa5ce;
 
 $accent-background: #04a5e5;
-$accent-background-transparent: #04a5e5fa;
+$accent-background-transparent: #7dcffffa;
+$accent-foreground: #1a1b26;
 
-$accent-foreground: #11111b;
+$base: #1a1b26;
+$base-transparent: #1a1b26e0;
 
-$base: #1e1e2e;
-$base-transparent: #1e1e2ee0;
+$mantle: #24283b;
+$mantle-transparent: #24283bf2;
 
-$mantle: #181825;
-$mantle-transparent: #181825f2;
+$crust: #1a1b26;
+$crust-transparent: #1a1b26f2;
 
-$crust: #11111b;
-$crust-transparent: #11111bf2;
+$surface0: #1f2335;
+$surface0-transparent: #1f2335fa;
 
-$surface0: #313244;
-$surface0-transparent: #313244fa;
+$surface1: #2a2f4b;
+$surface1-transparent: #2a2f4bfa;
 
-$surface1: #45475a;
-$surface1-transparent: #45475afa;
+$surface2: #3b4261;
+$surface2-transparent: #3b4261fa;
 
-$surface2: #585b70;
-$surface2-transparent: #585b70fa;
+$overlay0: #414868;
+$overlay0-transparent: #414868fa;
 
-$overlay0: #6c7086;
-$overlay0-transparent: #6c7086fa;
+$overlay1: #565f89;
+$overlay1-transparent: #565f89fa;
 
-$overlay1: #7f849c;
-$overlay1-transparent: #7f849cfa;
+$overlay2: #9aa5ce;
+$overlay2-transparent: #9aa5cefa;
 
-$overlay2: #9399b2;
-$overlay2-transparent: #9399b2fa;
+$red: #f7768e;
+$orange: #ff9e64;
+$yellow: #e0af68;
+$green: #9ece6a;
+$teal: #73daca;
+$cyan: #7dcfff;
+$blue: #7aa2f7;
+$magenta: #bb9af7;
+$white: #c0caf5;
+$black: #1a1b26;
 
-$blue: #1e66f5;
 $lavender: #7287fd;
 $sapphire: #209fb5;
 $sky: #04a5e5;
-$teal: #179299;
-$green: #40a02b;
-$yellow: #df8e1d;
 $peach: #fe640b;
 $maroon: #e64553;
-$red: #d20f39;
 $mauve: #8839ef;
 $pink: #ea76cb;
 $flamingo: #dd7878;
 $rosewater: #dc8a78;
-
-$magenta: #8839ef;
-$cyan: #179299;
-$white: #bac2de;
-$black: #11111b;

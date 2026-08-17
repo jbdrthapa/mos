@@ -12,8 +12,8 @@ mpris-media-info {
 }
 
 mpris-title {
-    font-size: 16px;
-    font-weight: 600;
+    font-size: 14px;
+    font-weight: 500;
     color: $accent-background;
 }
 
@@ -23,20 +23,20 @@ mpris-artist {
 }
 
 mpris-button {
-    background-color: $base;
+    background-color: $surface1;
     padding: 10px;
     border-radius: 99px;
     transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 mpris-button:hover {
-    background-color: $overlay0;
+    background-color: $surface2;
     color: $accent-background;
 }
 
 mpris-cover-art {
     border-radius: 99px;
-    border: 2px solid $surface2;
+    border: 2px solid $surface0;
 }
 
 @keyframes spin {

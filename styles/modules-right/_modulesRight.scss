@@ -4,20 +4,14 @@ modules-right-container {
   background-color: $base-transparent;
   border: 2px solid $base;
   border-radius: $border-radius;
-  min-height: 1000px;
   padding: 20px;
 }
 
-app-launcher-background-right {
-  background-color: $sky;
-  border-radius: $border-radius;
-}
-
-
 system-info-pill-container {
   background-color: $crust-transparent;
-  border: 1px solid $surface0;
+  border: 2px solid $surface0;
+  box-shadow: inset 0 -1px 0 0 $surface0, 0 4px 4px rgba(0, 0, 0, 0.2);
   border-radius: $border-radius;
-  min-width: 500px;
+  min-width: 400px;
   padding: 10px;
 }

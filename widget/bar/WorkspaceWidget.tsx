@@ -21,6 +21,16 @@ export function WorkspaceWidget() {
   return (
     <box>
       <box spacing={10} cssName="workspace-container" orientation={Gtk.Orientation.HORIZONTAL}>
+        <image
+          visible={focused.as(win => !!win)}
+          icon-name={focused.as(win => win?.app_id || "image-missing")}
+          cssName="active-window-icon"
+          tooltipText={focused.as(win => {
+            if (!win || !win.title) return "";
+            return win.title;
+          })}
+        />
+
         <button
           valign={Gtk.Align.CENTER}
           cssClasses={["workspace-item", "focus"]}
@@ -59,15 +69,6 @@ export function WorkspaceWidget() {
           <label label="" />
         </button>
 
-        <image
-          visible={focused.as(win => !!win)}
-          icon-name={focused.as(win => win?.app_id || "image-missing")}
-          cssName="active-window-icon"
-          tooltipText={focused.as(win => {
-            if (!win || !win.title) return "";
-            return win.title;
-          })}
-        />
       </box>
     </box>
   )

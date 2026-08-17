@@ -28,11 +28,9 @@ export function ModulesRight() {
     const powerButtonsWidget = PowerButtonsWidget();
 
     const button = (
-        <box cssName={"app-launcher-background-right"}>
-            <button onClicked={() => ModulesRightPopup.toggle()} cssName={"bar-module-button-right"}>
-                <label label={"󰣇"} />
-            </button>
-        </box>
+        <button onClicked={() => ModulesRightPopup.toggle()} cssName={"bar-module-button"}>
+            <label label={"󰣇"} />
+        </button>
     ) as any;
 
     ModulesRightPopup = new PopupWindow({
@@ -41,8 +39,8 @@ export function ModulesRight() {
         anchor: Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT,
         margin: 8,
         child: (
-            <box cssName="modules-right-container" vexpand={true} orientation={Gtk.Orientation.VERTICAL}>
-                <box orientation={Gtk.Orientation.VERTICAL} vexpand={true}  valign={Gtk.Align.START} spacing={20}>
+            <box cssName="modules-right-container" vexpand={false} valign={Gtk.Align.START} orientation={Gtk.Orientation.VERTICAL}>
+                <box orientation={Gtk.Orientation.VERTICAL} vexpand={true} valign={Gtk.Align.START} spacing={20}>
                     <box orientation={Gtk.Orientation.VERTICAL} hexpand={false} halign={Gtk.Align.CENTER} cssName="system-info-pill-container">
                         {systemInfoWidget}
                         {pillWidgets}
@@ -51,7 +49,7 @@ export function ModulesRight() {
                     {audioControlsWidget}
                     {mprisWidget}
                 </box>
-                <box vexpand={false}  valign={Gtk.Align.END} halign={Gtk.Align.CENTER} cssName="power-button-container">
+                <box vexpand={false} valign={Gtk.Align.END} halign={Gtk.Align.CENTER} cssName="power-button-container">
                     {powerButtonsWidget}
                 </box>
             </box>

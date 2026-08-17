@@ -7,8 +7,8 @@ export function WeatherBarWidget() {
     const weatherService = WeatherService.get_default();
 
     return (
-        <box cssName="bar-weather">
-            <label label={createBinding(weatherService, "icon")} cssName="bar-weather-icon" />
+        <box>
+            <label vexpand={true} valign={Gtk.Align.CENTER} label={createBinding(weatherService, "icon")} cssName="bar-weather-icon" />
             <label label={createBinding(weatherService, "temperature")} cssName="bar-weather-temperature" />
         </box>
     );

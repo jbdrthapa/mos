@@ -7,29 +7,23 @@ pill-container {
 }
 
 pill-button {
-  background-color: $mantle;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  color: $overlay0;
+  background-color: $surface0-transparent;
+  color: $overlay1;
+  padding: 5px;
   border-radius: 99px;
-  border: 2px solid $surface0;
+  border: 2px solid $surface1-transparent;
   transition: all 600ms cubic-bezier(0.4, 0, 0.2, 1);
-  min-width: 250px;
+  min-width: 200px;
   min-height: 50px;
-  margin-left: 5px;
-  margin-right: 5px;
+  margin: 10px;
 }
 
 pill-button:hover {
   border: 2px solid $accent-background;
 }
 
-pill-button>button {
-  background-color: transparent;
-}
-
 pill-button-image {
-  color: $accent-background;
+  color: $overlay2;
   font-weight: 900;
   font-size: 28px;
   background-color: transparent;
@@ -39,13 +33,15 @@ pill-button-image {
 
 pill-button-name {
   background-color: transparent;
-  font-weight: 800;
+  font-weight: 700;
   font-size: 18px;
+  margin-top: 5px;
 }
 
 pill-button-detail {
   background-color: transparent;
-  font-weight: 500;
+  color: $accent-background;
+  font-weight: 400;
   font-size: 14px;
 }
 
@@ -74,9 +70,9 @@ pill-content-button:hover {
 }
 
 pill-content {
-  background-color: $mantle;
+  background-color: $base-transparent;
+  border-top: 2px solid $surface2;
   border-radius: $border-radius;
-  border: 2px solid $surface0;
   margin: 5px;
   margin-top: 10px;
   margin-bottom: 10px;

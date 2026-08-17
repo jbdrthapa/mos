@@ -7,7 +7,7 @@ const accordion = new AccordionController();
 export function BluetoothWidget(controller: AccordionController) {
     const content = (
         <box orientation={Gtk.Orientation.VERTICAL} cssName="pill-content">
-            <label label="Bluetooth" />
+            <label label="B L U E T O O T H" cssName={"pill-content-header"} />
         </box>
     ) as Gtk.Box;
 

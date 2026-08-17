@@ -1,19 +1,22 @@
 js-shell, custom shell for Tiling Window Managers
  
 ## Bar
- ![Application Launcher](screenshots/Bar.png?v=6)
+![Application Launcher](screenshots/Bar1.png?v=1)
+![Application Launcher](screenshots/Bar2.png?v=1)
+![Application Launcher](screenshots/Bar3.png?v=1)
+
 
 ## Application Launcher
-![Application Launcher](screenshots/Launcher.png?v=5)
+![Application Launcher](screenshots/Launcher.png?v=6)
 
 ## Menu 
-![Menu](screenshots/Menu.png?v=5)
+![Menu](screenshots/Menu.png?v=6)
  
 ## Notifications
-![Notification](screenshots/Notification.png?v=5)
+![Notification](screenshots/Notification.png?v=6)
  
 ## Date time calendar
-![Time & Calendar](screenshots/Time-Calendar.png?v=5)
+![Time & Calendar](screenshots/Time-Calendar.png?v=6)
 
 ## Power Settings 
 ![Power Settings](screenshots/Settings-Power.png?v=5)

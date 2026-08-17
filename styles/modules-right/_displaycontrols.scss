@@ -1,12 +1,12 @@
 @use "theme" as *;
 
 brightness-icon {
-    color: $overlay0;
+    color: $overlay1;
     font-size: 34px;
 }
 
 brightness-percent {
-    color: $overlay0;
+    color: $overlay1;
     font-size: 18px;
     font-weight: 600;
     background-color: $mantle-transparent;

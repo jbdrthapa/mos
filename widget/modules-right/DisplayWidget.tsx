@@ -61,7 +61,7 @@ export function DisplayWidget(controller: AccordionController) {
 
     const content = (
         <box orientation={Gtk.Orientation.VERTICAL} spacing={12} cssName="pill-content">
-            <label label="Display Mode" cssName={"pill-content-header"} />
+            <label label="D I S P L A Y" cssName={"pill-content-header"} />
             {dropdown}
             {applyButton}
         </box>

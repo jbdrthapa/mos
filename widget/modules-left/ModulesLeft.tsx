@@ -5,12 +5,9 @@ export function ModulesLeft() {
     const appListingWindow = AppListing();
 
     const button = (
-        <box cssName={"app-launcher-background-left"}>
-            <button onClicked={() => appListingWindow.toggle()} cssName={"bar-module-button-left"}>
-                <label label="" />
-            </button>
-        </box>
-
+        <button onClicked={() => appListingWindow.toggle()} cssName={"bar-module-button"}>
+            <label label="" />
+        </button>
     ) as any;
 
 

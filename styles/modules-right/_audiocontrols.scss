@@ -6,11 +6,11 @@ audio-controls-container {
 }
 
 audio-icon {
-    color: $overlay0;
+    color: $overlay1;
 }
 
 audio-percent {
-    color: $overlay0;
+    color: $overlay1;
     font-size: 18px;
     font-weight: 600;
     background-color: $mantle-transparent;
@@ -20,4 +20,43 @@ audio-percent {
     min-height: 40px;
     margin-left: 10px;
     margin-right: 10px;
+}
+
+audio-slider-button {
+    background: none;
+}
+
+slider-content-header {
+    color: $overlay1;
+    margin-bottom: 10px;
+}
+
+slider-content-extender {
+    transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
+    color: $overlay0;
+    font-size: 28px;
+    font-weight: 800;
+    margin-left: 10px;
+}
+
+slider-content-extender:hover {
+    color: $accent-background;
+    transform: rotate(90deg);
+}
+
+slider-content {
+    background-color: $base-transparent;
+    border-top: 2px solid $surface2;
+    border-radius: $border-radius;
+    margin: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    min-height: 100px;
+    font-size: 14px;
+    padding: 10px;
+}
+
+slider-content-param {
+    color: $overlay1;
+    font-size: 14px;
 }

@@ -25,7 +25,8 @@ popup-window-style {
 
 tooltip {
   background-color: $mantle-transparent;
-  color: $overlay0;
+  color: $overlay1;
+  font-size: 16px;
   border-radius: $border-radius;
   border: 2px solid $surface1;
   padding: 10px;
@@ -51,37 +52,23 @@ bar-button-background {
 }
 
 bar-module-button {
-  background-color: $base;
+  background-color: $crust-transparent;
   transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
-  color: $overlay0;
-  font-weight: 600;
-  border-radius: $border-radius;
-  min-width: 60px;
-  padding: 0px;
-  margin: 2px;
-}
-
-bar-module-button-left {
-  @extend bar-module-button;
-  margin-left: 2px;
-}
-
-bar-module-button-right {
-  @extend bar-module-button;
-  margin-right: 2px;
+  color: $overlay1;
+  font-size: 22px;
+  min-width: 70px;
 }
 
 bar-module-button:hover {
   background-color: $surface0;
   color: $accent-background;
-  box-shadow: inset 1px -1px 0 0 $base, 0 4px 6px rgba(0, 0, 0, 0.5);
 }
 
 desktop-menu-button label {
-  background-color: $base-transparent;
+  background-color: $crust-transparent;
   transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
-  border: 2px solid $surface0;
-  color: $overlay0;
+  border: 2px solid $surface2;
+  color: $overlay1;
   font-weight: 600;
   border-radius: 99px;
   min-width: 160px;
@@ -91,6 +78,14 @@ desktop-menu-button label {
 
 desktop-menu-button label:hover {
   border: 2px solid $accent-background;
+  color: $accent-background;
+}
+
+slider-device-name{
+    color: $overlay1;
+    font-size: 16px;
+    font-weight: 600;
+    margin-left: 15px;
 }
 
 /* The main slider container */
@@ -100,7 +95,7 @@ desktop-menu-button label:hover {
 
 // /* The track background */
 .slider-control trough {
-  background-color: $surface0;
+  background-color: $surface2;
   border-radius: $border-radius;
   min-height: 10px;
 }
@@ -116,11 +111,36 @@ desktop-menu-button label:hover {
   background-color: $base;
   border: 2px solid $surface1;
   transition: all 600ms cubic-bezier(0.4, 0, 0.2, 1);
-  min-width: 25px;
-  min-height: 25px;
+  min-width: 20px;
+  min-height: 20px;
   border-radius: 100%;
 }
 
 .slider-control slider:hover {
   border: 2px solid $accent-background;
+}
+
+switch {
+    background-color: $mantle-transparent;
+    border: 1px solid $overlay1;
+    border-radius: $border-radius;
+    min-height: 12px;
+    min-width: 24px;
+}
+
+switch:checked {
+    background-color: $accent-background;
+    border-color: $black;
+}
+
+switch slider {
+    background-color: $overlay2;
+    border-radius: 100%;
+    min-height: 10px;
+    min-width: 10px;
+    margin: 2px;
+}
+
+switch:checked slider {
+    background-color: $surface2;
 }

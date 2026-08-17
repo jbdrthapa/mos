@@ -109,6 +109,8 @@ class InternalSystemInfoService extends GObject.Object {
 
     authenticate(password: string, onSuccess: () => void) {
         let message = "";
+        this.auth_message = "checking ...";
+        this.notify("auth-message");
         Auth.Pam.authenticate(password, (_, task) => {
             try {
                 Auth.Pam.authenticate_finish(task)
@@ -116,16 +118,16 @@ class InternalSystemInfoService extends GObject.Object {
                 this.auth_message = message;
                 this.notify("auth-message");
 
-                GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1000, () => {
+                GLib.timeout_add(GLib.PRIORITY_DEFAULT, 800, () => {
                     this.auth_message = "";
                     this.notify("auth-message");
-                    
+
                     onSuccess();
 
                     return GLib.SOURCE_REMOVE;
                 });
 
-                
+
             }
             catch (error) {
                 message = "Authentication Failed";

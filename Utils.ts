@@ -8,9 +8,14 @@ export function GetUserConfigDirectory() {
     return GLib.get_user_config_dir();
 }
 
+export function GetSessionType() {
+    return GLib.getenv("XDG_CURRENT_DESKTOP") || "";
+}
+
 const Utils = {
     GetHomeDirectory,
-    GetUserConfigDirectory
+    GetUserConfigDirectory,
+    GetSessionType
 };
 
 export default Utils;

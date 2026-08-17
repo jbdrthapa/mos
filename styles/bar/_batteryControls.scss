@@ -23,12 +23,12 @@ battery-bar {
     >trough block.low {
         border-radius: $border-radius;
         padding: 2px;
-        background-color: $red;
+        background-color: $peach;
     }
 
     >trough block.high {
         border-radius: $border-radius;
-        background-color: $orange;
+        background-color: $yellow;
     }
 
     >trough block.full {

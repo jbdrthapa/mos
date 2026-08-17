@@ -1,7 +1,7 @@
 import AstalWp from "gi://AstalWp?version=0.1";
 import Gtk from "gi://Gtk?version=4.0";
 import { createBinding } from "gnim";
-import { AudioAccordionController } from "./SliderAccordionController";
+import { SliderAccordionController } from "./SliderAccordionController";
 
 export function AudioSliderWidget({
     id,
@@ -10,13 +10,17 @@ export function AudioSliderWidget({
     content
 }: {
     id: string;
-    controller: AudioAccordionController;
+    controller: SliderAccordionController;
     endPoint: AstalWp.Endpoint;
     content: Gtk.Widget;
 }) {
 
     function SliderSet({ endpoint }: { endpoint: AstalWp.Endpoint }) {
-        const device = createBinding(endpoint, "device").as((value) => value?.description || "");
+        const descriptionTooltip = createBinding(endpoint, "description").as(d => d ?? "");
+        const description = createBinding(endpoint, "description").as(d => {
+            const s = d ?? "";
+            return s.length > 35 ? s.slice(0, 32) + "…" : s;
+        });
         const volumeIcon = createBinding(endpoint, "volumeIcon");
         const volume = createBinding(endpoint, "volume");
         const volumeText = volume.as((value) => String(Math.trunc(value * 100)));
@@ -28,7 +32,7 @@ export function AudioSliderWidget({
                     iconName={volumeIcon} cssName={"audio-icon"} />
                 <label valign={Gtk.Align.CENTER} label={volumeText} cssName={"audio-percent"} />
                 <box orientation={Gtk.Orientation.VERTICAL}>
-                    <label xalign={0} label={device} tooltipText={device} cssName="slider-device-name" />
+                    <label xalign={0} label={description} tooltipText={descriptionTooltip} cssName="slider-device-name" />
                     <slider
                         cssClasses={["slider-control"]}
                         tooltipText={volumeText}

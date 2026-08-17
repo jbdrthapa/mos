@@ -119,3 +119,28 @@ slider-device-name{
 .slider-control slider:hover {
   border: 2px solid $accent-background;
 }
+
+switch {
+    background-color: $mantle-transparent;
+    border: 1px solid $overlay1;
+    border-radius: $border-radius;
+    min-height: 12px;
+    min-width: 24px;
+}
+
+switch:checked {
+    background-color: $accent-background;
+    border-color: $black;
+}
+
+switch slider {
+    background-color: $overlay2;
+    border-radius: 100%;
+    min-height: 10px;
+    min-width: 10px;
+    margin: 2px;
+}
+
+switch:checked slider {
+    background-color: $surface2;
+}

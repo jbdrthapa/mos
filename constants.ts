@@ -6,5 +6,6 @@ export const WindowName = {
     settings: "js-shell-modules-settings",
     osd: "js-shell-osd",
     desktopMenu: "js-shell-desktopmenu",
-    lockScreen: "js-shell-lockscreen"
+    lockScreen: "js-shell-lockscreen",
+    powerOptions: "js-shell-poweroptions"
 } as const;

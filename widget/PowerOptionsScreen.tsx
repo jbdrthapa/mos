@@ -15,7 +15,7 @@ export function PowerOptionsScreen() {
     const revealerWidget = (
         <revealer
             revealChild={reveal}
-            transitionType={Gtk.RevealerTransitionType.FADE_SLIDE_UP}
+            transitionType={Gtk.RevealerTransitionType.CROSSFADE}
             transitionDuration={1000}
             vexpand={true}
             hexpand={true}
@@ -89,7 +89,7 @@ export function PowerOptionsScreen() {
 
         setReveal(false);
 
-        GLib.timeout_add(GLib.PRIORITY_DEFAULT, 800, () => {
+        GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1000, () => {
             powerOptionsWindow.hide();
 
             setReveal(true);

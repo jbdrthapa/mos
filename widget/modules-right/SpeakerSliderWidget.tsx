@@ -10,8 +10,15 @@ export function SpeakerSliderWidget(controller: SliderAccordionController) {
 
     const wp = AstalWp.get_default();
     const speakersRawBinding = createBinding(wp.audio, "speakers");
-    const speakersBinding = createComputed(() => { return speakersRawBinding() || []; });
+    const speakersBinding = createComputed(() => {
+        const list = speakersRawBinding() || [];
 
+        return [...list].sort((a, b) => {
+            const descA = a.description ?? "Unknown Device";
+            const descB = b.description ?? "Unknown Device";
+            return descA.localeCompare(descB);
+        });
+    });
 
     const content = (
         <box orientation={Gtk.Orientation.VERTICAL} cssName="slider-content">

@@ -11,7 +11,16 @@ export function MicrophoneSliderWidget(controller: SliderAccordionController) {
 
     const wp = AstalWp.get_default();
     const microphonesRawBinding = createBinding(wp.audio, "microphones");
-    const microphonesBinding = createComputed(() => { return microphonesRawBinding() || []; });
+
+    const microphonesBinding = createComputed(() => {
+        const list = microphonesRawBinding() || [];
+
+        return [...list].sort((a, b) => {
+            const descA = a.description ?? "Unknown Device";
+            const descB = b.description ?? "Unknown Device";
+            return descA.localeCompare(descB);
+        });
+    });
 
 
     const content = (

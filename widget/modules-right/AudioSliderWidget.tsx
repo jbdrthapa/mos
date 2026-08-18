@@ -36,9 +36,35 @@ export function AudioSliderWidget({
             const s = d ?? "";
             return s.length > 35 ? s.slice(0, 32) + "…" : s;
         });
-        const volumeIcon = createBinding(endpoint, "volumeIcon");
+
         const volume = createBinding(endpoint, "volume");
-        const volumeText = volume.as((value) => String(Math.trunc(value * 100)));
+
+        const volumeIcon = volume.as(v => {
+            if (id == "speaker") {
+                if (v === 0) return "audio-volume-muted-symbolic";
+                if (v < 0.33) return "audio-volume-low-symbolic";
+                if (v < 0.66) return "audio-volume-medium-symbolic";
+                if (v <= 1.0) return "audio-volume-high-symbolic";
+                return "audio-volume-overamplified-symbolic";
+            }
+            else if (id == "microphone") {
+                if (v === 0) return "audio-input-microphone-muted-symbolic";
+                if (v < 0.33) return "audio-input-microphone-low-symbolic";
+                if (v < 0.66) return "audio-input-microphone-low-symbolic";
+                if (v <= 1.0) return "audio-input-microphone-high-symbolic";
+                return "audio-input-microphone-high-symbolic";
+            }
+        });
+
+        const volumeText = volume.as(v => String(Math.trunc(v * 100)));
+
+        const volumeAdj = new Gtk.Adjustment({
+            lower: 0,
+            upper: 1.5,
+            step_increment: 0.01,
+            page_increment: 0.05,
+            value: endpoint.volume,
+        });
 
         return (
             <box orientation={Gtk.Orientation.HORIZONTAL} heightRequest={80}>
@@ -49,6 +75,7 @@ export function AudioSliderWidget({
                 <box orientation={Gtk.Orientation.VERTICAL}>
                     <label xalign={0} label={description} tooltipText={descriptionTooltip} cssName="slider-device-name" />
                     <slider
+                        adjustment={volumeAdj}
                         cssClasses={["slider-control"]}
                         tooltipText={volumeText}
                         widthRequest={320}

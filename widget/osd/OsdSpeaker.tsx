@@ -15,7 +15,14 @@ export default function OsdSpeaker(gdkmonitor: Gdk.Monitor) {
     if (!speaker) return <box />
 
     const volumeBinding = createBinding(speaker, "volume")
-    const iconBinding = createBinding(speaker, "volume-icon")
+    const iconBinding = volumeBinding.as(v => {
+        if (v === 0) return "audio-volume-muted-symbolic";
+        if (v < 0.33) return "audio-volume-low-symbolic";
+        if (v < 0.66) return "audio-volume-medium-symbolic";
+        if (v <= 1.0) return "audio-volume-high-symbolic";
+        return "audio-volume-overamplified-symbolic";
+    });
+
 
     // Destructure the accessor [0] and the setter function [1]
     const [visible, setVisible] = createState(false)
@@ -64,6 +71,8 @@ export default function OsdSpeaker(gdkmonitor: Gdk.Monitor) {
                 widthRequest={100}
                 heightRequest={25}
                 cssClasses={["osd-bar"]}
+                minValue={0}
+                maxValue={1.5}
                 value={volumeBinding.as(v => v)}
                 valign={Gtk.Align.CENTER}
                 hexpand={true}

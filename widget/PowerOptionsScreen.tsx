@@ -28,7 +28,7 @@ export function PowerOptionsScreen() {
             <box vexpand={true} hexpand={true} valign={Gtk.Align.CENTER} halign={Gtk.Align.CENTER} orientation={Gtk.Orientation.VERTICAL} spacing={20}>
                 <box orientation={Gtk.Orientation.HORIZONTAL} halign={Gtk.Align.CENTER} spacing={35}>
 
-                    <box orientation={Gtk.Orientation.VERTICAL} spacing={40}>
+                    <box orientation={Gtk.Orientation.VERTICAL} spacing={40} cssName="power-button-container-large">
                         <button label="󰿅" cssName="power-button-large" onClicked={() => {
                             slideDownAndHide();
                             GLib.spawn_command_line_async('bash -c "niri msg action quit --skip-confirmation"');
@@ -36,7 +36,7 @@ export function PowerOptionsScreen() {
                         <label label={"Log Off"} tooltipText="Log Off" cssName="power-button-caption" />
                     </box>
 
-                    <box orientation={Gtk.Orientation.VERTICAL} spacing={40}>
+                    <box orientation={Gtk.Orientation.VERTICAL} spacing={40} cssName="power-button-container-large">
                         <button label="" cssName="power-button-large" onClicked={() => {
                             slideDownAndHide();
                             GLib.spawn_command_line_async('bash -c "systemctl reboot"');
@@ -44,7 +44,7 @@ export function PowerOptionsScreen() {
                         <label label={"Reboot"} tooltipText="Reboot" cssName="power-button-caption" />
                     </box>
 
-                    <box orientation={Gtk.Orientation.VERTICAL} spacing={40}>
+                    <box orientation={Gtk.Orientation.VERTICAL} spacing={40} cssName="power-button-container-large">
                         <button label="" cssName="power-button-large" onClicked={() => {
                             slideDownAndHide();
                             GLib.spawn_command_line_async('bash -c "systemctl poweroff"');
@@ -52,7 +52,7 @@ export function PowerOptionsScreen() {
                         <label label={"Power Off"} tooltipText="Power Off" cssName="power-button-caption" />
                     </box>
 
-                    <box orientation={Gtk.Orientation.VERTICAL} spacing={40}>
+                    <box orientation={Gtk.Orientation.VERTICAL} spacing={40} cssName="power-button-container-large">
                         <button label="" cssName="power-button-large" onClicked={() => {
                             slideDownAndHide();
                         }} />

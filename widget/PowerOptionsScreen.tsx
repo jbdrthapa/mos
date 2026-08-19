@@ -15,7 +15,7 @@ export function PowerOptionsScreen() {
     const revealerWidget = (
         <revealer
             revealChild={reveal}
-            transitionType={Gtk.RevealerTransitionType.CROSSFADE}
+            transitionType={Gtk.RevealerTransitionType.FADE_SLIDE_UP}
             transitionDuration={1000}
             vexpand={true}
             hexpand={true}
@@ -30,24 +30,21 @@ export function PowerOptionsScreen() {
 
                     <box orientation={Gtk.Orientation.VERTICAL} spacing={40} cssName="power-button-container-large">
                         <button label="󰿅" cssName="power-button-large" onClicked={() => {
-                            slideDownAndHide();
-                            GLib.spawn_command_line_async('bash -c "niri msg action quit --skip-confirmation"');
+                            slideDownAndHide("niri msg action quit --skip-confirmation");
                         }} />
                         <label label={"Log Off"} tooltipText="Log Off" cssName="power-button-caption" />
                     </box>
 
                     <box orientation={Gtk.Orientation.VERTICAL} spacing={40} cssName="power-button-container-large">
                         <button label="" cssName="power-button-large" onClicked={() => {
-                            slideDownAndHide();
-                            GLib.spawn_command_line_async('bash -c "systemctl reboot"');
+                            slideDownAndHide("systemctl reboot");
                         }} />
                         <label label={"Reboot"} tooltipText="Reboot" cssName="power-button-caption" />
                     </box>
 
                     <box orientation={Gtk.Orientation.VERTICAL} spacing={40} cssName="power-button-container-large">
                         <button label="" cssName="power-button-large" onClicked={() => {
-                            slideDownAndHide();
-                            GLib.spawn_command_line_async('bash -c "systemctl poweroff"');
+                            slideDownAndHide("systemctl poweroff");
                         }} />
                         <label label={"Power Off"} tooltipText="Power Off" cssName="power-button-caption" />
                     </box>
@@ -85,12 +82,16 @@ export function PowerOptionsScreen() {
         </window>
     ) as Astal.Window;
 
-    function slideDownAndHide() {
+    function slideDownAndHide(cmd: string = "") {
 
         setReveal(false);
 
         GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1000, () => {
             powerOptionsWindow.hide();
+
+            if (cmd) {
+                GLib.spawn_command_line_async(cmd);
+            }
 
             setReveal(true);
 

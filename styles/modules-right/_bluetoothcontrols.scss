@@ -1,0 +1,10 @@
+@use "theme" as *;
+
+devices-box {
+    border-bottom: 1px solid $mantle;
+    padding: 10px;
+}
+
+device-name {
+    color: $overlay1;
+}

@@ -2,8 +2,28 @@
 
 devices-box {
     border-bottom: 1px solid $mantle;
-    padding: 10px;
+    padding: 5px;
 }
+
+devices-box-row {
+    padding: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    border-radius: $border-radius;
+    background: $surface0;
+    margin-bottom: 6px;
+}
+
+devices-box-row:hover {
+    color: $crust;
+    background: $accent-background;
+}
+
+devices-box-row:selected {
+    color: $crust;
+    background: $green;
+}
+
 
 device-name {
     color: $overlay1;

@@ -43,7 +43,7 @@ export function BluetoothWidget(controller: AccordionController) {
             <For each={pairedDevicesList}>
                 {(device) => {
                     return (
-                        <Gtk.ListBoxRow>
+                        <Gtk.ListBoxRow cssName={"devices-box-row"}>
                             <box orientation={Gtk.Orientation.HORIZONTAL} spacing={4}>
                                 <label
                                     label={createBinding(device, "name").as(name => name || device.address || "Unknown Device")}
@@ -70,8 +70,25 @@ export function BluetoothWidget(controller: AccordionController) {
 
     const discoveredDevicesList = createComputed(() => {
         const allDevices = devicesBinding() || [];
-        return allDevices.filter(device => !device.paired);
+
+        return allDevices
+            .filter(device => !device.paired)
+            .sort((a, b) => {
+                const hasRealNameA = !!a.name && a.name.trim().length > 0;
+                const hasRealNameB = !!b.name && b.name.trim().length > 0;
+
+                // Devices with real names go first
+                if (hasRealNameA && !hasRealNameB) return -1;
+                if (!hasRealNameA && hasRealNameB) return 1;
+
+                // If both have names or both don't, sort alphabetically by alias/name
+                const labelA = a.name || a.alias || "";
+                const labelB = b.name || b.alias || "";
+
+                return labelA.localeCompare(labelB);
+            });
     });
+
 
     const discoveredDevicesBox = (
         <Gtk.ListBox
@@ -87,7 +104,7 @@ export function BluetoothWidget(controller: AccordionController) {
             <For each={discoveredDevicesList}>
                 {(device) => {
                     return (
-                        <Gtk.ListBoxRow>
+                        <Gtk.ListBoxRow cssName={"devices-box-row"}>
                             <box orientation={Gtk.Orientation.HORIZONTAL} spacing={4}>
                                 <label
                                     label={createBinding(device, "name").as(name => name || device.address || "Unknown Device")}
@@ -127,7 +144,7 @@ export function BluetoothWidget(controller: AccordionController) {
 
     discoverButton.connect("clicked", async () => {
         if (!adapter?.discovering) {
-            discoverButton.tooltipText = "Discovering ...";
+            discoverButton.tooltipText = "discovering ...";
             console.log("Starting dscovery");
             adapter.start_discovery();
         }
@@ -137,6 +154,8 @@ export function BluetoothWidget(controller: AccordionController) {
             adapter.stop_discovery();
         }
     });
+
+    discoverButton.tooltipText = adapter.discovering ? "discovering ..." : "discover";
 
     pairButton.connect("clicked", async () => {
         if (!selectedDevice) return;

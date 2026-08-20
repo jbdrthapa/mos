@@ -10,6 +10,8 @@ const min_height = 100;
 
 export function BluetoothWidget(controller: AccordionController) {
 
+    let selectedDevice: AstalBluetooth.Device;
+
     const bluetooth = AstalBluetooth.get_default();
 
     const adapter = bluetooth.adapter;
@@ -28,22 +30,34 @@ export function BluetoothWidget(controller: AccordionController) {
     });
 
     const pairedDevicesBox = (
-        <box orientation={Gtk.Orientation.VERTICAL} spacing={4} cssName="devices-box">
+        <Gtk.ListBox
+            cssName="devices-box"
+            onRowSelected={(self, row) => {
+                if (row) {
+                    const index = row.get_index();
+                    selectedDevice = pairedDevicesList()[index];
+                    console.log("Selected:", selectedDevice.name || selectedDevice.address);
+                }
+            }}
+        >
             <For each={pairedDevicesList}>
                 {(device) => {
                     return (
-                        <box>
-                            <label
-                                label={createBinding(device, "name").as(name => name || device.address || "Unknown Device")}
-                                cssName="device-name"
-                                halign={Gtk.Align.START}
-                            />
-                        </box>
+                        <Gtk.ListBoxRow>
+                            <box orientation={Gtk.Orientation.HORIZONTAL} spacing={4}>
+                                <label
+                                    label={createBinding(device, "name").as(name => name || device.address || "Unknown Device")}
+                                    cssName="device-name"
+                                    halign={Gtk.Align.START}
+                                />
+                            </box>
+                        </Gtk.ListBoxRow>
                     );
                 }}
             </For>
-        </box>
-    ) as Gtk.Box;
+        </Gtk.ListBox>
+    ) as Gtk.ListBox;
+
 
     const pairedDevices = new Gtk.ScrolledWindow({
         hscrollbar_policy: hscroll_policy,
@@ -60,24 +74,33 @@ export function BluetoothWidget(controller: AccordionController) {
     });
 
     const discoveredDevicesBox = (
-        <box orientation={Gtk.Orientation.VERTICAL} spacing={4} cssName="devices-box">
-            <box orientation={Gtk.Orientation.VERTICAL} spacing={4}>
-                <For each={discoveredDevicesList}>
-                    {(device) => {
-                        return (
-                            <box>
+        <Gtk.ListBox
+            cssName="devices-box"
+            onRowSelected={(self, row) => {
+                if (row) {
+                    const index = row.get_index();
+                    selectedDevice = discoveredDevicesList()[index];
+                    console.log("Selected:", selectedDevice.name || selectedDevice.address);
+                }
+            }}
+        >
+            <For each={discoveredDevicesList}>
+                {(device) => {
+                    return (
+                        <Gtk.ListBoxRow>
+                            <box orientation={Gtk.Orientation.HORIZONTAL} spacing={4}>
                                 <label
                                     label={createBinding(device, "name").as(name => name || device.address || "Unknown Device")}
                                     cssName="device-name"
                                     halign={Gtk.Align.START}
                                 />
                             </box>
-                        );
-                    }}
-                </For>
-            </box>
-        </box>
-    ) as Gtk.Box;
+                        </Gtk.ListBoxRow>
+                    );
+                }}
+            </For>
+        </Gtk.ListBox>
+    ) as Gtk.ListBox;
 
     const discoveredDevices = new Gtk.ScrolledWindow({
         hscrollbar_policy: hscroll_policy,
@@ -87,27 +110,133 @@ export function BluetoothWidget(controller: AccordionController) {
     discoveredDevices.set_child(discoveredDevicesBox);
 
     const discoverButton = (
-        <button cssName="pill-content-button" label="" vexpand={false} hexpand={false} halign={Gtk.Align.CENTER} />
+        <button cssName="pill-content-button" label="" tooltipText="discover" vexpand={false} hexpand={false} halign={Gtk.Align.CENTER} />
+    ) as Gtk.Button;
+
+    const pairButton = (
+        <button cssName="pill-content-button" label="󱄀" tooltipText="pair" vexpand={false} hexpand={false} halign={Gtk.Align.CENTER} />
+    ) as Gtk.Button;
+
+    const unpairButton = (
+        <button cssName="pill-content-button" label="󱃿" tooltipText="unpair" vexpand={false} hexpand={false} halign={Gtk.Align.CENTER} />
+    ) as Gtk.Button;
+
+    const connectButton = (
+        <button cssName="pill-content-button" label="󰂱" tooltipText="connect" vexpand={false} hexpand={false} halign={Gtk.Align.CENTER} />
     ) as Gtk.Button;
 
     discoverButton.connect("clicked", async () => {
         if (!adapter?.discovering) {
             discoverButton.tooltipText = "Discovering ...";
-            console.log("Starting discovery");
-            adapter?.start_discovery();
+            console.log("Starting dscovery");
+            adapter.start_discovery();
         }
         else {
             console.log("Stopping discovery");
-            discoverButton.tooltipText = "Discovery";
-            adapter?.stop_discovery();
+            discoverButton.tooltipText = "discover";
+            adapter.stop_discovery();
         }
     });
+
+    pairButton.connect("clicked", async () => {
+        if (!selectedDevice) return;
+
+        const deviceName = selectedDevice.name || selectedDevice.address;
+
+        if (selectedDevice.paired) {
+            print(`${deviceName} is already paired.`);
+            return;
+        }
+
+        try {
+            if (!adapter.discovering) {
+                print("Adapter is not in discoverable state, setting the adapter to discoverable state.")
+                adapter.start_discovery();
+                adapter.pairable = true;
+                adapter.discoverable = true;
+            }
+
+            print(`${deviceName} is not paired, pairing.`)
+            selectedDevice.pair();
+            adapter.stop_discovery();
+            adapter.pairable = true;
+            adapter.discoverable = true;
+            print(`${deviceName} pairing completed.`)
+
+            print(`${deviceName} is not connected, connecting.`)
+            selectedDevice.connect_device(() => {
+                print(`Connection to ${deviceName} completed.`)
+            });
+
+        } catch (err) {
+            console.error(err);
+        }
+    });
+
+    unpairButton.connect("clicked", async () => {
+        if (!selectedDevice) return;
+
+        const deviceName = selectedDevice.name || selectedDevice.address;
+
+        if (!selectedDevice.paired) {
+            print(`${deviceName} is not paired.`);
+            return;
+        }
+
+        try {
+            if (!adapter.discovering) {
+                print("Adapter is not in discoverable state, setting the adapter to discoverable state.")
+                adapter.start_discovery();
+                adapter.pairable = true;
+                adapter.discoverable = true;
+            }
+
+            print(`${deviceName} is paired, unpairing.`)
+            selectedDevice.disconnect_device((dev, res) => {
+                try {
+                    dev?.disconnect_device_finish(res);
+                    print(`${deviceName} unpairing completed.`);
+                } catch (err) {
+                    print(`Unpairing ${deviceName} failed:`, err);
+                }
+            });
+        } catch (err) {
+            console.error(err);
+        }
+    });
+
+    connectButton.connect("clicked", async () => {
+        if (!selectedDevice) return;
+
+        const deviceName = selectedDevice.name || selectedDevice.address;
+
+        if (selectedDevice.connected) {
+            print(`${deviceName} is already connected.`);
+            return;
+        }
+
+        try {
+            print(`${deviceName} is not connected, connecting.`)
+            selectedDevice.connect_device(() => {
+                print(`Connection to ${deviceName} completed.`)
+            });
+
+        } catch (err) {
+            console.error(err);
+        }
+    });
+
+
+
 
     const content = (
         <box orientation={Gtk.Orientation.VERTICAL} cssName="pill-content" spacing={2}>
             <label label="B L U E T O O T H" cssName={"pill-content-header"} />
             <box orientation={Gtk.Orientation.HORIZONTAL}>
                 {discoverButton}
+                {pairButton}
+                {unpairButton}
+                {connectButton}
             </box>
             {pairedDevices}
             {discoveredDevices}

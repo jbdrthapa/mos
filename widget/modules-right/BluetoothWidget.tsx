@@ -7,6 +7,7 @@ import { For, createBinding, createComputed } from "gnim";
 const hscroll_policy = Gtk.PolicyType.NEVER;
 const vscroll_policy = Gtk.PolicyType.AUTOMATIC;
 const min_height = 100;
+const deviceLabelWidth = 18;
 
 export function BluetoothWidget(controller: AccordionController) {
 
@@ -47,6 +48,11 @@ export function BluetoothWidget(controller: AccordionController) {
                     const address = createBinding(device, "address");
                     const connected = createBinding(device, "connected");
                     const batteryInfo = createBinding(device, "batteryPercentage");
+
+                    let deviceName = name() || alias() || "Unknown Device";
+
+                    deviceName = deviceName.length > deviceLabelWidth ? deviceName.slice(0, deviceLabelWidth) + "…" : deviceName;
+
                     let tooltipText = "";
 
                     if (name() == alias()) {
@@ -64,7 +70,7 @@ export function BluetoothWidget(controller: AccordionController) {
                         <Gtk.ListBoxRow cssName={"devices-box-row"}>
                             <box orientation={Gtk.Orientation.HORIZONTAL} spacing={4}>
                                 <label
-                                    label={name() || alias() || "Unknown Device"}
+                                    label={deviceName}
                                     tooltipText={tooltipText}
                                     cssName="device-name"
                                     halign={Gtk.Align.START}

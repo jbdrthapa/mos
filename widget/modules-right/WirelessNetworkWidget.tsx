@@ -145,11 +145,11 @@ export function WirelessNetworkWidget(controller: AccordionController) {
     accessPoints.set_child(accessPointsListBox);
 
     const connectButton = (
-        <button cssName="pill-content-button" label="󱛃" tooltipText="discover" vexpand={false} hexpand={false} halign={Gtk.Align.CENTER} />
+        <button cssName="pill-content-button" label="󱛃" tooltipText="connect" vexpand={false} hexpand={false} halign={Gtk.Align.CENTER} />
     ) as Gtk.Button;
 
     const disconnectButton = (
-        <button cssName="pill-content-button" label="󱛂" tooltipText="pair" vexpand={false} hexpand={false} halign={Gtk.Align.CENTER} />
+        <button cssName="pill-content-button" label="󱛂" tooltipText="disconnect" vexpand={false} hexpand={false} halign={Gtk.Align.CENTER} />
     ) as Gtk.Button;
 
     const passphraseWidget = (

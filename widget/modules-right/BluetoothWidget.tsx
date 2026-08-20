@@ -184,13 +184,6 @@ export function BluetoothWidget(controller: AccordionController) {
         }
 
         try {
-            if (!adapter.discovering) {
-                print("Adapter is not in discoverable state, setting the adapter to discoverable state.")
-                adapter.start_discovery();
-                adapter.pairable = true;
-                adapter.discoverable = true;
-            }
-
             print(`${deviceName} is paired, unpairing.`)
             selectedDevice.disconnect_device((dev, res) => {
                 try {

@@ -3,7 +3,6 @@ import { AccordionController } from "./AccordionController";
 import Network from "gi://AstalNetwork"
 import { For, createBinding, createComputed } from "gnim";
 import { PillWidget } from "./PillWidget";
-import AstalNetwork from "gi://AstalNetwork?version=0.1";
 
 export function WirelessNetworkWidget(controller: AccordionController) {
 
@@ -12,7 +11,7 @@ export function WirelessNetworkWidget(controller: AccordionController) {
     const hscroll_policy = Gtk.PolicyType.NEVER;
     const vscroll_policy = Gtk.PolicyType.AUTOMATIC;
     const min_height = 200;
-    const apLabelWidth = 18;
+    const apLabelWidth = 17;
 
     const network = Network.get_default();
 
@@ -29,22 +28,49 @@ export function WirelessNetworkWidget(controller: AccordionController) {
     const filtered_accessPoints = createComputed(() => {
         const allAPs = access_points() || [];
 
-        return allAPs
-            .sort((a, b) => {
-                const hasSsidA = !!a.ssid && a.ssid.trim().length > 0;
-                const hasSsidB = !!b.ssid && b.ssid.trim().length > 0;
+        const uniqueMap = new Map();
 
-                // Devices with SSID go first
-                if (hasSsidA && !hasSsidB) return -1;
-                if (!hasSsidA && hasSsidB) return 1;
+        for (const ap of allAPs) {
+            const ssidStr = ap.ssid || "";
+            const bssidStr = ap.bssid || "";
+            const freqNum = Number(ap.frequency) || 0;
 
-                // If both have ssid or both don't, sort alphabetically by alias/name
-                const labelA = a.ssid || a.ssid || "";
-                const labelB = b.ssid || b.ssid || "";
+            const freqBand = freqNum >= 5000 ? "5G" : "2G";
 
-                return labelA.localeCompare(labelB);
-            });
+            const identityKey = ssidStr.trim().length > 0
+                ? `${ssidStr}_${freqBand}`
+                : bssidStr;
+
+            if (!identityKey) continue;
+
+            if (!uniqueMap.has(identityKey) || (ap.strength > uniqueMap.get(identityKey).strength)) {
+                uniqueMap.set(identityKey, ap);
+            }
+        }
+
+        const uniqueAPs = Array.from(uniqueMap.values());
+
+        return [...uniqueAPs].sort((a, b) => {
+            const strengthA = a.strength || 0;
+            const strengthB = b.strength || 0;
+
+            if (strengthA !== strengthB) {
+                return strengthB - strengthA;
+            }
+
+            const hasSsidA = !!a.ssid && a.ssid.trim().length > 0;
+            const hasSsidB = !!b.ssid && b.ssid.trim().length > 0;
+
+            if (hasSsidA && !hasSsidB) return -1;
+            if (!hasSsidA && hasSsidB) return 1;
+
+            const labelA = a.ssid || a.bssid || "";
+            const labelB = b.ssid || b.bssid || "";
+
+            return labelA.localeCompare(labelB);
+        });
     });
+
 
     const iface = createComputed(() => {
         return device().interface;

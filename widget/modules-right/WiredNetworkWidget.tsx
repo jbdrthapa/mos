@@ -128,8 +128,11 @@ export function WiredNetworkWidget(controller: AccordionController) {
     });
 
     const content = (
-        <box orientation={Gtk.Orientation.VERTICAL} cssName="pill-content" spacing={10}>
+        <box orientation={Gtk.Orientation.VERTICAL} cssName="pill-content" spacing={2}>
             <label label="W I R E D" cssName={"pill-content-header"} />
+            <box orientation={Gtk.Orientation.HORIZONTAL} spacing={5}>
+                {refreshNetworkButton}
+            </box>
             <box orientation={Gtk.Orientation.HORIZONTAL}>
                 <image iconSize={Gtk.IconSize.NORMAL} iconName={iconName} cssName="pill-param-caption" halign={Gtk.Align.START} />
                 <label label={deviceInterface} cssName="pill-param-value" halign={Gtk.Align.START} />
@@ -141,7 +144,6 @@ export function WiredNetworkWidget(controller: AccordionController) {
             <box orientation={Gtk.Orientation.HORIZONTAL}>
                 <label label="State" xalign={0} cssName="pill-param-caption" halign={Gtk.Align.START} />
                 <label label={state} cssName="pill-param-value" halign={Gtk.Align.START} />
-                {refreshNetworkButton}
             </box>
             <box orientation={Gtk.Orientation.HORIZONTAL}>
                 <label label="Speed" xalign={0} cssName="pill-param-caption" halign={Gtk.Align.START} />

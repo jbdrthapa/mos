@@ -111,14 +111,28 @@ export function WirelessNetworkWidget(controller: AccordionController) {
                         if (label.length > apLabelWidth) {
                             label = label.slice(0, apLabelWidth) + "…";
                         }
+                        return label;
+                    });
 
+                    const freqBadge = createComputed(() => {
                         const freq = Number(frequency());
                         if (freq >= 5000) {
-                            return label + " 󰩯";
+                            return "󰩯";
                         } else if (freq >= 2000 && freq < 5000) {
-                            return label + " 󰜒";
+                            return "󰜒";
                         }
-                        return label;
+                        return "";
+                    });
+
+                    const freqClass = createComputed(() => {
+                        const freq = Number(frequency());
+
+                        if (freq >= 5000) {
+                            return "freq-5g";
+                        } else if (freq >= 2000) {
+                            return "freq-2g";
+                        }
+                        return "freq-unknown";
                     });
 
                     const tooltipText = createComputed(() => {
@@ -126,13 +140,16 @@ export function WirelessNetworkWidget(controller: AccordionController) {
                     });
 
                     return (
-
                         <Gtk.ListBoxRow cssName={"devices-box-row"}>
-                            <box orientation={Gtk.Orientation.HORIZONTAL} spacing={4}>
+                            <box orientation={Gtk.Orientation.HORIZONTAL} spacing={2}>
                                 <label
                                     label={apLabel}
                                     tooltipText={tooltipText}
-                                    cssName="device-name"
+                                    halign={Gtk.Align.START}
+                                />
+                                <label
+                                    label={freqBadge}
+                                    cssName={freqClass()}
                                     halign={Gtk.Align.START}
                                 />
                             </box>
@@ -223,7 +240,7 @@ export function WirelessNetworkWidget(controller: AccordionController) {
     });
 
     const content = (
-        <box orientation={Gtk.Orientation.VERTICAL} cssName="pill-content">
+        <box orientation={Gtk.Orientation.VERTICAL} cssName="pill-content" spacing={2}>
             <label label="W I R E L E S S" cssName={"pill-content-header"} />
             <box orientation={Gtk.Orientation.HORIZONTAL} spacing={5}>
                 {connectButton}

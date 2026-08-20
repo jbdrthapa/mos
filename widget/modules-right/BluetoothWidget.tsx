@@ -72,7 +72,6 @@ export function BluetoothWidget(controller: AccordionController) {
                                 <label
                                     label={deviceName}
                                     tooltipText={tooltipText}
-                                    cssName="device-name"
                                     halign={Gtk.Align.START}
                                 />
                             </box>
@@ -126,21 +125,21 @@ export function BluetoothWidget(controller: AccordionController) {
                 }
             }}
         >
-            <For each={discoveredDevicesList}>
-                {(device) => {
-                    return (
-                        <Gtk.ListBoxRow cssName={"devices-box-row"}>
-                            <box orientation={Gtk.Orientation.HORIZONTAL} spacing={4}>
+            <box orientation={Gtk.Orientation.VERTICAL} spacing={20}>
+                <For each={discoveredDevicesList}>
+                    {(device) => {
+                        return (
+                            <Gtk.ListBoxRow cssName={"devices-box-row"}>
                                 <label
                                     label={createBinding(device, "name").as(name => name || device.address || "Unknown Device")}
-                                    cssName="device-name"
                                     halign={Gtk.Align.START}
                                 />
-                            </box>
-                        </Gtk.ListBoxRow>
-                    );
-                }}
-            </For>
+                            </Gtk.ListBoxRow>
+                        );
+                    }}
+                </For>
+            </box>
+
         </Gtk.ListBox>
     ) as Gtk.ListBox;
 

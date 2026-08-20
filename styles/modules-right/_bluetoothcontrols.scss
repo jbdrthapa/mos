@@ -6,12 +6,15 @@ devices-box {
 }
 
 devices-box-row {
-    padding: 4px;
-    padding-left: 8px;
-    padding-right: 8px;
+    color: $overlay0;
+    font-weight: 400;
+    font-size: 14px;
+    padding: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
     border-radius: $border-radius;
     background: $surface0;
-    margin-bottom: 6px;
+    margin-bottom: 2px;
 }
 
 devices-box-row:hover {
@@ -22,6 +25,20 @@ devices-box-row:hover {
 devices-box-row:selected {
     color: $crust;
     background: $green;
+}
+
+freq {
+    padding-left: 5px;
+}
+
+freq-2g {
+    @extend freq;
+    color: $flamingo;
+}
+
+freq-5g {
+    @extend freq;
+    color: $mauve;
 }
 
 

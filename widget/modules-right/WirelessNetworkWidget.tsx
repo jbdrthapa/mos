@@ -152,13 +152,67 @@ export function WirelessNetworkWidget(controller: AccordionController) {
         <button cssName="pill-content-button" label="󱛂" tooltipText="pair" vexpand={false} hexpand={false} halign={Gtk.Align.CENTER} />
     ) as Gtk.Button;
 
-    connectButton.connect("clicked", async () => {
-        print(`connecting to ${selectedDevice.ssid}`)
+    const passphraseWidget = (
+        <entry
+            cssName={"passphrase-entry"}
+            placeholderText="passphrase"
+        />
+    ) as Gtk.Entry;
 
+    connectButton.connect("clicked", async () => {
+        print(`connecting to AP ${selectedDevice.ssid}`);
+
+        const ap = wifi.access_points.find(ap => ap.ssid === selectedDevice.ssid);
+
+        if (!ap) {
+            print(`AP not found with matching ssid ${selectedDevice.ssid}`);
+            return;
+        }
+
+        let ap_name = ap.ssid || ap.bssid || "unknown AP";
+
+        try {
+            if (ap.requiresPassword) {
+                print(passphraseWidget.text);
+                if (passphraseWidget.text == "") {
+                    print(`Failed to connect to AP, no passphrase supplied`);
+                    return;
+                }
+                print(`Activating AP ${ap_name} with passphrase`);
+                ap.activate(passphraseWidget.text, null);
+            } else {
+                print(`Activating AP ${ap_name} without passphrase`);
+                ap.activate(null, null);
+            }
+
+            print(`Connected to AP ${ap_name}`);
+        } catch (err) {
+            print(`Failed to connect to AP ${ap_name}: ${err}`);
+        }
     });
 
     disconnectButton.connect("clicked", async () => {
+        const ap = wifi.active_access_point;
+
+        if (!ap) {
+            print("No active Wi‑Fi connection to disconnect.");
+            return;
+        }
+
         print(`disconnecting from ${selectedDevice.ssid}`)
+
+        try {
+            wifi.deactivate_connection((wifiObj, res) => {
+                try {
+                    wifiObj?.deactivate_connection_finish(res);
+                    print("Disconnected.");
+                } catch (err) {
+                    print("Failed to disconnect:", err);
+                }
+            });
+        } catch (err) {
+            print("Failed to disconnect: Wi-Fi", err);
+        }
     });
 
     const content = (
@@ -168,6 +222,7 @@ export function WirelessNetworkWidget(controller: AccordionController) {
                 {connectButton}
                 {disconnectButton}
             </box>
+            {passphraseWidget}
             {accessPoints}
         </box>
     ) as Gtk.Box;

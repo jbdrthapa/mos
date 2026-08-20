@@ -25,6 +25,13 @@ export function WirelessNetworkWidget(controller: AccordionController) {
 
     const access_points = createBinding(wifi, "accessPoints");
 
+    const active_ap = createBinding(wifi, "activeAccessPoint");
+
+    const active_ap_ssid = createComputed(() => {
+        const ap = active_ap();
+        return ap ? ap.ssid || ap.bssid || "unknown" : "Not Connected";
+    });
+
     const filtered_accessPoints = createComputed(() => {
         const allAPs = access_points() || [];
 
@@ -232,7 +239,7 @@ export function WirelessNetworkWidget(controller: AccordionController) {
         controller: controller,
         iconName: "",
         title: "Wireless",
-        detail: "Connected",
+        detail: active_ap_ssid,
         content,
     });
 }

@@ -1,14 +1,9 @@
 import Gtk from "gi://Gtk?version=4.0";
-import { Astal, Gdk } from "ags/gtk4"
+import { Astal } from "ags/gtk4"
 import app from "ags/gtk4/app"
 import { WindowName } from "../../constants";
 import PopupWindow from "../PopupWindow";
 import { PowerSettings } from "./PowerSettings";
-import { DisplaySettings } from "./DisplaySettings";
-import { AudioSettings } from "./AudioSettings";
-import { WiredNetworkSettings } from "./WiredNetworkSettings";
-import { WirelessNetworkSettings } from "./WirelessNetworkSettings";
-import { BluetoothSettings } from "./BluetoothSettings";
 import { WallpaperSettings } from "./WallpaperSettings";
 import { Preferences } from "./Preferences";
 import { AboutSettings } from "./AboutSettings";
@@ -19,11 +14,6 @@ export function Settings() {
     const windowName = WindowName.settings;
 
     const powerSettings = PowerSettings() as any;
-    const displaySettings = DisplaySettings() as any;
-    const audioSettings = AudioSettings() as any;
-    const wiredNetworkSettings = WiredNetworkSettings() as any;
-    const wirelessNetworkSettings = WirelessNetworkSettings() as any;
-    const bluetoothSettings = BluetoothSettings() as any;
     const wallpaperSettings = WallpaperSettings() as any;
     const preferences = Preferences() as any;
     const aboutSettings = AboutSettings() as any;
@@ -36,11 +26,6 @@ export function Settings() {
     });
 
     notebook.append_page(powerSettings, new Gtk.Label({ label: "Power" }));
-    notebook.append_page(displaySettings, new Gtk.Label({ label: "Display" }));
-    notebook.append_page(audioSettings, new Gtk.Label({ label: "Audio" }));
-    notebook.append_page(wiredNetworkSettings, new Gtk.Label({ label: "Wired" }));
-    notebook.append_page(wirelessNetworkSettings, new Gtk.Label({ label: "Wireless" }));
-    notebook.append_page(bluetoothSettings, new Gtk.Label({ label: "Bluetooth" }));
     notebook.append_page(wallpaperSettings, new Gtk.Label({ label: "Wallpaper" }));
     notebook.append_page(preferences, new Gtk.Label({ label: "Preferences" }));
     notebook.append_page(aboutSettings, new Gtk.Label({ label: "About" }));

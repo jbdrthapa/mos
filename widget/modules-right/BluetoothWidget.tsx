@@ -42,11 +42,30 @@ export function BluetoothWidget(controller: AccordionController) {
         >
             <For each={pairedDevicesList}>
                 {(device) => {
+                    const name = createBinding(device, "name");
+                    const alias = createBinding(device, "alias");
+                    const address = createBinding(device, "address");
+                    const connected = createBinding(device, "connected");
+                    const batteryInfo = createBinding(device, "batteryPercentage");
+                    let tooltipText = "";
+
+                    if (name() == alias()) {
+                        tooltipText += `Device : ${name()}`;
+                    } else {
+                        tooltipText += `Device : ${alias()}`;
+                    }
+                    tooltipText += `\nAddress : ${address()}`;
+                    tooltipText += `\nConnected : ${connected()}`;
+                    if (batteryInfo() != -1) {
+                        tooltipText += `\nBattery : ${batteryInfo()}`;
+                    }
+
                     return (
                         <Gtk.ListBoxRow cssName={"devices-box-row"}>
                             <box orientation={Gtk.Orientation.HORIZONTAL} spacing={4}>
                                 <label
-                                    label={createBinding(device, "name").as(name => name || device.address || "Unknown Device")}
+                                    label={name() || alias() || "Unknown Device"}
+                                    tooltipText={tooltipText}
                                     cssName="device-name"
                                     halign={Gtk.Align.START}
                                 />
@@ -239,12 +258,10 @@ export function BluetoothWidget(controller: AccordionController) {
     });
 
 
-
-
     const content = (
         <box orientation={Gtk.Orientation.VERTICAL} cssName="pill-content" spacing={2}>
             <label label="B L U E T O O T H" cssName={"pill-content-header"} />
-            <box orientation={Gtk.Orientation.HORIZONTAL}>
+            <box orientation={Gtk.Orientation.HORIZONTAL} spacing={5}>
                 {discoverButton}
                 {pairButton}
                 {unpairButton}

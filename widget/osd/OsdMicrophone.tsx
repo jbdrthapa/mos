@@ -15,7 +15,14 @@ export default function OsdMicrophone(gdkmonitor: Gdk.Monitor) {
     if (!microphone) return <box />
 
     const volumeBinding = createBinding(microphone, "volume")
-    const iconBinding = createBinding(microphone, "volume-icon")
+    const iconBinding = volumeBinding.as(v => {
+        if (v === 0) return "audio-input-microphone-muted-symbolic";
+        if (v < 0.33) return "audio-input-microphone-low-symbolic";
+        if (v < 0.66) return "audio-input-microphone-low-symbolic";
+        if (v <= 1.0) return "audio-input-microphone-high-symbolic";
+        return "audio-input-microphone-high-symbolic";
+    });
+
 
     // Destructure the accessor [0] and the setter function [1]
     const [visible, setVisible] = createState(false)
@@ -58,12 +65,14 @@ export default function OsdMicrophone(gdkmonitor: Gdk.Monitor) {
     >
         <box cssName={"osd-box"} orientation={Gtk.Orientation.HORIZONTAL} spacing={8}>
             <label label={"Microphone"} hexpand={false} halign={Gtk.Align.CENTER} cssName="osd-device-name" />
-            <image iconName={iconBinding} pixelSize={32} cssName={"osd-box-icon"}/>
+            <image iconName={iconBinding} pixelSize={32} cssName={"osd-box-icon"} />
             <label label={volumeBinding.as(v => `${Math.round(v * 100)}`)} cssName={"osd-box-label"} />
             <levelbar
                 widthRequest={100}
                 heightRequest={25}
                 cssClasses={["osd-bar"]}
+                minValue={0}
+                maxValue={1.5}
                 value={volumeBinding.as(v => v)}
                 valign={Gtk.Align.CENTER}
                 hexpand={true}

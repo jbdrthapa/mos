@@ -11,7 +11,7 @@ export function WirelessNetworkWidget(controller: AccordionController) {
     const hscroll_policy = Gtk.PolicyType.NEVER;
     const vscroll_policy = Gtk.PolicyType.AUTOMATIC;
     const min_height = 200;
-    const apLabelWidth = 17;
+    const apLabelWidth = 15;
 
     const network = Network.get_default();
 
@@ -105,6 +105,7 @@ export function WirelessNetworkWidget(controller: AccordionController) {
                     const mode = createBinding(ap, "mode");
                     const strength = createBinding(ap, "strength");
                     const frequency = createBinding(ap, "frequency");
+                    const requiresAuth = createBinding(ap, "requiresPassword");
 
                     const apLabel = createComputed(() => {
                         let label = ssid() || bssid() || "";
@@ -135,21 +136,46 @@ export function WirelessNetworkWidget(controller: AccordionController) {
                         return "freq-unknown";
                     });
 
+                    const requires_auth = createComputed(() => {
+                        const auth_reqd = requiresAuth();
+                        if (auth_reqd) {
+                            return "󰌾";
+                        }
+                        else {
+                            return "󱙱";
+                        }
+                    });
+
+                    const requiresAuthClass = createComputed(() => {
+                        const auth_reqd = requiresAuth();
+
+                        if (auth_reqd) {
+                            return "auth-required";
+                        } else {
+                            return "auth-not-required";
+                        }
+                    });
+
                     const tooltipText = createComputed(() => {
-                        return `SSID : ${ssid()}\nMode : ${mode()}\nStrength : ${strength()}\nFrequency : ${frequency()}`;
+                        return `SSID : ${ssid()}\nMode : ${mode()}\nStrength : ${strength()}\nFrequency : ${frequency()}\nAuth : ${requiresAuth()}`;
                     });
 
                     return (
                         <Gtk.ListBoxRow cssName={"devices-box-row"}>
-                            <box orientation={Gtk.Orientation.HORIZONTAL} spacing={2}>
-                                <label
-                                    label={apLabel}
-                                    tooltipText={tooltipText}
-                                    halign={Gtk.Align.START}
-                                />
+                            <box orientation={Gtk.Orientation.HORIZONTAL}>
                                 <label
                                     label={freqBadge}
                                     cssName={freqClass()}
+                                    halign={Gtk.Align.START}
+                                />
+                                <label
+                                    label={requires_auth}
+                                    cssName={requiresAuthClass()}
+                                    halign={Gtk.Align.START}
+                                />
+                                <label
+                                    label={apLabel}
+                                    tooltipText={tooltipText}
                                     halign={Gtk.Align.START}
                                 />
                             </box>

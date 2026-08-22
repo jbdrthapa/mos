@@ -1,4 +1,4 @@
-js-shell, custom shell for Tiling Window Managers
+mos my-own-shell, custom shell for Tiling Window Managers
  
 ## Bar
 ![Bar 1](screenshots/Bar1.png?v=1)
@@ -42,4 +42,4 @@ js-shell, custom shell for Tiling Window Managers
 GJS_ENABLE_PROFILER=1 ags run
 
 ## Bundle the package
-ags bundle app.ts $HOME/.config/ags/js-shell
+ags bundle app.ts $HOME/.config/mos/mos

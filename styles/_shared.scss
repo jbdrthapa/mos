@@ -1,8 +1,8 @@
 @use "theme" as *;
 
-#js-shell-modules-left,
-#js-shell-modules-center,
-#js-shell-modules-right {
+#mos-modules-left,
+#mos-modules-center,
+#mos-modules-right {
   background-color: $base-transparent;
   border-radius: $border-radius;
   border: 2px solid $surface0;
@@ -14,11 +14,11 @@ popup-window-style {
   background-color: transparent;
 }
 
-#js-shell-modules-left {
+#mos-modules-left {
   padding: 20px;
 }
 
-#js-shell-desktopmenu {
+#mos-desktopmenu {
   background-color: transparent;
   padding: 5px;
 }

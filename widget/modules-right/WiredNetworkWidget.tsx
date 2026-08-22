@@ -72,10 +72,35 @@ export function WiredNetworkWidget(controller: AccordionController) {
         return NM_STATE[rawState()] ?? "?";
     });
 
+    const stateNames: Record<number, string> = {
+        [Network.DeviceState.UNKNOWN]: "Unknown",
+        [Network.DeviceState.UNMANAGED]: "Unmanaged",
+        [Network.DeviceState.UNAVAILABLE]: "Unavailable",
+        [Network.DeviceState.DISCONNECTED]: "Disconnected",
+        [Network.DeviceState.PREPARE]: "Preparing",
+        [Network.DeviceState.CONFIG]: "Configuring",
+        [Network.DeviceState.NEED_AUTH]: "Needs Auth",
+        [Network.DeviceState.IP_CONFIG]: "IP Config",
+        [Network.DeviceState.IP_CHECK]: "Checking IP",
+        [Network.DeviceState.SECONDARIES]: "Secondaries",
+        [Network.DeviceState.DEACTIVATING]: "Deactivating",
+        [Network.DeviceState.FAILED]: "Failed",
+    };
+
+    const statePillLabel = createComputed(() => {
+        let stateInfo = rawState();
+        if (stateInfo == Network.DeviceState.ACTIVATED) {
+            return device().interface;
+        } else {
+            return stateNames[stateInfo];
+        }
+    });
+
     const rawSpeed = createBinding(wired, "speed");
     const speed = createComputed(() => {
         return NM_SPEED[rawSpeed()] ?? "?";
     });
+
 
     const refreshNetworkButton = (
         <button cssName="pill-content-button" label="" vexpand={false} hexpand={false} halign={Gtk.Align.CENTER} />
@@ -157,7 +182,7 @@ export function WiredNetworkWidget(controller: AccordionController) {
         controller: controller,
         iconName: "󰈀",
         title: "Wired",
-        detail: deviceInterface,
+        detail: statePillLabel,
         content,
     });
 }

@@ -4,7 +4,7 @@ import Utils from "../../Utils";
 
 export function AboutSettings() {
 
-    const CONFIG_DIR = `${Utils.GetUserConfigDirectory()}/ags`;
+    const CONFIG_DIR = `${Utils.GetUserConfigDirectory()}/mos`;
 
     const jsshellLogoPath = `${CONFIG_DIR}/assets/general/mos-vibrant-shell.svg`
 

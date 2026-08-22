@@ -53,7 +53,7 @@ export function SystemInfoWidget() {
                 }} />
 
                 <button label="" cssName="system-info-button" tooltipText="Restart Shell" onClicked={() => {
-                    GLib.spawn_command_line_async('bash -c "killall gjs; ~/.config/ags/js-shell"');
+                    GLib.spawn_command_line_async('bash -c "killall gjs; ~/.config/mos/mos"');
                 }} />
             </box>
         </box>

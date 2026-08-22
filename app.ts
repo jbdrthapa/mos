@@ -4,11 +4,11 @@ import Bar from "./widget/Bar"
 import NotificationPopups from "./widget/modules-right/NotificationPopups"
 import Osd from "./widget/osd/Osd"
 
-app.set_application_id("org.js-shell")
+app.set_application_id("org.mos")
 app.version = "1.0"
 
 app.start({
-  instanceName: "js-shell",
+  instanceName: "mos",
   css: style,
   main() {
     for (const monitor of app.get_monitors()) {

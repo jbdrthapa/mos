@@ -8,7 +8,7 @@ let configPath = GLib.build_filenamev([
     ".config",
     "ags",
     "conf",
-    "js-shell.json",
+    "mos.json",
 ]);
 
 function loadConfig() {
@@ -21,7 +21,7 @@ function loadConfig() {
     try {
         cachedConfig = JSON.parse(new TextDecoder().decode(bytes));
     } catch (e) {
-        print(`js-shell config parse error: ${e}`);
+        print(`mos config parse error: ${e}`);
         cachedConfig = null;
     }
 }
@@ -61,7 +61,7 @@ function saveConfig() {
         return true;
 
     } catch (e) {
-        console.log(`js-shell config save error: ${e}`);
+        console.log(`mos config save error: ${e}`);
         return false;
     }
 }
@@ -78,7 +78,7 @@ function setupWatcher() {
             eventType === Gio.FileMonitorEvent.CHANGED ||
             eventType === Gio.FileMonitorEvent.CREATED) {
 
-            print("js-shell.json changed, reloading...");
+            print("mos.json changed, reloading...");
             loadConfig();
         }
     });

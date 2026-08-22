@@ -1,11 +1,11 @@
 export const WindowName = {
-    modulesLeft: "js-shell-modules-left",
-    modulesCenter: "js-shell-modules-center",
-    modulesRight: "js-shell-modules-right",
+    modulesLeft: "mos-modules-left",
+    modulesCenter: "mos-modules-center",
+    modulesRight: "mos-modules-right",
     bar: "bar-background",
-    settings: "js-shell-modules-settings",
-    osd: "js-shell-osd",
-    desktopMenu: "js-shell-desktopmenu",
-    lockScreen: "js-shell-lockscreen",
-    powerOptions: "js-shell-poweroptions"
+    settings: "mos-modules-settings",
+    osd: "mos-osd",
+    desktopMenu: "mos-desktopmenu",
+    lockScreen: "mos-lockscreen",
+    powerOptions: "mos-poweroptions"
 } as const;

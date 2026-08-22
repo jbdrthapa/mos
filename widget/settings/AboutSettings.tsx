@@ -6,7 +6,7 @@ export function AboutSettings() {
 
     const CONFIG_DIR = `${Utils.GetUserConfigDirectory()}/ags`;
 
-    const jsshellLogoPath = `${CONFIG_DIR}/assets/general/js-shell-vibrant-shell.svg`
+    const jsshellLogoPath = `${CONFIG_DIR}/assets/general/mos-vibrant-shell.svg`
 
     return (
         <box orientation={Gtk.Orientation.VERTICAL} spacing={10}>

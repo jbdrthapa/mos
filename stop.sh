@@ -1,3 +1,3 @@
 #!/bin/bash
 
-ags quit -i js-shell
+ags quit -i mos

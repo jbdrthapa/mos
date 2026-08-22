@@ -6,7 +6,7 @@ let monitor: Gio.FileMonitor | null = null;
 let configPath = GLib.build_filenamev([
     GLib.get_home_dir(),
     ".config",
-    "ags",
+    "mos",
     "conf",
     "mos.json",
 ]);

@@ -9,7 +9,7 @@ export function PowerSettings() {
 
     const devicesBinding = createComputed(() => upower.devices || []);
 
-    const CONFIG_DIR = `${Utils.GetUserConfigDirectory()}/ags`;
+    const CONFIG_DIR = `${Utils.GetUserConfigDirectory()}/mos`;
 
     const STATE: Record<AstalBattery.State, [string, string]> = {
         0: [`${CONFIG_DIR}/assets/power/state/unknown.svg`, "Unknown"],

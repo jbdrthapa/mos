@@ -41,7 +41,7 @@ search-entry {
   border-radius: $border-radius;
   border: 2px solid $surface1;
   margin-bottom: 20px;
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 600;
   transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -74,7 +74,7 @@ app-icon {
 }
 
 app-name {
-  color: $overlay1;
+  color: $subtext1;
   font-size: 16px;
   font-weight: 600;
 }

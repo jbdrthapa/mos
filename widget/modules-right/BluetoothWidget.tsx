@@ -125,7 +125,7 @@ export function BluetoothWidget(controller: AccordionController) {
                 }
             }}
         >
-            <box orientation={Gtk.Orientation.VERTICAL} spacing={20}>
+            <box orientation={Gtk.Orientation.VERTICAL} spacing={10}>
                 <For each={discoveredDevicesList}>
                     {(device) => {
                         return (

@@ -14,7 +14,7 @@ bar-weather-icon {
 
 bar-weather-temperature {
   font-weight: 600;
-  color: $overlay1;
+  color: $subtext1;
 }
 
 detail-weather-icon {
@@ -23,18 +23,18 @@ detail-weather-icon {
 }
 
 detail-weather-temp {
-  color: $overlay1;
+  color: $subtext1;
   font-size: 32px;
 }
 
 detail-weather-details-label {
-  color: $overlay1;
+  color: $overlay2;
   min-width: 160px;
   font-size: 16px;
 }
 
 detail-weather-details-value {
-  color: $overlay1;
+  color: $subtext1;
   background-color: $mantle-transparent;
   min-width: 100px;
   padding: 10px;

@@ -17,24 +17,24 @@ user-avatar-lockscreen:hover {
 host-info {
   font-size: 32px;
   font-weight: 800;
-  color: $overlay1;
+  color: $subtext1;
 }
 
 uptime-info {
   font-size: 16px;
   font-weight: 400;
-  color: $overlay1;
+  color: $subtext1;
 }
 
 auth-message {
   font-size: 14px;
   font-weight: 400;
-  color: $overlay0;
+  color: $subtext0;
 }
 
 lockscreen-entry {
   background-color: $surface0;
-  color: $overlay1;
+  color: $subtext1;
   border: 2px solid $accent-background;
   border-radius: 99px;
   padding: 10px 16px;

@@ -6,11 +6,11 @@ audio-controls-container {
 }
 
 audio-icon {
-    color: $overlay1;
+    color: $subtext1;
 }
 
 audio-percent {
-    color: $overlay1;
+    color: $subtext1;
     font-size: 18px;
     font-weight: 600;
     background-color: $mantle-transparent;
@@ -27,13 +27,13 @@ audio-slider-button {
 }
 
 slider-content-header {
-    color: $overlay1;
+    color: $subtext1;
     margin-bottom: 10px;
 }
 
 slider-content-extender {
     transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
-    color: $overlay0;
+    color: $subtext1;
     font-size: 28px;
     font-weight: 800;
     margin-left: 10px;
@@ -57,6 +57,6 @@ slider-content {
 }
 
 slider-content-param {
-    color: $overlay1;
+    color: $subtext1;
     font-size: 14px;
 }

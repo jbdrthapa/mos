@@ -7,14 +7,14 @@ osd-window {
 }
 
 osd-device-name {
-    color: $overlay1;
+    color: $subtext1;
     font-size: 22px;
     font-weight: 800;
     margin-right: 10px;
 }
 
 osd-box {
-    background-color: $crust;
+    background-color: $base-transparent;
     border-radius: 99px;
     padding: 15px;
     padding-left: 35px;
@@ -24,7 +24,7 @@ osd-box {
 }
 
 osd-box-icon {
-    color: $overlay0;
+    color: $subtext1;
     margin-right: 10px;
 }
 
@@ -34,7 +34,7 @@ osd-box-label {
     padding: 4px;
     border-radius: $border-radius;
     min-width: 60px;
-    color: $overlay0;
+    color: $subtext1;
     font-weight: 600;
     margin-right: 10px;
 }

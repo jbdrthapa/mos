@@ -13,7 +13,7 @@ export function ClockWidget({ time_fmt = "%H:%M", date_fmt = "%a, %b %e" } = {})
                 <label cssName="local-clock-minutes" label={worldClocks[0].as(t => t.minutes)} />
             </box>
             <box cssName="world-clock-panel">
-                <box orientation={Gtk.Orientation.VERTICAL}>
+                <box orientation={Gtk.Orientation.VERTICAL} spacing={10}>
                     {worldClocks.map((worldClock) => (
                         <box orientation={Gtk.Orientation.HORIZONTAL}>
                             <label xalign={0} cssName="world-clock-name" label={worldClock.as(t => t.name)} />

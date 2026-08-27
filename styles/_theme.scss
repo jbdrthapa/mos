@@ -1,59 +1,64 @@
-/*
-* Latte-Mocha
-*/
-
 $border-radius: 15px;
 
-$border: #414868;
+$border: #3a3a3a;
 
-$hover-background: #9aa5ce;
-$hover-foreground: #1a1b26;
+$hover-background: #1a1a1a;
+$hover-foreground: #ffffff;
 
-$text: #c0caf5;
-$subtext0: #a9b1d6;
-$subtext1: #9aa5ce;
+$text: #ffffff;
+$subtext0: #d0d0d0;
+$subtext1: #b0b0b0;
 
-$accent-background: #009efe;
-$accent-background-transparent: #009efefa;
-$accent-foreground: #1a1b26;
+$accent-background: #5e7cff;
+$accent-background-transparent: #5e7cfffa;
+$accent-foreground: #121212;
 
-$base: #1a1b26;
-$base-transparent: #1a1b26e0;
+$base: #121212;
+$base-transparent: #121212fa;
 
-$mantle: #24283b;
-$mantle-transparent: #24283bf2;
+$mantle: #1a1a1a;
+$mantle-transparent: #1a1a1afa;
 
-$crust: #1a1b26;
-$crust-transparent: #1a1b26f2;
+$crust: #202020;
+$crust-transparent: #202020fa;
 
-$surface0: #1f2335;
-$surface0-transparent: #1f2335fa;
+$surface0: #1c1c1c;
+$surface0-transparent: #1c1c1cfa;
 
-$surface1: #2a2f4b;
-$surface1-transparent: #2a2f4bfa;
+$surface1: #222222;
+$surface1-transparent: #222222fa;
 
-$surface2: #3b4261;
-$surface2-transparent: #3b4261fa;
+$surface2: #2a2a2a;
+$surface2-transparent: #2a2a2afa;
 
-$overlay0: #414868;
-$overlay0-transparent: #414868fa;
+$surface3: #323232;
+$surface3-transparent: #323232fa;
 
-$overlay1: #565f89;
-$overlay1-transparent: #565f89fa;
+$surface4: #3a3a3a;
+$surface4-transparent: #3a3a3afa;
 
-$overlay2: #9aa5ce;
-$overlay2-transparent: #9aa5cefa;
+$surface5: #444444;
+$surface5-transparent: #444444fa;
 
-$red: #f7768e;
-$orange: #ff9e64;
-$yellow: #e0af68;
-$green: #9ece6a;
-$teal: #73daca;
-$cyan: #7dcfff;
-$blue: #7aa2f7;
-$magenta: #bb9af7;
-$white: #c0caf5;
-$black: #1a1b26;
+$overlay0: #454545;
+$overlay0-transparent: #454545fa;
+
+$overlay1: #505050;
+$overlay1-transparent: #505050fa;
+
+$overlay2: #5a5a5a;
+$overlay2-transparent: #5a5a5afa;
+
+$red: #ff8080;
+$orange: #ffbc5e;
+$yellow: #ffbc5e;
+$green: #7dff95;
+$teal: #7dff95;
+$cyan: #87d1ff;
+$blue: #5e7cff;
+$magenta: #ff5ecc;
+$white: #ffffff;
+$black: #121212;
 
 $lavender: #7287fd;
 $sapphire: #209fb5;

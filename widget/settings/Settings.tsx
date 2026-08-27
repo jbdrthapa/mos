@@ -7,7 +7,7 @@ import { PowerSettings } from "./PowerSettings";
 import { WallpaperSettings } from "./WallpaperSettings";
 import { Preferences } from "./Preferences";
 import { AboutSettings } from "./AboutSettings";
-import { WeatherCalendar } from "./today/WeatherCalendar";
+import { WeatherCalendar, ResetCalendar } from "./today/WeatherCalendar";
 
 
 export function Settings() {
@@ -53,10 +53,12 @@ export function Settings() {
     if (win) {
         (win as any).Settings = () => {
             notebook.set_current_page(0);
+            ResetCalendar();
         };
-        
+
         (win as any).Today = () => {
             notebook.set_current_page(0);
+            ResetCalendar();
         };
 
         (win as any).Power = () => {

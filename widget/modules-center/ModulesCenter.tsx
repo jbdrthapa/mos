@@ -39,14 +39,6 @@ export function ModulesCenter() {
         </box>
     ) as any;
 
-    // Reset the calendar when the popup is made visible
-
-    // popup.connect("notify::visible", () => {
-    //     if (popup.visible) {
-    //         calendarWidget.set_date(GLib.DateTime.new_now_local());
-    //     }
-    // });
-
     return button;
 
 }

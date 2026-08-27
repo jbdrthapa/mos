@@ -13,7 +13,7 @@ export function WeatherDetailWidget() {
         <box orientation={Gtk.Orientation.VERTICAL} spacing={10}>
             <box orientation={Gtk.Orientation.HORIZONTAL}>
                 <label label={createBinding(weatherService, "icon")} cssName="detail-weather-icon" />
-                <label hexpand={true} halign={Gtk.Align.END} label={createBinding(weatherService, "temperature")} cssName="detail-weather-temp" />
+                <label hexpand={true} halign={Gtk.Align.CENTER} label={createBinding(weatherService, "temperature")} cssName="detail-weather-temp" />
             </box>
             <box orientation={Gtk.Orientation.VERTICAL} spacing={8}>
                 <label xalign={0} label={cityWeather} cssName="detail-weather-details-label" />

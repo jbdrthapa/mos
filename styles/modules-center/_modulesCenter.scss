@@ -37,7 +37,7 @@ local-clock-minutes {
   background-color: $surface0-transparent;
   transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
   color: $subtext1;
-  font-size: 60px;
+  font-size: 100px;
   font-weight: 600;
   border-radius: $border-radius;
   border: 1px solid $surface1;
@@ -57,8 +57,6 @@ local-clock-minutes {
 
 world-clock-panel {
   background-color: transparent;
-  padding: 10px;
-  min-width: 180px;
 }
 
 world-clock-name,
@@ -71,14 +69,14 @@ world-clock-time,
 world-clock-date {
   color: $subtext1;
   background-color: $mantle-transparent;
-  min-width: 100px;
+  min-width: 120px;
   padding: 10px;
   font-size: 16px;
   border-radius: $border-radius;
 }
 
 world-clock-name {
-  min-width: 160px;
+  min-width: 175px;
   color: $overlay2;
 }
 
@@ -90,6 +88,7 @@ detail-calendar {
   box-shadow: inset 0 -1px 0 0 $surface0, 0 2px 2px rgba(0, 0, 0, 0.2);
   border-radius: $border-radius;
   padding: 20px;
+  min-width: 600px;
 }
 
 detail-calendar .day-name {

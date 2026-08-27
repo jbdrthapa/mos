@@ -2,18 +2,6 @@ import Gtk from "gi://Gtk?version=4.0"
 import { createBinding, createComputed } from "ags"
 import WeatherService from "../../services/WeatherService";
 
-export function WeatherBarWidget() {
-
-    const weatherService = WeatherService.get_default();
-
-    return (
-        <box vexpand={true}>
-            <label valign={Gtk.Align.START} label={createBinding(weatherService, "icon")} cssName="bar-weather-icon" />
-            <label valign={Gtk.Align.CENTER} label={createBinding(weatherService, "temperature")} cssName="bar-weather-temperature" />
-        </box>
-    );
-}
-
 export function WeatherDetailWidget() {
     const weatherService = WeatherService.get_default();
 

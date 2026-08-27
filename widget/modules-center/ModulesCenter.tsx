@@ -1,10 +1,20 @@
 import Gtk from "gi://Gtk?version=4.0"
-import { WeatherBarWidget } from "./WeatherWidget"
 import TimeService from "../../services/TimeService"
 import { createBinding } from "gnim"
 import WidgetManager from "../../WidgetManager"
+import WeatherService from "../../services/WeatherService";
 
+export function WeatherBarWidget() {
 
+    const weatherService = WeatherService.get_default();
+
+    return (
+        <box vexpand={true}>
+            <label valign={Gtk.Align.START} label={createBinding(weatherService, "icon")} cssName="bar-weather-icon" />
+            <label valign={Gtk.Align.CENTER} label={createBinding(weatherService, "temperature")} cssName="bar-weather-temperature" />
+        </box>
+    );
+}
 
 export function ModulesCenter() {
 

@@ -7,7 +7,7 @@ import { PowerSettings } from "./PowerSettings";
 import { WallpaperSettings } from "./WallpaperSettings";
 import { Preferences } from "./Preferences";
 import { AboutSettings } from "./AboutSettings";
-import { WeatherCalendar } from "../modules-center/WeatherCalendar";
+import { WeatherCalendar } from "./WeatherCalendar";
 
 
 export function Settings() {

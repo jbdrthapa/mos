@@ -80,15 +80,15 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
       anchor={TOP | LEFT | RIGHT}
       application={app}
     >
-      <centerbox cssName="bar">
-        <box $type="start" spacing={10}>
+      <centerbox cssName="bar" vexpand={true}>
+        <box $type="start" spacing={10} vexpand={true} valign={Gtk.Align.CENTER}>
           {modulesLeft}
           {dock}
         </box>
-        <box $type="center">
+        <box $type="center" vexpand={true} valign={Gtk.Align.CENTER}>
           {modulesCenter}
         </box>
-        <box $type="end" spacing={10}>
+        <box $type="end" spacing={10} vexpand={true} valign={Gtk.Align.CENTER}>
           {workspaceWidget}
           {trayWidget}
           {powerProfileWidget}

@@ -1,4 +1,5 @@
 import { AppListing } from "./AppListing"
+import Gtk from "gi://Gtk?version=4.0"
 
 export function ModulesLeft() {
 

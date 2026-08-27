@@ -7,24 +7,27 @@ import { PowerSettings } from "./PowerSettings";
 import { WallpaperSettings } from "./WallpaperSettings";
 import { Preferences } from "./Preferences";
 import { AboutSettings } from "./AboutSettings";
+import { WeatherCalendar } from "../modules-center/WeatherCalendar";
 
 
 export function Settings() {
 
     const windowName = WindowName.settings;
 
+    const weatherCalendar = WeatherCalendar() as any;
     const powerSettings = PowerSettings() as any;
     const wallpaperSettings = WallpaperSettings() as any;
     const preferences = Preferences() as any;
     const aboutSettings = AboutSettings() as any;
 
     let notebook = new Gtk.Notebook({
-        tabPos: Gtk.PositionType.LEFT,
+        tabPos: Gtk.PositionType.TOP,
         cssName: "settings-notebook",
         hexpand: true,
         vexpand: true,
     });
 
+    notebook.append_page(weatherCalendar, new Gtk.Label({ label: "Today" }));
     notebook.append_page(powerSettings, new Gtk.Label({ label: "Power" }));
     notebook.append_page(wallpaperSettings, new Gtk.Label({ label: "Wallpaper" }));
     notebook.append_page(preferences, new Gtk.Label({ label: "Preferences" }));
@@ -33,28 +36,13 @@ export function Settings() {
     const SettingsPopup = new PopupWindow({
         name: windowName,
         namespace: windowName,
-        anchor: Astal.WindowAnchor.NONE,
+        anchor: Astal.WindowAnchor.TOP,
         exclusivity: Astal.Exclusivity.IGNORE,
         application: app,
         child: (
             <box cssName="settings-container">
-                <box orientation={Gtk.Orientation.VERTICAL}>
-                    <box cssName="settings-titlebar">
-                        <label hexpand halign={Gtk.Align.CENTER} label="Settings"></label>
-                        <button
-                            halign={Gtk.Align.END}
-                            onClicked={() => {
-                                const window = app.get_window(windowName);
-                                window?.toggle();
-                            }}
-                            cssName="settings-close-button"
-                        >
-                            <label label="" />
-                        </button>
-                    </box>
-                    <box>
-                        {notebook}
-                    </box>
+                <box>
+                    {notebook}
                 </box>
             </box>
         )
@@ -66,17 +54,21 @@ export function Settings() {
         (win as any).Settings = () => {
             notebook.set_current_page(0);
         };
-
-        (win as any).Power = () => {
+        
+        (win as any).Today = () => {
             notebook.set_current_page(0);
         };
 
-        (win as any).Display = () => {
+        (win as any).Power = () => {
             notebook.set_current_page(1);
         };
 
+        (win as any).Display = () => {
+            notebook.set_current_page(2);
+        };
+
         (win as any).Wallpaper = () => {
-            notebook.set_current_page(6);
+            notebook.set_current_page(3);
         };
     }
 

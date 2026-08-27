@@ -1,7 +1,7 @@
 @use "theme" as *;
 
 wallpaper-container {
-    padding: 20px;
+    padding: 10px;
 }
 
 wallpaper-image {
@@ -16,7 +16,7 @@ wallpaper-thumbnail {
     border: 2px solid $surface0;
     padding: 5px;
     min-height: 175px;
-    min-width: 250px;
+    min-width: 150px;
 }
 
 wallpaper-thumbnail:focus {

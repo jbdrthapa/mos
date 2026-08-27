@@ -43,8 +43,8 @@ export function WallpaperSettings() {
         cssName: "wallpaper-container",
         min_children_per_line: 4,
         max_children_per_line: 4,
-        column_spacing: 10,
-        row_spacing: 10,
+        column_spacing: 20,
+        row_spacing: 20,
         selection_mode: Gtk.SelectionMode.NONE,
     });
 
@@ -79,7 +79,6 @@ export function WallpaperSettings() {
 
         const tile = (
             <box
-                cssName="wallpaper-tile"
                 orientation={Gtk.Orientation.VERTICAL}
                 overflow={Gtk.Overflow.HIDDEN}
                 focusable={true}

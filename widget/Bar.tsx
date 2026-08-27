@@ -140,7 +140,6 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
 
   app.add_window(backdrop);
   app.add_window(modulesLeft.popup);
-  app.add_window(modulesCenter.popup);
   app.add_window(modulesRight.popup);
   app.add_window(desktopMenu);
   app.add_window(settings);

@@ -36,10 +36,17 @@ function launch(app?: Apps.Application) {
 
 function AppItem({ app }: { app: Apps.Application }) {
 
-    const appNameLengthMax = 15;
-    const appName = app.name.length > appNameLengthMax
-        ? app.name.substring(0, appNameLengthMax) + "..."
+    const appNameDescLengthMax = 100;
+    const appName = app.name.length > appNameDescLengthMax
+        ? app.name.substring(0, appNameDescLengthMax) + "..."
         : app.name;
+
+    let appDesc;
+    if (app.description) {
+        appDesc = app.description.length > appNameDescLengthMax
+            ? app.description.substring(0, appNameDescLengthMax) + "..."
+            : app.description;
+    }
 
     let appTooltip = "Application: " + app.name;
 
@@ -54,18 +61,24 @@ function AppItem({ app }: { app: Apps.Application }) {
                 launch(app);
             }}
         >
-            <box orientation={Gtk.Orientation.VERTICAL} halign={Gtk.Align.CENTER} tooltipText={appTooltip}>
+            <box orientation={Gtk.Orientation.HORIZONTAL} halign={Gtk.Align.START} tooltipText={appTooltip} spacing={20}>
                 <image
                     iconName={app.icon_name || "image-missing"}
-                    pixelSize={96}
+                    pixelSize={52}
                     cssName="app-icon"
                 />
-                <label
-                    label={appName}
-                    wrap
-                    justify={Gtk.Justification.CENTER}
-                    cssName="app-name"
-                />
+                <box orientation={Gtk.Orientation.VERTICAL}>
+                    <label
+                        label={appName}
+                        cssName="app-name"
+                        halign={Gtk.Align.START}
+                    />
+                    <label
+                        label={appDesc}
+                        cssName="app-desc"
+                        halign={Gtk.Align.START}
+                    />
+                </box>
             </box>
         </button>
     );
@@ -136,10 +149,10 @@ export function AppListing() {
             hexpand
             selectionMode={Gtk.SelectionMode.SINGLE}
             activate_on_single_click={true}
-            columnSpacing={40}
-            rowSpacing={40}
-            minChildrenPerLine={6}
-            maxChildrenPerLine={6}
+            columnSpacing={0}
+            rowSpacing={10}
+            minChildrenPerLine={1}
+            maxChildrenPerLine={1}
             homogeneous={false}
             valign={Gtk.Align.START}
             halign={Gtk.Align.START}
@@ -164,11 +177,11 @@ export function AppListing() {
     appListingWindow = new PopupWindow({
         name: windowName,
         namespace: windowName,
-        anchor: Astal.WindowAnchor.NONE,
+        anchor: Astal.WindowAnchor.TOP,
         child: (
             <box cssName="modules-left-container" orientation={Gtk.Orientation.VERTICAL}>
                 {searchEntry}
-                <scrolledwindow vexpand heightRequest={860} hexpand widthRequest={1300} $={(ref) => (appsScroll = ref)}>
+                <scrolledwindow vexpand heightRequest={500} hexpand widthRequest={800} $={(ref) => (appsScroll = ref)}>
                     {flowBox}
                 </scrolledwindow>
             </box>

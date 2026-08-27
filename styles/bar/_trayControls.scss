@@ -1,7 +1,5 @@
 @use "theme" as *;
 
-tray-container {}
-
 tray-module-button {
   border-radius: $border-radius;
   transition: transform 340ms cubic-bezier(.33, 1, .68, 1);

@@ -10,18 +10,20 @@ modules-center-container {
 
 date-time-weather-container button {
   background: none;
+  margin: 0px;
+  padding: 0px;
 }
 
-bar-date-time {
+bar-time {
   font-weight: 700;
   color: $subtext1;
-  padding-left: 5px;
-  padding-right: 5px;
+  font-size: 42px;
 }
 
-bar-date-time-delim {
-  @extend bar-date-time;
-  color: $overlay0;
+bar-date {
+  font-weight: 700;
+  font-size: 12px;
+  color: $subtext1;
 }
 
 time-container {

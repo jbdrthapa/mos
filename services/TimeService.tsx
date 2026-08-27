@@ -71,7 +71,8 @@ class InternalTimeService extends GObject.Object {
             let month = await execAsync("bash -c 'date +%b'");
             let day = await execAsync("bash -c 'date +%d'");
 
-            this.time = hour + " : " + minute + " " + ampm;
+            // this.time = hour + " : " + minute + " " + ampm;
+            this.time = hour + " : " + minute;
             this.notify("time");
 
             this.date = weekday + ", " + month + " " + day;

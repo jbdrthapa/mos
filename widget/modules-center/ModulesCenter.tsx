@@ -2,7 +2,6 @@ import Gtk from "gi://Gtk?version=4.0"
 import GLib from "gi://GLib"
 import PopupWindow from "../PopupWindow"
 import { Astal } from "ags/gtk4"
-import { WorldClocks } from "../../services/WorldClocks"
 import { ClockWidget } from "./ClockWidget"
 import { CalendarWidget } from "./CalendarWidget"
 import { WeatherBarWidget, WeatherDetailWidget } from "./WeatherWidget"
@@ -25,12 +24,12 @@ export function ModulesCenter() {
     const button = (
         <box cssName={"date-time-weather-container"}>
             <button onClicked={() => popup.toggle()} >
-                <box>
-                    <label label={createBinding(timeService, "date")} cssName={"bar-date-time"} />
-                    <label label="󰇙" cssName={"bar-date-time-delim"} />
-                    <label label={createBinding(timeService, "time")} cssName={"bar-date-time"} />
-                    <label label="󰇙" cssName={"bar-date-time-delim"} />
-                    {weatherBarWidget}
+                <box orientation={Gtk.Orientation.HORIZONTAL} spacing={20}>
+                    <label label={createBinding(timeService, "time")} valign={Gtk.Align.CENTER} cssName={"bar-time"} />
+                    <box orientation={Gtk.Orientation.VERTICAL}>
+                        <label vexpand={true} valign={Gtk.Align.END} label={createBinding(timeService, "date")} cssName={"bar-date"} />
+                        {weatherBarWidget}
+                    </box>
                 </box>
             </button>
         </box>

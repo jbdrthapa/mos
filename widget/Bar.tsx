@@ -5,7 +5,6 @@ import { ModulesCenter } from "./modules-center/ModulesCenter"
 import { ModulesLeft } from "./modules-left/ModulesLeft"
 import { WorkspaceWidget } from "./bar/WorkspaceWidget"
 import { ModulesRight } from "./modules-right/ModulesRight"
-import { Settings } from "./settings/Settings"
 import { TrayWidget } from "./bar/TrayWidget"
 import { PowerProfileWidget } from "./bar/PowerProfileWidget"
 import { GraphicsWidget } from "./bar/GraphicsWidget"
@@ -91,10 +90,10 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
         </box>
         <box $type="end" spacing={10}>
           {workspaceWidget}
+          {trayWidget}
           {powerProfileWidget}
           {graphicsWidget}
           {batteryWidget}
-          {trayWidget}
           {modulesRight}
         </box>
       </centerbox>

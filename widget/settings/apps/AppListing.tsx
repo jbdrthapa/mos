@@ -1,24 +1,17 @@
 import Gtk from "gi://Gtk?version=4.0"
 import Apps from "gi://AstalApps"
-import PopupWindow from "../PopupWindow"
 import { Astal, Gdk } from "ags/gtk4"
 import { For, createState } from "ags";
 import { subprocess } from "ags/process";
-import { WindowName } from "../../constants"
 import { execAsync } from "ags/process";
 
-const windowName = WindowName.modulesLeft;
-
 const terminal = "kitty";
-let appListingWindow: any;
+let appListing: any;
 
 function launch(app?: Apps.Application) {
     if (app) {
-        appListingWindow.hide()
-
         execAsync("niri msg action close-overview");
 
-        // Check if the .desktop file has Terminal=true
         const needsTerminal = app.app.get_boolean("Terminal");
 
         const launchCmd = needsTerminal
@@ -57,7 +50,6 @@ function AppItem({ app }: { app: Apps.Application }) {
     return (
         <button cssName="app-button"
             onClicked={() => {
-                appListingWindow.hide_all();
                 launch(app);
             }}
         >
@@ -86,8 +78,8 @@ function AppItem({ app }: { app: Apps.Application }) {
 
 export function AppListing() {
 
-    if (appListingWindow) {
-        return appListingWindow;
+    if (appListing) {
+        return appListing;
     }
 
     let searchentry: Gtk.Entry
@@ -114,7 +106,7 @@ export function AppListing() {
     ) {
         console.log("Key pressed", Gdk.keyval_name(keyval), "with modifier", mod);
         if (keyval === Gdk.KEY_Escape) {
-            appListingWindow.visible = false
+            appListing.visible = false
             return true
         }
 
@@ -174,28 +166,22 @@ export function AppListing() {
     )
 
 
-    appListingWindow = new PopupWindow({
-        name: windowName,
-        namespace: windowName,
-        anchor: Astal.WindowAnchor.TOP,
-        child: (
-            <box cssName="modules-left-container" orientation={Gtk.Orientation.VERTICAL}>
-                {searchEntry}
-                <scrolledwindow vexpand heightRequest={500} hexpand widthRequest={800} $={(ref) => (appsScroll = ref)}>
-                    {flowBox}
-                </scrolledwindow>
-            </box>
-        )
-    });
-
+    appListing = (
+        <box cssName="modules-left-container" orientation={Gtk.Orientation.VERTICAL}>
+            {searchEntry}
+            <scrolledwindow vexpand heightRequest={500} hexpand widthRequest={800} $={(ref) => (appsScroll = ref)}>
+                {flowBox}
+            </scrolledwindow>
+        </box>
+    );
     // subscribe to key events for the entire window
     const keyController = new Gtk.EventControllerKey();
     keyController.connect("key-pressed", onKey);
-    appListingWindow.add_controller(keyController);
+    appListing.add_controller(keyController);
 
     // connect to visibility changes
-    appListingWindow.connect("notify::visible", () => {
-        if (appListingWindow.visible) {
+    appListing.connect("notify::visible", () => {
+        if (appListing.visible) {
 
             // console.log("Launcher window is opened");
 
@@ -215,5 +201,5 @@ export function AppListing() {
         }
     });
 
-    return appListingWindow;
+    return appListing;
 }

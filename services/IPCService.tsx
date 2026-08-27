@@ -1,8 +1,9 @@
 import GObject from "gi://GObject";
 import app from "ags/gtk4/app"
-import { AppListing } from "../widget/modules-left/AppListing"
+import { AppListing } from "../widget/settings/apps/AppListing"
 import { LockScreen } from "../widget/LockScreen";
 import DisplayService from "./DisplayService";
+import WidgetManager from "../WidgetManager"
 
 const IPCServiceProperties = {
 
@@ -18,8 +19,6 @@ class InternalIPCService extends GObject.Object {
     constructor() {
         super();
 
-        let appListing = AppListing();
-
         let displayService = DisplayService.get_default();
 
         let lockScreen = LockScreen();
@@ -29,7 +28,9 @@ class InternalIPCService extends GObject.Object {
 
             switch (command) {
                 case "launch-apps":
-                    appListing.toggle();
+                    let settings = WidgetManager.GetSettingsWindow();
+                    settings?.Apps();
+                    settings?.toggle();
                     response("Launching apps");
                     break;
                 case "increase-brightness":

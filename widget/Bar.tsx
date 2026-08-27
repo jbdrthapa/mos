@@ -27,7 +27,6 @@ let desktopMenu = createRoot(() => DesktopMenu());
 const windowName = WindowName.bar;
 
 function CloseAllMenus() {
-  modulesLeft.popup.hide_all();
   modulesRight.popup.hide_all();
   desktopMenu.hide_all();
 }
@@ -138,7 +137,6 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
   console.debug("Bar rendered, registering backdrop and popups...");
 
   app.add_window(backdrop);
-  app.add_window(modulesLeft.popup);
   app.add_window(modulesRight.popup);
   app.add_window(desktopMenu);
   app.add_window(settings);

@@ -8,6 +8,7 @@ import { WallpaperSettings } from "./WallpaperSettings";
 import { Preferences } from "./Preferences";
 import { AboutSettings } from "./AboutSettings";
 import { WeatherCalendar, ResetCalendar } from "./today/WeatherCalendar";
+import { AppListing } from "./apps/AppListing"
 
 
 export function Settings() {
@@ -15,6 +16,7 @@ export function Settings() {
     const windowName = WindowName.settings;
 
     const weatherCalendar = WeatherCalendar() as any;
+    const appListing = AppListing() as any;
     const powerSettings = PowerSettings() as any;
     const wallpaperSettings = WallpaperSettings() as any;
     const preferences = Preferences() as any;
@@ -28,6 +30,7 @@ export function Settings() {
     });
 
     notebook.append_page(weatherCalendar, new Gtk.Label({ label: "Today" }));
+    notebook.append_page(appListing, new Gtk.Label({ label: "Apps" }));
     notebook.append_page(powerSettings, new Gtk.Label({ label: "Power" }));
     notebook.append_page(wallpaperSettings, new Gtk.Label({ label: "Wallpaper" }));
     notebook.append_page(preferences, new Gtk.Label({ label: "Preferences" }));
@@ -61,16 +64,21 @@ export function Settings() {
             ResetCalendar();
         };
 
-        (win as any).Power = () => {
+        (win as any).Apps = () => {
             notebook.set_current_page(1);
+            ResetCalendar();
         };
 
-        (win as any).Display = () => {
+        (win as any).Power = () => {
             notebook.set_current_page(2);
         };
 
-        (win as any).Wallpaper = () => {
+        (win as any).Display = () => {
             notebook.set_current_page(3);
+        };
+
+        (win as any).Wallpaper = () => {
+            notebook.set_current_page(5);
         };
     }
 

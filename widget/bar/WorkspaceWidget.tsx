@@ -21,6 +21,16 @@ export function WorkspaceWidget() {
   return (
     <box>
       <box spacing={10} cssName="workspace-container" orientation={Gtk.Orientation.HORIZONTAL}>
+        <button
+          vexpand={true}
+          valign={Gtk.Align.CENTER}
+          cssClasses={["dock-button", "close"]}
+          onClicked={() => {
+            execAsync("niri msg action close-window")
+          }}
+          tooltipText={"Close Active"}>
+          <label label="󰛉" />
+        </button>
         <image
           visible={focused.as(win => !!win)}
           icon-name={focused.as(win => win?.app_id || "image-missing")}

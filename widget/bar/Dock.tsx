@@ -1,4 +1,3 @@
-import Gtk from "gi://Gtk?version=4.0"
 import Apps from "gi://AstalApps"
 import { execAsync } from "ags/process";
 import Config from "../../conf/Config";
@@ -9,17 +8,7 @@ const DOCK_LAUNCHERS = Config.GetDockLaunchers();
 
 export default function Dock() {
     return (
-        <box halign={Gtk.Align.CENTER}>
-            <button
-                vexpand={true}
-                valign={Gtk.Align.CENTER}
-                cssClasses={["dock-button", "close"]}
-                onClicked={() => {
-                    execAsync("niri msg action close-window")
-                }}
-                tooltipText={"Close Active"}>
-                <label label="󰛉" />
-            </button>
+        <box>
             {DOCK_LAUNCHERS.map(appName => {
                 const app: Apps.Application = appsService.fuzzy_query(appName)?.[0]
                     || appsService.get_list().find(a => a.name.toLowerCase().includes(appName.toLowerCase()))

@@ -1,6 +1,6 @@
 import Gtk from "gi://Gtk?version=4.0"
 import { createBinding, createComputed } from "ags"
-import WeatherService from "../../services/WeatherService";
+import WeatherService from "../../../services/WeatherService";
 
 export function WeatherDetailWidget() {
     const weatherService = WeatherService.get_default();

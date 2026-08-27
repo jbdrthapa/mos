@@ -1,5 +1,5 @@
 import Gtk from "gi://Gtk?version=4.0"
-import { WorldClocks } from "../../services/WorldClocks";
+import { WorldClocks } from "../../../services/WorldClocks";
 
 export function ClockWidget({ time_fmt = "%H:%M", date_fmt = "%a, %b %e" } = {}) {
 

@@ -34,7 +34,7 @@ export function AudioSliderWidget({
         const descriptionTooltip = createBinding(endpoint, "description").as(d => d ?? "");
         const description = createBinding(endpoint, "description").as(d => {
             const s = d ?? "";
-            return s.length > 35 ? s.slice(0, 32) + "…" : s;
+            return s.length > 40 ? s.slice(0, 37) + "…" : s;
         });
 
         const volume = createBinding(endpoint, "volume");
@@ -69,7 +69,7 @@ export function AudioSliderWidget({
         return (
             <box orientation={Gtk.Orientation.HORIZONTAL} heightRequest={80}>
                 <image
-                    pixelSize={28}
+                    pixelSize={26}
                     iconName={volumeIcon} cssName={"audio-icon"} />
                 <label valign={Gtk.Align.CENTER} label={volumeText} cssName={"audio-percent"} />
                 <box orientation={Gtk.Orientation.VERTICAL}>
@@ -78,7 +78,7 @@ export function AudioSliderWidget({
                         adjustment={volumeAdj}
                         cssClasses={["slider-control"]}
                         tooltipText={volumeText}
-                        widthRequest={320}
+                        widthRequest={280}
                         onChangeValue={({ value }) => {
                             endpoint.set_volume(value);
                             if (id == "speaker") {

@@ -11,7 +11,7 @@ export function WirelessNetworkWidget(controller: AccordionController) {
     const hscroll_policy = Gtk.PolicyType.NEVER;
     const vscroll_policy = Gtk.PolicyType.AUTOMATIC;
     const min_height = 200;
-    const apLabelWidth = 15;
+    const apLabelWidth = 12;
 
     const network = Network.get_default();
 

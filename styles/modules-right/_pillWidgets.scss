@@ -8,7 +8,7 @@ pill-container {
 
 pill-button {
   background-color: $base-transparent;
-  color: $overlay2;
+  color: $subtext1;
   padding: 5px;
   border-radius: 99px;
   border: 2px solid $surface1-transparent;
@@ -23,7 +23,7 @@ pill-button:hover {
 }
 
 pill-button-image {
-  color: $overlay2;
+  color: $subtext0;
   font-weight: 900;
   font-size: 28px;
   background-color: transparent;
@@ -82,38 +82,6 @@ pill-content {
   min-height: 200px;
   font-size: 14px;
   padding: 10px;
-}
-
-pill-summary-property-name {
-  font-weight: 800;
-  color: $overlay0;
-  padding: 5px;
-}
-
-pill-summary-property-value {
-  color: $overlay2;
-  padding: 5px
-}
-
-pill-popover-container {
-  min-width: 400px;
-  min-height: 400px;
-  padding: 20px;
-}
-
-pill-popover-details-area-container {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  padding: 20px;
-  background-color: $mantle;
-  border-radius: $border-radius;
-  border: 1px solid $base;
-}
-
-pill-popover-details-header {
-  color: $overlay0;
-  font-weight: 800;
-  margin-bottom: 20px;
 }
 
 wifi-access-point-item {

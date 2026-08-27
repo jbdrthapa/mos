@@ -55,7 +55,7 @@ function AppItem({ app }: { app: Apps.Application }) {
     }
 
     return (
-        <button css="background-color: transparent;"
+        <button cssName="app-button"
             onClicked={() => {
                 appListingWindow.hide_all();
                 launch(app);
@@ -139,7 +139,7 @@ export function AppListing() {
             $={(ref) => (searchentry = ref)}
             onNotifyText={({ text }) => search(text)}
             onActivate={() => launch(list.peek()[0])}
-            placeholderText=">"
+            placeholderText=""
         />
     ) as any;
 
@@ -165,7 +165,7 @@ export function AppListing() {
         >
             <For each={list}>
                 {(app) => (
-                    <Gtk.FlowBoxChild cssName="app-tile">
+                    <Gtk.FlowBoxChild>
                         <AppItem app={app} />
                     </Gtk.FlowBoxChild>
                 )}

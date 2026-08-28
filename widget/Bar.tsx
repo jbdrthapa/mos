@@ -27,6 +27,7 @@ let desktopMenu = createRoot(() => DesktopMenu());
 const windowName = WindowName.bar;
 
 function CloseAllMenus() {
+  settings?.hide_all();
   modulesRight.popup.hide_all();
   desktopMenu.hide_all();
 }

@@ -17,15 +17,15 @@ const windowName = WindowName.desktopMenu;
 
 let settings = WidgetManager.GetSettingsWindow() as SettingsWindow | null;
 
+
 function ShowSettings(action: (() => void) | undefined) {
     action?.();
     settings?.toggle();
 }
 
-
 export function DesktopMenu() {
 
-    let desktopMenu = new PopupWindow({
+    return new PopupWindow({
         name: windowName,
         namespace: windowName,
         anchor: Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT,
@@ -34,7 +34,7 @@ export function DesktopMenu() {
                 <button cssName="desktop-menu-button" onClicked={() => {
                     ShowSettings(settings?.Apps);
                 }}>Apps</button>
-                
+
                 <button cssName="desktop-menu-button" onClicked={() => {
                     ShowSettings(settings?.Wallpaper);
                 }}>Wallpaper</button>
@@ -49,7 +49,4 @@ export function DesktopMenu() {
             </box>
         )
     });
-
-    return desktopMenu;
-
 }

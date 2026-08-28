@@ -48,7 +48,7 @@ function AppItem({ app }: { app: Apps.Application }) {
     }
 
     return (
-        <button cssName="app-button"
+        <button css="background: none;"
             onClicked={() => {
                 launch(app);
             }}
@@ -56,10 +56,10 @@ function AppItem({ app }: { app: Apps.Application }) {
             <box orientation={Gtk.Orientation.HORIZONTAL} halign={Gtk.Align.START} tooltipText={appTooltip} spacing={20}>
                 <image
                     iconName={app.icon_name || "image-missing"}
-                    pixelSize={52}
-                    cssName="app-icon"
+                    pixelSize={56}
+                    vexpand={true} valign={Gtk.Align.CENTER}
                 />
-                <box orientation={Gtk.Orientation.VERTICAL}>
+                <box orientation={Gtk.Orientation.VERTICAL} vexpand={true} valign={Gtk.Align.CENTER}>
                     <label
                         label={appName}
                         cssName="app-name"
@@ -157,7 +157,7 @@ export function AppListing() {
         >
             <For each={list}>
                 {(app) => (
-                    <Gtk.FlowBoxChild>
+                    <Gtk.FlowBoxChild cssName="app-button">
                         <AppItem app={app} />
                     </Gtk.FlowBoxChild>
                 )}

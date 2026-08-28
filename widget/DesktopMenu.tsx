@@ -2,11 +2,26 @@ import Gtk from "gi://Gtk?version=4.0"
 import PopupWindow from "../widget/PopupWindow"
 import { Astal } from "ags/gtk4"
 import { WindowName } from "../constants"
-import app from "ags/gtk4/app";
 import WidgetManager from "../WidgetManager";
 
+interface SettingsWindow extends PopupWindow {
+    Settings: () => void;
+    Today: () => void;
+    Apps: () => void;
+    Wallpaper: () => void;
+    Power: () => void;
+    toggle: () => void;
+}
+
 const windowName = WindowName.desktopMenu;
-const settingsWindowName = WindowName.settings
+
+let settings = WidgetManager.GetSettingsWindow() as SettingsWindow | null;
+
+function ShowSettings(action: (() => void) | undefined) {
+    action?.();
+    settings?.toggle();
+}
+
 
 export function DesktopMenu() {
 
@@ -16,27 +31,21 @@ export function DesktopMenu() {
         anchor: Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT,
         child: (
             <box orientation={Gtk.Orientation.VERTICAL}>
-
-
                 <button cssName="desktop-menu-button" onClicked={() => {
-                    let settings = WidgetManager.GetSettingsWindow();
-                    settings?.Display();
-                    settings?.toggle();
-                }}>Display</button>
-
+                    ShowSettings(settings?.Apps);
+                }}>Apps</button>
+                
                 <button cssName="desktop-menu-button" onClicked={() => {
-                    let settings = WidgetManager.GetSettingsWindow();
-                    settings?.Wallpaper();
-                    settings?.toggle();
+                    ShowSettings(settings?.Wallpaper);
                 }}>Wallpaper</button>
 
                 <button cssName="desktop-menu-button" onClicked={() => {
-                    let settings = WidgetManager.GetSettingsWindow();
-                    settings?.Settings();
-                    settings?.toggle();
+                    ShowSettings(settings?.Power);
+                }}>Power</button>
 
+                <button cssName="desktop-menu-button" onClicked={() => {
+                    ShowSettings(settings?.Settings);
                 }}>Settings</button>
-
             </box>
         )
     });

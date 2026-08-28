@@ -31,8 +31,8 @@ export function Settings() {
 
     notebook.append_page(weatherCalendar, new Gtk.Label({ label: "Today" }));
     notebook.append_page(appListing, new Gtk.Label({ label: "Apps" }));
-    notebook.append_page(powerSettings, new Gtk.Label({ label: "Power" }));
     notebook.append_page(wallpaperSettings, new Gtk.Label({ label: "Wallpaper" }));
+    notebook.append_page(powerSettings, new Gtk.Label({ label: "Power" }));
     notebook.append_page(preferences, new Gtk.Label({ label: "Preferences" }));
     notebook.append_page(aboutSettings, new Gtk.Label({ label: "About" }));
 
@@ -51,38 +51,31 @@ export function Settings() {
         )
     });
 
-    const win = app.get_window(windowName);
+    const customPopup = SettingsPopup as any;
 
-    if (win) {
-        (win as any).Settings = () => {
-            notebook.set_current_page(0);
-            ResetCalendar();
-        };
+    customPopup.Settings = () => {
+        notebook.set_current_page(0);
+        ResetCalendar();
+    };
 
-        (win as any).Today = () => {
-            notebook.set_current_page(0);
-            ResetCalendar();
-        };
+    customPopup.Today = () => {
+        notebook.set_current_page(0);
+        ResetCalendar();
+    };
 
-        (win as any).Apps = () => {
-            notebook.set_current_page(1);
-            ResetCalendar();
-        };
+    customPopup.Apps = () => {
+        notebook.set_current_page(1);
+        ResetCalendar();
+    };
 
-        (win as any).Power = () => {
-            notebook.set_current_page(2);
-        };
+    customPopup.Wallpaper = () => {
+        notebook.set_current_page(2);
+    };
 
-        (win as any).Display = () => {
-            notebook.set_current_page(3);
-        };
-
-        (win as any).Wallpaper = () => {
-            notebook.set_current_page(5);
-        };
-    }
+    customPopup.Power = () => {
+        notebook.set_current_page(3);
+    };
 
     return SettingsPopup;
-
 }
 

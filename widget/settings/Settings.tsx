@@ -44,9 +44,7 @@ export function Settings() {
         application: app,
         child: (
             <box cssName="settings-container">
-                <box>
-                    {notebook}
-                </box>
+                {notebook}
             </box>
         )
     });

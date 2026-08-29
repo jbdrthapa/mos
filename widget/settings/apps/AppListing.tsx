@@ -40,9 +40,9 @@ function AppItem({ app }: { app: Apps.Application }) {
                 : app.description;
     }
 
-    let appTooltip = "Application: " + app.name;
+    let appTooltip = "<b>Application:</b> " + app.name;
     if (app.description !== null) {
-        appTooltip += "\nDescription: " + app.description;
+        appTooltip += "\n<b>Description:</b> " + app.description;
     }
 
     return (
@@ -53,7 +53,7 @@ function AppItem({ app }: { app: Apps.Application }) {
             <box
                 orientation={Gtk.Orientation.HORIZONTAL}
                 halign={Gtk.Align.START}
-                tooltipText={appTooltip}
+                tooltipMarkup={appTooltip}
                 spacing={20}
             >
                 <image

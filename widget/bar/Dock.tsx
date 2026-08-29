@@ -25,7 +25,7 @@ export default function Dock() {
                 return (
                     <button
                         cssName="dock-item"
-                        tooltipText={`${app.name}\n${app.description || "Application Launcher"}`}
+                        tooltipMarkup={`<b>Application: </b>${app.name}\n<b>Description: </b>${app.description || "Application Launcher"}`}
                         onClicked={() => {
                             execAsync("niri msg action close-overview");
                             app.launch()

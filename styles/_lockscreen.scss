@@ -29,13 +29,13 @@ uptime-info {
 auth-message {
   font-size: 14px;
   font-weight: 400;
-  color: $subtext0;
+  color: $overlay2;
 }
 
 lockscreen-entry {
   background-color: $surface0;
   color: $overlay2;
-  border: 4px solid $overlay1;
+  border: 2px solid $overlay1;
   border-radius: 99px;
   padding: 10px 16px;
   font-size: 26px;

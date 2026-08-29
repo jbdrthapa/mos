@@ -137,7 +137,7 @@ export function WallpaperSettings() {
                 <label
                     cssName={"wallpaper-label"}
                     label={filenameShort}
-                    tooltip_markup={metadata}
+                    tooltipMarkup={metadata}
                     wrap={true}
                     wrap_mode={Pango.WrapMode.WORD_CHAR}
                     max_width_chars={20}

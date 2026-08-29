@@ -9,6 +9,8 @@ const WALLPAPER_DIR_CACHE = `${WALLPAPER_DIR}/.cache/`;
 
 const thumbToOriginal = new Map<string, string>();
 
+const filenameLengthMax = 40;
+
 function getOriginalFromThumb(thumbPath: string): string | undefined {
     return thumbToOriginal.get(thumbPath);
 }
@@ -38,13 +40,48 @@ function SetWallpaper(image: string) {
 
 }
 
+function GetFileMetadata(filePath: string) {
+    let metadataText = "";
+    const filename = GLib.path_get_basename(filePath);
+    const dotIndex = filename.lastIndexOf('.');
+    const extension = dotIndex !== -1 ? filename.slice(dotIndex + 1) : '';
+
+    const file = Gio.File.new_for_path(filePath);
+
+    try {
+        const info = file.query_info(
+            'standard::size,standard::content-type,standard::fast-content-type',
+            Gio.FileQueryInfoFlags.NONE,
+            null
+        );
+
+        const sizeInBytes = info.get_size();
+        const humanReadableSize = GLib.format_size(sizeInBytes);
+        const contentType = info.get_content_type();
+        const formatDescription = Gio.content_type_get_description(contentType);
+
+        metadataText += `<b>Filename:</b> ${filename}\n`;
+        metadataText += `<b>Extension:</b> ${extension}\n`;
+        metadataText += `<b>Size:</b> ${sizeInBytes} bytes (${humanReadableSize})\n`;
+        metadataText += `<b>MIME Type:</b> ${contentType}\n`;
+        metadataText += `<b>Description:</b> ${formatDescription}`;
+
+        // console.log(metadataText);
+
+        return metadataText;
+
+    } catch (error) {
+        console.error(`Failed to read file info: ${error.message}`);
+    }
+}
+
 export function WallpaperSettings() {
     const flowbox = new Gtk.FlowBox({
         cssName: "wallpaper-container",
-        min_children_per_line: 4,
-        max_children_per_line: 4,
-        column_spacing: 20,
-        row_spacing: 20,
+        min_children_per_line: 6,
+        max_children_per_line: 6,
+        column_spacing: 15,
+        row_spacing: 15,
         selection_mode: Gtk.SelectionMode.NONE,
     });
 
@@ -74,6 +111,11 @@ export function WallpaperSettings() {
     for (let i = 0; i < files.length; i++) {
         const path = files[i];
         const filename = GLib.path_get_basename(path);
+        const metadata = GetFileMetadata(`${WALLPAPER_DIR}/${filename}`);
+        const filenameShort =
+            filename.length > filenameLengthMax
+                ? filename.substring(0, filenameLengthMax) + "..."
+                : filename;
         const file = Gio.File.new_for_path(path);
         const image_file = getOriginalFromThumb(path) ?? "";
 
@@ -87,15 +129,15 @@ export function WallpaperSettings() {
                 <Gtk.Picture
                     cssName="wallpaper-image"
                     file={file}
-                    tooltipText={filename}
                     hexpand={true}
                     vexpand={true}
                     keepAspectRatio={true}
                     contentFit={Gtk.ContentFit.COVER}
                 />
                 <label
-                    label={filename}
-                    tooltipText={filename}
+                    cssName={"wallpaper-label"}
+                    label={filenameShort}
+                    tooltip_markup={metadata}
                     wrap={true}
                     wrap_mode={Pango.WrapMode.WORD_CHAR}
                     max_width_chars={20}

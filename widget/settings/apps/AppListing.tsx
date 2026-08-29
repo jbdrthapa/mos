@@ -1,6 +1,6 @@
 import Gtk from "gi://Gtk?version=4.0";
 import Apps from "gi://AstalApps";
-import { Astal, Gdk } from "ags/gtk4";
+import { Gdk } from "ags/gtk4";
 import { For, createState } from "ags";
 import { subprocess, execAsync } from "ags/process";
 

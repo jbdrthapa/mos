@@ -1,16 +1,12 @@
-import { Gdk } from "ags/gtk4"
+import { Gdk } from "ags/gtk4";
 import OsdSpeaker from "./OsdSpeaker";
 import OsdMicrophone from "./OsdMicrophone";
-import OsdBrigtness from "./OsdBrightness";
+import OsdBrightness from "./OsdBrightness";
 
 export default function Osd(gdkmonitor: Gdk.Monitor) {
     const osdSpeaker = OsdSpeaker(gdkmonitor);
     const osdMicrophone = OsdMicrophone(gdkmonitor);
-    const osdBrightness = OsdBrigtness(gdkmonitor);
+    const osdBrightness = OsdBrightness(gdkmonitor);
 
-    return (
-        <window>
-
-        </window>
-    );
+    return [osdSpeaker, osdMicrophone, osdBrightness];
 }

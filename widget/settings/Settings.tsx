@@ -1,28 +1,27 @@
 import Gtk from "gi://Gtk?version=4.0";
-import { Astal } from "ags/gtk4"
-import app from "ags/gtk4/app"
+import { Astal } from "ags/gtk4";
+import app from "ags/gtk4/app";
+
 import { WindowName } from "../../constants";
 import PopupWindow from "../PopupWindow";
 import { PowerSettings } from "./PowerSettings";
 import { WallpaperSettings } from "./WallpaperSettings";
 import { Preferences } from "./Preferences";
 import { AboutSettings } from "./AboutSettings";
-import { WeatherCalendar, ResetCalendar } from "./today/WeatherCalendar";
-import { AppListing } from "./apps/AppListing"
-
+import { WeatherCalendar } from "./today/WeatherCalendar";
+import { AppListing } from "./apps/AppListing";
 
 export function Settings() {
-
     const windowName = WindowName.settings;
 
-    const weatherCalendar = WeatherCalendar() as any;
+    const { widget: weatherCalendar, reset: resetCalendar } = WeatherCalendar();
     const appListing = AppListing() as any;
     const powerSettings = PowerSettings() as any;
     const wallpaperSettings = WallpaperSettings() as any;
     const preferences = Preferences() as any;
     const aboutSettings = AboutSettings() as any;
 
-    let notebook = new Gtk.Notebook({
+    const notebook = new Gtk.Notebook({
         tabPos: Gtk.PositionType.TOP,
         cssName: "settings-notebook",
         hexpand: true,
@@ -46,24 +45,24 @@ export function Settings() {
             <box cssName="settings-container">
                 {notebook}
             </box>
-        )
+        ),
     });
 
     const customPopup = SettingsPopup as any;
 
     customPopup.Settings = () => {
         notebook.set_current_page(0);
-        ResetCalendar();
+        resetCalendar();
     };
 
     customPopup.Today = () => {
         notebook.set_current_page(0);
-        ResetCalendar();
+        resetCalendar();
     };
 
     customPopup.Apps = () => {
         notebook.set_current_page(1);
-        ResetCalendar();
+        resetCalendar();
     };
 
     customPopup.Wallpaper = () => {
@@ -76,4 +75,3 @@ export function Settings() {
 
     return SettingsPopup;
 }
-

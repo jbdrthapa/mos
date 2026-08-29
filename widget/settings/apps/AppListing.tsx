@@ -1,65 +1,72 @@
-import Gtk from "gi://Gtk?version=4.0"
-import Apps from "gi://AstalApps"
-import { Astal, Gdk } from "ags/gtk4"
+import Gtk from "gi://Gtk?version=4.0";
+import Apps from "gi://AstalApps";
+import { Astal, Gdk } from "ags/gtk4";
 import { For, createState } from "ags";
-import { subprocess } from "ags/process";
-import { execAsync } from "ags/process";
+import { subprocess, execAsync } from "ags/process";
 
 const terminal = "kitty";
 let appListing: any;
 
 function launch(app?: Apps.Application) {
-    if (app) {
-        execAsync("niri msg action close-overview");
+    if (!app) return;
 
-        const needsTerminal = app.app.get_boolean("Terminal");
+    execAsync("niri msg action close-overview");
 
-        const launchCmd = needsTerminal
-            ? `${terminal} -e ${app.executable}`
-            : app.executable;
-        if (needsTerminal) {
-            subprocess(["bash", "-c", `${launchCmd} >/dev/null 2>&1 &`]);
-        }
-        else {
-            app.launch()
-        }
+    const needsTerminal = app.app.get_boolean("Terminal");
+    const launchCmd = needsTerminal
+        ? `${terminal} -e ${app.executable}`
+        : app.executable;
+
+    if (needsTerminal) {
+        subprocess(["bash", "-c", `${launchCmd} >/dev/null 2>&1 &`]);
+    } else {
+        app.launch();
     }
 }
 
-
 function AppItem({ app }: { app: Apps.Application }) {
-
     const appNameDescLengthMax = 100;
-    const appName = app.name.length > appNameDescLengthMax
-        ? app.name.substring(0, appNameDescLengthMax) + "..."
-        : app.name;
 
-    let appDesc;
+    const appName =
+        app.name.length > appNameDescLengthMax
+            ? app.name.substring(0, appNameDescLengthMax) + "..."
+            : app.name;
+
+    let appDesc: string | undefined;
     if (app.description) {
-        appDesc = app.description.length > appNameDescLengthMax
-            ? app.description.substring(0, appNameDescLengthMax) + "..."
-            : app.description;
+        appDesc =
+            app.description.length > appNameDescLengthMax
+                ? app.description.substring(0, appNameDescLengthMax) + "..."
+                : app.description;
     }
 
     let appTooltip = "Application: " + app.name;
-
     if (app.description !== null) {
-        appTooltip += "\n" + "Description: " + app.description;
+        appTooltip += "\nDescription: " + app.description;
     }
 
     return (
-        <button css="background: none;"
-            onClicked={() => {
-                launch(app);
-            }}
+        <button
+            css="background: none;"
+            onClicked={() => launch(app)}
         >
-            <box orientation={Gtk.Orientation.HORIZONTAL} halign={Gtk.Align.START} tooltipText={appTooltip} spacing={20}>
+            <box
+                orientation={Gtk.Orientation.HORIZONTAL}
+                halign={Gtk.Align.START}
+                tooltipText={appTooltip}
+                spacing={20}
+            >
                 <image
                     iconName={app.icon_name || "image-missing"}
                     pixelSize={56}
-                    vexpand={true} valign={Gtk.Align.CENTER}
+                    vexpand={true}
+                    valign={Gtk.Align.CENTER}
                 />
-                <box orientation={Gtk.Orientation.VERTICAL} vexpand={true} valign={Gtk.Align.CENTER}>
+                <box
+                    orientation={Gtk.Orientation.VERTICAL}
+                    vexpand={true}
+                    valign={Gtk.Align.CENTER}
+                >
                     <label
                         label={appName}
                         cssName="app-name"
@@ -77,53 +84,44 @@ function AppItem({ app }: { app: Apps.Application }) {
 }
 
 export function AppListing() {
+    if (appListing) return appListing;
 
-    if (appListing) {
-        return appListing;
-    }
-
-    let searchentry: Gtk.Entry
-    let appsScroll: Gtk.ScrolledWindow
-    let win: Astal.Window
-    let flowBox: Gtk.FlowBox
+    let searchentry: Gtk.Entry;
+    let appsScroll: Gtk.ScrolledWindow;
+    let flowBox: Gtk.FlowBox;
 
     const apps = new Apps.Apps();
-    const initialResults = apps.fuzzy_query("")
-    const [list, setList] = createState(initialResults)
+    const initialResults = apps.fuzzy_query("");
+    const [list, setList] = createState(initialResults);
 
     function search(text: string) {
-        const results = text === "" ? apps.fuzzy_query("") : apps.fuzzy_query(text)
-        setList(results)
+        const results =
+            text === "" ? apps.fuzzy_query("") : apps.fuzzy_query(text);
+        setList(results);
     }
 
-
-    // handle key events for the entire window
     function onKey(
         _e: Gtk.EventControllerKey,
         keyval: number,
         _: number,
         mod: number,
     ) {
-        console.log("Key pressed", Gdk.keyval_name(keyval), "with modifier", mod);
         if (keyval === Gdk.KEY_Escape) {
-            appListing.visible = false
-            return true
+            appListing.visible = false;
+            return true;
         }
 
         if (mod === Gdk.ModifierType.ALT_MASK) {
             for (const i of [1, 2, 3, 4, 5, 6, 7, 8, 9] as const) {
                 if (keyval === Gdk[`KEY_${i}`]) {
-                    launch(list.peek()[i - 1])
-                    return true
+                    launch(list.peek()[i - 1]);
+                    return true;
                 }
             }
         }
 
-        return false
+        return false;
     }
-
-    let listRoot = new Gtk.Box();
-    listRoot.orientation = Gtk.Orientation.VERTICAL;
 
     const searchEntry = (
         <entry
@@ -150,9 +148,7 @@ export function AppListing() {
             halign={Gtk.Align.START}
             onChildActivated={(self, child) => {
                 const button = child.child;
-                if (button) {
-                    button.activate();
-                }
+                if (button) button.activate();
             }}
         >
             <For each={list}>
@@ -163,41 +159,39 @@ export function AppListing() {
                 )}
             </For>
         </Gtk.FlowBox>
-    )
-
+    );
 
     appListing = (
-        <box cssName="modules-left-container" orientation={Gtk.Orientation.VERTICAL}>
+        <box
+            cssName="modules-left-container"
+            orientation={Gtk.Orientation.VERTICAL}
+        >
             {searchEntry}
-            <scrolledwindow vexpand heightRequest={500} hexpand widthRequest={800} $={(ref) => (appsScroll = ref)}>
+            <scrolledwindow
+                vexpand
+                heightRequest={500}
+                hexpand
+                widthRequest={800}
+                $={(ref) => (appsScroll = ref)}
+            >
                 {flowBox}
             </scrolledwindow>
         </box>
-    );
-    // subscribe to key events for the entire window
+    ) as any;
+
     const keyController = new Gtk.EventControllerKey();
     keyController.connect("key-pressed", onKey);
     appListing.add_controller(keyController);
 
-    // connect to visibility changes
     appListing.connect("notify::visible", () => {
         if (appListing.visible) {
-
-            // console.log("Launcher window is opened");
-
-            // reset search and focus
             searchEntry.text = "";
             searchEntry.grab_focus();
 
-            // scroll to top
             if (appsScroll) {
-                const vadjustment = appsScroll.get_vadjustment()
-                vadjustment.set_value(vadjustment.get_lower())
+                const vadjustment = appsScroll.get_vadjustment();
+                vadjustment.set_value(vadjustment.get_lower());
             }
-        }
-        else {
-
-            // console.log("Launcher window is closed");
         }
     });
 

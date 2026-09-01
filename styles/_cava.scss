@@ -14,23 +14,3 @@ cava {
 cava-bar {
     background-color: $red;
 }
-
-.player-button {
-    padding: 5px;
-    border: 2px solid transparent;
-}
-
-.player-tab {
-    @extend .player-button;
-    border: 2px solid $overlay1;
-}
-
-.active-player-tab {
-    @extend .player-button;
-    border: 2px solid $white;
-}
-
-.playing-player-tab {
-    @extend .player-button;
-    border: 2px solid $green;
-}

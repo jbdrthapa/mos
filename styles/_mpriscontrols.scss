@@ -1,9 +1,10 @@
 @use "theme" as *;
 
-mpris-controls {
-    background-color: transparent;
-    padding: 10px;
+players-container {
+    background-color: $base-transparent;
+    padding: 40px;
     border-radius: $border-radius;
+    border: 1px solid $surface0;
     transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -12,7 +13,7 @@ mpris-media-info {
 }
 
 mpris-title {
-    font-size: 14px;
+    font-size: 18px;
     font-weight: 500;
     color: $accent-background;
 }
@@ -24,8 +25,10 @@ mpris-artist {
 
 mpris-button {
     background-color: $surface1;
-    padding: 10px;
-    border-radius: 99px;
+    padding: 20px;
+    border-radius: $border-radius;
+    border: 1px solid $overlay0;
+    box-shadow: inset 1px -1px 0 0 $base, 0 4px 6px rgba(0, 0, 0, 0.5);
     transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -40,10 +43,50 @@ mpris-cover-art {
 }
 
 @keyframes spin {
-    from { transform: rotate(0deg); }
-    to   { transform: rotate(360deg); }
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 mpris-cover-art.playing image {
     animation: spin 15s linear infinite;
+}
+
+.player-tab {
+    padding: 5px;
+    border: 2px solid transparent;
+    border-radius: $border-radius;
+    border: 2px solid $overlay1;
+    background-color: $base-transparent;
+}
+
+.player-tab label {
+    padding: 5px;
+    font-size: 10px;
+    font-weight: 500;
+    background-color: $surface0-transparent;
+    border-radius: 10px;
+    color: $subtext0;
+    min-width: 60px;
+    min-height: 5px;
+}
+
+.active-player-tab label {
+    color: $white;
+}
+
+.playing-player-tab label {
+    color: $accent-background;
+}
+
+.active-player-tab {
+    border: 2px solid $white;
+}
+
+.playing-player-tab {
+    border: 2px solid $accent-background;
 }

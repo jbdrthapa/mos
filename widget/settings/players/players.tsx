@@ -6,7 +6,7 @@ import AstalCava from "gi://AstalCava";
 
 
 function MediaInfo({ mprisPlayer }: { mprisPlayer: AstalMpris.Player }) {
-    const textWidth = 57;
+    const textWidth = 50;
     const title = createBinding(mprisPlayer, "title");
 
     const titleText = title.as((value) => {
@@ -42,7 +42,7 @@ function CoverArt({ mprisPlayer }: { mprisPlayer: AstalMpris.Player }) {
             cssName="mpris-cover-art"
             cssClasses={playingClass.as(cls => [cls])}
         >
-            <image pixelSize={300} file={coverArt} />
+            <image pixelSize={250} file={coverArt} />
         </box>
     );
 }
@@ -55,7 +55,7 @@ function Buttons({ mprisPlayer }: { mprisPlayer: AstalMpris.Player }) {
     const playbackStatusNot = playbackStatus.as((status) => !status);
 
     return (
-        <box hexpand spacing={2} halign={Gtk.Align.END} valign={Gtk.Align.CENTER}>
+        <box hexpand spacing={10} halign={Gtk.Align.END} valign={Gtk.Align.CENTER}>
             <button onClicked={() => mprisPlayer.previous()} visible={canGoPrevious} cssName="mpris-button">
                 <image iconName="media-seek-backward-symbolic" />
             </button>
@@ -117,19 +117,20 @@ export function Players() {
 
 
     return (
-        <box orientation={Gtk.Orientation.VERTICAL} spacing={10}>
+        <box orientation={Gtk.Orientation.VERTICAL} spacing={10} cssName={"players-container"}>
 
             {/* Top Navigation Row */}
-            <box orientation={Gtk.Orientation.HORIZONTAL} spacing={5} halign={Gtk.Align.CENTER}>
+            <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10} halign={Gtk.Align.CENTER}>
                 <For each={players}>
                     {(player) => {
                         const identity = createBinding(player, "identity");
+                        const coverArt = createBinding(player, "coverArt");
                         const isActive = activePlayer((current) => current === player);
                         const isStopped = createBinding(player, "playbackStatus");
 
-
                         return (
                             <button
+                                overflow={Gtk.Overflow.HIDDEN}
                                 onClicked={() => setActivePlayer(player)}
                                 cssClasses={createComputed(() => {
                                     const classes = ["player-tab"];
@@ -143,8 +144,20 @@ export function Players() {
                                 hexpand={false}
                                 tooltipText={identity}
                             >
-                                <image pixelSize={24} file={player.coverArt} vexpand={true} hexpand={true} halign={Gtk.Align.CENTER} valign={Gtk.Align.CENTER} />
+                                <box orientation={Gtk.Orientation.VERTICAL} spacing={5}>
+                                    <image
+                                        pixelSize={48}
+                                        file={coverArt}
+                                        halign={Gtk.Align.CENTER}
+                                        valign={Gtk.Align.CENTER}
+                                        hexpand={true}
+                                        vexpand={true}
+                                    />
+                                    <label label={identity} />
+                                </box>
+
                             </button>
+
                         );
                     }}
                 </For>

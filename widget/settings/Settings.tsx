@@ -10,12 +10,14 @@ import { Preferences } from "./Preferences";
 import { AboutSettings } from "./AboutSettings";
 import { WeatherCalendar } from "./today/WeatherCalendar";
 import { AppListing } from "./apps/AppListing";
+import { Players } from "./players/players";
 
 export function Settings() {
     const windowName = WindowName.settings;
 
     const { widget: weatherCalendar, reset: resetCalendar } = WeatherCalendar();
     const appListing = AppListing() as any;
+    const players = Players() as any;
     const powerSettings = PowerSettings() as any;
     const wallpaperSettings = WallpaperSettings() as any;
     const preferences = Preferences() as any;
@@ -31,6 +33,7 @@ export function Settings() {
     notebook.append_page(weatherCalendar, new Gtk.Label({ label: "Today" }));
     notebook.append_page(appListing, new Gtk.Label({ label: "Apps" }));
     notebook.append_page(wallpaperSettings, new Gtk.Label({ label: "Wallpaper" }));
+    notebook.append_page(players, new Gtk.Label({ label: "Players" }));
     notebook.append_page(powerSettings, new Gtk.Label({ label: "Power" }));
     notebook.append_page(preferences, new Gtk.Label({ label: "Preferences" }));
     notebook.append_page(aboutSettings, new Gtk.Label({ label: "About" }));
@@ -69,8 +72,12 @@ export function Settings() {
         notebook.set_current_page(2);
     };
 
-    customPopup.Power = () => {
+    customPopup.Players = () => {
         notebook.set_current_page(3);
+    };
+
+    customPopup.Power = () => {
+        notebook.set_current_page(4);
     };
 
     return SettingsPopup;

@@ -1,44 +1,27 @@
 @forward "theme";
 @forward "shared";
 
-// settings
-@use "./settings/settings";
-@use "./settings/wallpaperSettings";
-
-// bar
-@use "./bar/bar";
-@use "./bar/workspaceControls";
-@use "./bar/trayControls";
-@use "./bar/powerProfileControls";
-@use "./bar/batteryControls";
-@use "./bar/cava";
-@use "./bar/weather";
-
-// modules-left
-@use "./modules-left/modulesLeft";
-
-// modules-center
-@use "./modules-center/modulesCenter";
-
-// modules-right
-@use "./modules-right/notifications";
-@use "./modules-right/modulesRight";
-@use "./modules-right/systeminfocontrols";
-@use "./modules-right/powerWidgets";
-@use "./modules-right/audiocontrols";
-@use "./modules-right/displaycontrols";
-@use "./modules-right/mpriscontrols";
-@use "./modules-right/pillWidgets";
-@use "./modules-right/bluetoothcontrols";
-
-// OSD
-@use "./osd/Osd";
-
-// Dock
+@use "./settings";
+@use "./wallpaperSettings";
+@use "./bar";
+@use "./workspaceControls";
+@use "./trayControls";
+@use "./powerProfileControls";
+@use "./batteryControls";
+@use "./cava";
+@use "./weather";
+@use "./modulesLeft";
+@use "./modulesCenter";
+@use "./notifications";
+@use "./modulesRight";
+@use "./systeminfocontrols";
+@use "./powerWidgets";
+@use "./audiocontrols";
+@use "./displaycontrols";
+@use "./mpriscontrols";
+@use "./pillWidgets";
+@use "./bluetoothcontrols";
+@use "./Osd";
 @use "./dock";
-
-// Lock Screen
 @use "./lockscreen";
-
-// Power Options
 @use "./powerOptions";

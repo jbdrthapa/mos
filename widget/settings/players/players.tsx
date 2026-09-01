@@ -1,13 +1,12 @@
 import Gtk from "gi://Gtk?version=4.0";
-import { For, With, createBinding, createState } from "ags";
+import GLib from "gi://GLib";
+import { For, With, createBinding, createState, createComputed } from "ags";
 import AstalMpris from "gi://AstalMpris?version=0.1";
+import AstalCava from "gi://AstalCava";
 
-// ==========================================
-// Sub-Components
-// ==========================================
 
 function MediaInfo({ mprisPlayer }: { mprisPlayer: AstalMpris.Player }) {
-    const textWidth = 27;
+    const textWidth = 57;
     const title = createBinding(mprisPlayer, "title");
 
     const titleText = title.as((value) => {
@@ -91,7 +90,7 @@ export function Players() {
 
         if (currentPlayers.length > 0) {
             print("found some players");
-            
+
             const currentActive = activePlayer();
             const isCurrentPlaying = currentActive && currentActive.playbackStatus === AstalMpris.PlaybackStatus.PLAYING;
 
@@ -116,6 +115,7 @@ export function Players() {
         }
     });
 
+
     return (
         <box orientation={Gtk.Orientation.VERTICAL} spacing={10}>
 
@@ -125,13 +125,25 @@ export function Players() {
                     {(player) => {
                         const identity = createBinding(player, "identity");
                         const isActive = activePlayer((current) => current === player);
+                        const isStopped = createBinding(player, "playbackStatus");
+
 
                         return (
                             <button
                                 onClicked={() => setActivePlayer(player)}
-                                cssClasses={isActive((active) => active ? ["active-player-tab"] : [])}
-                            >
+                                cssClasses={createComputed(() => {
+                                    const classes = ["player-tab"];
 
+                                    if (isActive()) classes.push("active-player-tab");
+                                    if (!isStopped()) classes.push("playing-player-tab");
+
+                                    return classes;
+                                })}
+                                vexpand={false}
+                                hexpand={false}
+                                tooltipText={identity}
+                            >
+                                <image pixelSize={24} file={player.coverArt} vexpand={true} hexpand={true} halign={Gtk.Align.CENTER} valign={Gtk.Align.CENTER} />
                             </button>
                         );
                     }}
@@ -150,15 +162,22 @@ export function Players() {
                         }
 
                         return (
-                            <box spacing={10} hexpand>
-                                {CoverArt({ mprisPlayer: player })}
-                                {MediaInfo({ mprisPlayer: player })}
-                                {Buttons({ mprisPlayer: player })}
+                            <box orientation={Gtk.Orientation.VERTICAL}>
+                                <box spacing={10} hexpand>
+                                    {CoverArt({ mprisPlayer: player })}
+                                    {MediaInfo({ mprisPlayer: player })}
+                                    {Buttons({ mprisPlayer: player })}
+                                </box>
+
+                                <box halign={Gtk.Align.CENTER} spacing={4}>
+
+                                </box>
+
                             </box>
                         );
                     }}
                 </With>
-            </box>
-        </box>
+            </box >
+        </box >
     );
 }

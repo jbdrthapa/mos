@@ -7,7 +7,6 @@ import { SystemInfoWidget } from "./SystemInfoWidget";
 import { PillWidgets } from "./PillWidgets";
 import { DisplayControlsWidget } from "./DisplayControlsWidget";
 import { AudioControlsWidget } from "./AudioControlsWidget";
-import { MprisWidget } from "./MprisWidget";
 import { PowerButtonsWidget } from "./PowerButtons";
 import { WindowName } from "../../constants";
 
@@ -20,7 +19,6 @@ export function ModulesRight() {
     const pillWidgets = PillWidgets();
     const displayControlsWidget = DisplayControlsWidget();
     const audioControlsWidget = AudioControlsWidget();
-    const mprisWidget = MprisWidget();
     const powerButtonsWidget = PowerButtonsWidget();
 
     const button = (
@@ -62,7 +60,6 @@ export function ModulesRight() {
                     </box>
                     {displayControlsWidget}
                     {audioControlsWidget}
-                    {mprisWidget}
                 </box>
                 <box
                     vexpand={false}

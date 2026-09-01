@@ -1,0 +1,16 @@
+@use "theme" as *;
+
+cava {
+    color: $accent-background;
+    background-color: $base-transparent;
+    border-radius: $border-radius;
+    font-size: 12px;
+    letter-spacing: -4px;
+    /* Pulls the bars horizontally closer together */
+    font-stretch: ultra-condensed;
+    /* Squishes the characters if supported by the font */
+}
+
+cava-bar {
+    background-color: $red;
+}

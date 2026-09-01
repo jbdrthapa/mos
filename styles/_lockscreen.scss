@@ -17,7 +17,7 @@ user-avatar-lockscreen:hover {
 host-info {
   font-size: 32px;
   font-weight: 800;
-  color: $overlay1;
+  color: $subtext1;
 }
 
 uptime-info {
@@ -29,20 +29,21 @@ uptime-info {
 auth-message {
   font-size: 14px;
   font-weight: 400;
-  color: $overlay0;
+  color: $overlay2;
 }
 
 lockscreen-entry {
   background-color: $surface0;
-  color: $overlay1;
-  border: 2px solid $accent-background;
+  color: $overlay2;
+  border: 2px solid $overlay1;
   border-radius: 99px;
   padding: 10px 16px;
-  font-size: 14px;
-  caret-color: $peach;
+  font-size: 26px;
+  caret-color: $accent-background;
+  min-width: 300px;
   transition: all 200ms ease;
 }
 
 lockscreen-background {
-  background-color: $surface0;
+  background-color: $base;
 }

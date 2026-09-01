@@ -1,0 +1,95 @@
+@use "theme" as *;
+
+modules-left-container {
+  background-color: $base-transparent;
+  border: 2px solid $base;
+  border-radius: $border-radius;
+  padding: 5px;
+}
+
+bar-launcher-component {
+  background-color: transparent;
+  background: none;
+  padding: 4px;
+}
+
+launcher-button {
+  background-color: $overlay0;
+  padding-left: 10px;
+  border-radius: $border-radius;
+}
+
+/* In your .css file */
+scrollbar {
+  opacity: 0;
+}
+
+/* Or just the trough/slider */
+scrollbar trough,
+scrollbar slider {
+  min-width: 0;
+  min-height: 0;
+}
+
+search-entry {
+  min-height: 40px;
+  background-color: $crust-transparent;
+  color: $accent-background;
+  padding-left: 20px;
+  border-radius: $border-radius;
+  border: 2px solid $surface1;
+  margin-bottom: 30px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+search-entry:hover {
+  border-color: $accent-background-transparent;
+}
+
+app-button {
+  background: none;
+  min-width: 800px;
+}
+
+app-button-highlight {
+  background-color: $accent-background-transparent;
+  border-radius: $border-radius;
+}
+
+app-button:hover {
+  @extend app-button-highlight;
+}
+
+app-button:focus {
+  @extend app-button-highlight;
+}
+
+app-button:hover app-name {
+  color: $black;
+}
+
+app-button:hover app-desc {
+  color: $black;
+}
+
+app-button:focus app-name {
+  color: $black;
+}
+
+app-button:focus app-desc {
+  color: $black;
+}
+
+app-name {
+  color: $subtext1;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+app-desc {
+  color: $subtext1;
+  font-size: 14px;
+  font-weight: 400;
+}

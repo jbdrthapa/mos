@@ -18,6 +18,6 @@ export function GraphicsWidget() {
   });
 
   return (
-    <label label="" tooltipText={rawGraphicsStatusMode()} cssClasses={graphicsClass} vexpand={true} valign={Gtk.Align.CENTER} />
+    <label label="" tooltipText={rawGraphicsStatusMode()} cssClasses={graphicsClass} vexpand valign={Gtk.Align.CENTER}/>
   )
 }

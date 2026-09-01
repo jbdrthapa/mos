@@ -1,0 +1,37 @@
+@use "theme" as *;
+
+bar {
+  font-family: "Inter", "JetBrainsMono Nerd Font Propo", "Noto Sans CJK JP", "Noto Sans CJK KR";
+  font-size: 18px;
+  color: $subtext1;
+  background-color: $base-transparent;
+  border-bottom: 2px solid $surface0;
+  margin: 0 0px 3px 0px; 
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.4), 0 2px 2px -1px rgba(0, 0, 0, 0.3);
+}
+
+.discrete-graphics-icon {
+  font-size: 26px;
+  font-weight: 800;
+  color: $subtext1;
+}
+
+.discrete-graphics-icon-suspended {
+  @extend .discrete-graphics-icon;
+  color: $green;
+}
+
+.discrete-graphics-icon-active {
+  @extend .discrete-graphics-icon;
+  color: $peach;
+}
+
+.discrete-graphics-icon-resuming {
+  @extend .discrete-graphics-icon;
+  color: $yellow;
+}
+
+.discrete-graphics-icon-suspending {
+  @extend .discrete-graphics-icon;
+  color: $yellow;
+}

@@ -1,18 +1,20 @@
-import { AppListing } from "./AppListing"
+import WidgetManager from "../../WidgetManager"
 
 export function ModulesLeft() {
 
-    const appListingWindow = AppListing();
 
     const button = (
-        <button onClicked={() => appListingWindow.toggle()} cssName={"bar-module-button"}>
+        <button
+            onClicked={() => {
+                let settings = WidgetManager.GetSettingsWindow();
+                settings?.Apps();
+                settings?.toggle();
+            }}
+            cssName={"bar-module-button"
+            }>
             <label label="" />
         </button>
     ) as any;
-
-
-
-    button.popup = appListingWindow;
 
     return button;
 }

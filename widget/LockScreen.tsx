@@ -6,114 +6,116 @@ import { WindowName } from "../constants";
 import { createBinding, createState } from "gnim";
 import SystemInfoService from "../services/SystemInfoService";
 
-const windowName = WindowName.lockScreen;
-
 export function LockScreen() {
+  const systemInfoService = SystemInfoService.get_default();
 
-    const systemInfoService = SystemInfoService.get_default();
+  const avatarImg = createBinding(systemInfoService, "avatar");
+  const hostInfo = createBinding(systemInfoService, "host_info");
+  const uptime = createBinding(systemInfoService, "uptime_info");
+  const auth_message = createBinding(systemInfoService, "auth-message");
 
-    const avatarImg = createBinding(systemInfoService, "avatar");
-    const hostInfo = createBinding(systemInfoService, "host_info");
-    const uptime = createBinding(systemInfoService, "uptime_info");
-    const auth_message = createBinding(systemInfoService, "auth-message");
+  const dynamicGtkCss = avatarImg.as(path => {
+    const finalPath = (path && path.startsWith("/")) ? path : "avatar-default";
 
-    const dynamicGtkCss = avatarImg.as(path => {
-        const finalPath = (path && path.startsWith("/")) ? path : "avatar-default";
-
-        if (finalPath.startsWith("/")) {
-            return `
-                background-image: url('file://${finalPath}');
-                background-size: cover;
-                background-position: center;
-                background-repeat: no-repeat;
-            `;
-        }
-
-        return `
-            background-image: icon('${finalPath}');
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-        `;
-    });
-
-    const [reveal, setReveal] = createState(true);
-
-    const revealerWidget = (
-        <revealer
-            revealChild={reveal}
-            transitionType={Gtk.RevealerTransitionType.FADE_SLIDE_UP}
-            transitionDuration={1000}
-            vexpand={true}
-            hexpand={true}
-            cssName="lockscreen-background"
-
-            $={() => {
-                setTimeout(() => setReveal(true), 10);
-            }}
-        >
-            <box vexpand={true} hexpand={true} valign={Gtk.Align.CENTER} halign={Gtk.Align.CENTER} orientation={Gtk.Orientation.VERTICAL} spacing={20}>
-                <box
-                    hexpand={true}
-                    halign={Gtk.Align.CENTER}
-                    cssName="user-avatar-lockscreen"
-                    css={dynamicGtkCss}
-                />
-
-                <label label={hostInfo} cssName="host-info" />
-                <label label={uptime} cssName="uptime-info" />
-
-                <entry
-                    hexpand={false}
-                    halign={Gtk.Align.CENTER}
-                    visibility={false}
-                    cssName="lockscreen-entry"
-                    onActivate={(self) => {
-                        systemInfoService.authenticate(self.text, () => {
-                            slideDownAndHide();
-                            self.text = "";
-                        });
-                    }}
-                />
-
-                <label label={auth_message} cssName="auth-message" />
-            </box>
-        </revealer>
-    );
-
-    const lockScreenWindow = (
-        <window
-            name={windowName}
-            namespace={windowName}
-            keymode={Astal.Keymode.EXCLUSIVE}
-            layer={Astal.Layer.OVERLAY}
-            visible={false}
-            exclusivity={Astal.Exclusivity.IGNORE}
-            css={"background: none; "}
-            anchor={
-                Astal.WindowAnchor.TOP |
-                Astal.WindowAnchor.BOTTOM |
-                Astal.WindowAnchor.LEFT |
-                Astal.WindowAnchor.RIGHT
-            }
-            application={app}
-        >
-            {revealerWidget}
-        </window>
-    ) as Astal.Window;
-
-    function slideDownAndHide() {
-
-        setReveal(false);
-
-        GLib.timeout_add(GLib.PRIORITY_DEFAULT, 800, () => {
-            lockScreenWindow.hide();
-
-            setReveal(true);
-
-            return GLib.SOURCE_REMOVE;
-        });
+    if (finalPath.startsWith("/")) {
+      return `
+        background-image: url('file://${finalPath}');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      `;
     }
 
-    return lockScreenWindow;
+    return `
+      background-image: icon('${finalPath}');
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+    `;
+  });
+
+  const [reveal, setReveal] = createState(true);
+
+  let lockScreenWindow: Astal.Window;
+
+  function slideDownAndHide() {
+    setReveal(false);
+
+    GLib.timeout_add(GLib.PRIORITY_DEFAULT, 800, () => {
+      lockScreenWindow.hide();
+      setReveal(true);
+      return GLib.SOURCE_REMOVE;
+    });
+  }
+
+  const revealerWidget = (
+    <revealer
+      revealChild={reveal}
+      transitionType={Gtk.RevealerTransitionType.FADE_SLIDE_UP}
+      transitionDuration={1000}
+      vexpand={true}
+      hexpand={true}
+      cssName="lockscreen-background"
+      $={() => {
+        setTimeout(() => setReveal(true), 10);
+      }}
+    >
+      <box
+        vexpand={true}
+        hexpand={true}
+        valign={Gtk.Align.CENTER}
+        halign={Gtk.Align.CENTER}
+        orientation={Gtk.Orientation.VERTICAL}
+        spacing={20}
+      >
+        <box
+          hexpand={true}
+          halign={Gtk.Align.CENTER}
+          cssName="user-avatar-lockscreen"
+          css={dynamicGtkCss}
+        />
+
+        <label label={hostInfo} cssName="host-info" />
+        <label label={uptime} cssName="uptime-info" />
+
+        <entry
+          hexpand={false}
+          halign={Gtk.Align.CENTER}
+          visibility={false}
+          cssName="lockscreen-entry"
+          onActivate={(self) => {
+            systemInfoService.authenticate(self.text, () => {
+              slideDownAndHide();
+              self.text = "";
+            });
+          }}
+        />
+
+        <label label={auth_message} cssName="auth-message" />
+      </box>
+    </revealer>
+  );
+
+  lockScreenWindow = (
+    <window
+      name={WindowName.lockScreen}
+      namespace={WindowName.lockScreen}
+      keymode={Astal.Keymode.EXCLUSIVE}
+      layer={Astal.Layer.OVERLAY}
+      visible={false}
+      exclusivity={Astal.Exclusivity.IGNORE}
+      css={"background: none;"}
+      anchor={
+        Astal.WindowAnchor.TOP |
+        Astal.WindowAnchor.BOTTOM |
+        Astal.WindowAnchor.LEFT |
+        Astal.WindowAnchor.RIGHT
+      }
+      application={app}
+    >
+      {revealerWidget}
+    </window>
+  ) as Astal.Window;
+
+  return lockScreenWindow;
 }

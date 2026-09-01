@@ -18,7 +18,7 @@ export function BatteryWidget() {
         const minutes = Math.floor((t % 3600) / 60)
         return `${hours}h ${minutes}m`
     })
-    
+
     const formatTime = (t: any) => {
         if (t === -1 || !t) {
             return "...";
@@ -77,17 +77,17 @@ export function BatteryWidget() {
                 battery_state = "Unknown Status"
         }
 
-        tooltip = `State : ${battery_state} \nPercentage: ${percent.peek()} \nTime to Empty: ${timeToEmpty.peek()} \nTime to Full: ${timeToFull.peek()}\nEnergy Rate: ${energyRate.peek()}`
+        tooltip = `<b>State:</b> ${battery_state} \n<b>Percentage:</b> ${percent.peek()} \n<b>Time to Empty:</b> ${timeToEmpty.peek()} \n<b>Time to Full:</b> ${timeToFull.peek()}\n<b>Energy Rate:</b> ${energyRate.peek()}`
 
         return tooltip;
 
     })
 
     return (
-        <box vexpand valign={Gtk.Align.CENTER} orientation={Gtk.Orientation.VERTICAL} tooltipText={batteryTooltip}>
+        <box vexpand valign={Gtk.Align.CENTER} orientation={Gtk.Orientation.VERTICAL} tooltipMarkup={batteryTooltip}>
             <levelbar
-                widthRequest={75}
-                heightRequest={20}
+                widthRequest={55}
+                heightRequest={15}
                 cssName={"battery-bar"}
                 value={percentBinding.as(v => v)}
                 valign={Gtk.Align.CENTER}

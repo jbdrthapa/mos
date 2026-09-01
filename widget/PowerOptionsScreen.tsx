@@ -25,31 +25,31 @@ export function PowerOptionsScreen() {
                 setTimeout(() => setReveal(true), 10);
             }}
         >
-            <box vexpand={true} hexpand={true} valign={Gtk.Align.CENTER} halign={Gtk.Align.CENTER} orientation={Gtk.Orientation.VERTICAL} spacing={20}>
-                <box orientation={Gtk.Orientation.HORIZONTAL} halign={Gtk.Align.CENTER} spacing={35}>
+            <box vexpand={true} hexpand={true} valign={Gtk.Align.START} halign={Gtk.Align.CENTER} orientation={Gtk.Orientation.VERTICAL} spacing={20} marginTop={60}>
+                <box orientation={Gtk.Orientation.HORIZONTAL} cssName="power-button-box" halign={Gtk.Align.CENTER} spacing={35}>
 
-                    <box orientation={Gtk.Orientation.VERTICAL} spacing={40} cssName="power-button-container-large">
+                    <box orientation={Gtk.Orientation.VERTICAL} spacing={20} cssName="power-button-container-large">
                         <button label="󰿅" cssName="power-button-large" onClicked={() => {
                             slideDownAndHide("niri msg action quit --skip-confirmation");
                         }} />
-                        <label label={"Log Off"} tooltipText="Log Off" cssName="power-button-caption" />
+                        <label label={"Logout"} tooltipText="Log Off" cssName="power-button-caption" />
                     </box>
 
-                    <box orientation={Gtk.Orientation.VERTICAL} spacing={40} cssName="power-button-container-large">
+                    <box orientation={Gtk.Orientation.VERTICAL} spacing={20} cssName="power-button-container-large">
                         <button label="" cssName="power-button-large" onClicked={() => {
                             slideDownAndHide("systemctl reboot");
                         }} />
                         <label label={"Reboot"} tooltipText="Reboot" cssName="power-button-caption" />
                     </box>
 
-                    <box orientation={Gtk.Orientation.VERTICAL} spacing={40} cssName="power-button-container-large">
+                    <box orientation={Gtk.Orientation.VERTICAL} spacing={20} cssName="power-button-container-large">
                         <button label="" cssName="power-button-large" onClicked={() => {
                             slideDownAndHide("systemctl poweroff");
                         }} />
-                        <label label={"Power Off"} tooltipText="Power Off" cssName="power-button-caption" />
+                        <label label={"Halt"} tooltipText="Power Off" cssName="power-button-caption" />
                     </box>
 
-                    <box orientation={Gtk.Orientation.VERTICAL} spacing={40} cssName="power-button-container-large">
+                    <box orientation={Gtk.Orientation.VERTICAL} spacing={20} cssName="power-button-container-large">
                         <button label="" cssName="power-button-large" onClicked={() => {
                             slideDownAndHide();
                         }} />

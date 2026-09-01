@@ -1,0 +1,71 @@
+@use "theme" as *;
+
+osd-window {
+    background-color: transparent;
+    background: none;
+    margin-bottom: 30px;
+}
+
+osd-device-name {
+    color: $subtext1;
+    font-size: 22px;
+    font-weight: 800;
+    margin-right: 10px;
+}
+
+osd-box {
+    background-color: $base-transparent;
+    border-radius: 99px;
+    padding: 15px;
+    padding-left: 35px;
+    padding-right: 35px;
+    border: 2px solid $surface1;
+    min-width: 520px;
+}
+
+osd-box-icon {
+    color: $subtext1;
+    margin-right: 10px;
+}
+
+osd-box-label {
+    background-color: $mantle;
+    border: 1px solid $surface0;
+    padding: 4px;
+    border-radius: $border-radius;
+    min-width: 60px;
+    color: $subtext1;
+    font-weight: 600;
+    margin-right: 10px;
+}
+
+osd-box levelbar {
+    min-width: 200px;
+
+    >trough {
+        background-color: $black;
+        border-radius: $border-radius;
+    }
+
+    >trough block {
+        border-radius: $border-radius;
+        border: 1px solid $surface0;
+    }
+
+    >trough block.low {
+        background-color: $green;
+    }
+
+    >trough block.high {
+        background-color: $yellow;
+    }
+
+    >trough block.full {
+        background-color: $peach;
+    }
+
+    >trough block.empty {
+        background-color: transparent;
+    }
+
+}

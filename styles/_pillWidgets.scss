@@ -1,0 +1,127 @@
+@use "theme" as *;
+
+pill-container {
+  background: none;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+pill-button {
+  background-color: $base-transparent;
+  color: $subtext1;
+  padding: 2px;
+  border-radius: 99px;
+  border: 2px solid $surface1-transparent;
+  transition: all 600ms cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 200px;
+  min-height: 50px;
+  margin: 5px;
+}
+
+pill-button:hover {
+  border: 2px solid $accent-background;
+}
+
+pill-button-image {
+  color: $subtext0;
+  font-weight: 900;
+  font-size: 28px;
+  background-color: transparent;
+  margin-left: 20px;
+  margin-right: 10px;
+}
+
+pill-button-name {
+  background-color: transparent;
+  font-weight: 700;
+  font-size: 18px;
+  margin-top: 5px;
+}
+
+pill-button-detail {
+  background-color: transparent;
+  color: $accent-background;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+pill-content-header {
+  color: $overlay0;
+  font-weight: 800;
+  font-size: 14px;
+}
+
+pill-content-button {
+  background-color: $surface1;
+  transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  color: $subtext0;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: $border-radius;
+  min-width: 10px;
+  min-height: 10px;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin: 2px;
+}
+
+pill-content-button:hover {
+  background-color: $surface2;
+  color: $accent-background;
+  box-shadow: inset 1px -1px 0 0 $base, 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+pill-content {
+  background-color: $base-transparent;
+  border-top: 2px solid $surface2;
+  border-radius: $border-radius;
+  margin: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  min-height: 200px;
+  font-size: 14px;
+  padding: 10px;
+}
+
+wifi-access-point-item {
+  background: none;
+}
+
+wifi-access-point-item:hover {
+  color: $accent-background;
+}
+
+pill-param-caption {
+  color: $overlay0;
+  font-weight: 800;
+  font-size: 12px;
+  min-width: 40px;
+  padding: 2px;
+}
+
+pill-param-value {
+  background-color: $surface0-transparent;
+  color: $overlay0;
+  font-size: 14px;
+  border: 1px solid $surface1;
+  min-width: 80px;
+  border-radius: 99px;
+  padding: 5px;
+  margin: 2px;
+}
+
+passphrase-entry {
+  min-height: 20px;
+  background-color: $crust-transparent;
+  color: $overlay1;
+  padding-left: 5px;
+  border-radius: $border-radius;
+  border: 2px solid $surface1;
+  font-size: 12px;
+  transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+passphrase-entry:hover {
+  border-color: $accent-background-transparent;
+}

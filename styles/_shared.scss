@@ -25,7 +25,7 @@ popup-window-style {
 
 tooltip {
   background-color: $mantle-transparent;
-  color: $overlay1;
+  color: $subtext1;
   font-size: 16px;
   border-radius: $border-radius;
   border: 2px solid $surface1;
@@ -52,23 +52,23 @@ bar-button-background {
 }
 
 bar-module-button {
-  background-color: $crust-transparent;
+  background-color: $base-transparent;
   transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
-  color: $overlay1;
+  color: $subtext1;
   font-size: 22px;
   min-width: 70px;
+  min-height: 42px;
 }
 
 bar-module-button:hover {
-  background-color: $surface0;
   color: $accent-background;
 }
 
 desktop-menu-button label {
-  background-color: $crust-transparent;
+  background-color: $base-transparent;
   transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
   border: 2px solid $surface2;
-  color: $overlay1;
+  color: $subtext1;
   font-weight: 600;
   border-radius: 99px;
   min-width: 160px;
@@ -81,11 +81,11 @@ desktop-menu-button label:hover {
   color: $accent-background;
 }
 
-slider-device-name{
-    color: $overlay1;
-    font-size: 16px;
-    font-weight: 600;
-    margin-left: 15px;
+slider-device-name {
+  color: $subtext1;
+  font-size: 14px;
+  font-weight: 400;
+  margin-left: 15px;
 }
 
 /* The main slider container */
@@ -97,7 +97,7 @@ slider-device-name{
 .slider-control trough {
   background-color: $surface2;
   border-radius: $border-radius;
-  min-height: 10px;
+  min-height: 20px;
 }
 
 // /* The part showing current progress */
@@ -106,41 +106,34 @@ slider-device-name{
   border-radius: $border-radius;
 }
 
-// /* The draggable handle */
 .slider-control slider {
-  background-color: $base;
-  border: 2px solid $surface1;
-  transition: all 600ms cubic-bezier(0.4, 0, 0.2, 1);
-  min-width: 20px;
-  min-height: 20px;
-  border-radius: 100%;
-}
-
-.slider-control slider:hover {
-  border: 2px solid $accent-background;
+  background: none;
+  border: none;
+  box-shadow: none;
+  outline: none;
 }
 
 switch {
-    background-color: $mantle-transparent;
-    border: 1px solid $overlay1;
-    border-radius: $border-radius;
-    min-height: 12px;
-    min-width: 24px;
+  background-color: $mantle-transparent;
+  border: 1px solid $overlay1;
+  border-radius: $border-radius;
+  min-height: 12px;
+  min-width: 24px;
 }
 
 switch:checked {
-    background-color: $accent-background;
-    border-color: $black;
+  background-color: $accent-background;
+  border-color: $black;
 }
 
 switch slider {
-    background-color: $overlay2;
-    border-radius: 100%;
-    min-height: 10px;
-    min-width: 10px;
-    margin: 2px;
+  background-color: $overlay2;
+  border-radius: 100%;
+  min-height: 10px;
+  min-width: 10px;
+  margin: 2px;
 }
 
 switch:checked slider {
-    background-color: $surface2;
+  background-color: $surface2;
 }

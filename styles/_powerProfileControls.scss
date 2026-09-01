@@ -1,0 +1,39 @@
+@use "theme" as *;
+
+power-profile-button {
+    background-color: transparent;
+    transition: transform 340ms cubic-bezier(.33, 1, .68, 1);
+    background: none;
+    text-shadow:
+        2px 2px 0 $base,
+        -2px -2px 0 $base,
+        2px -2px 0 $base,
+        -2px 2px 0 $base;
+}
+power-profile-button:hover{
+    transform: scale(1.25);
+}
+
+.power-profile-power-saver {
+    font-size: 26px;
+    font-weight: 600;
+    color: $green;
+}
+
+.power-profile-balanced {
+    font-size: 26px;
+    font-weight: 600;
+    color: $subtext1;
+}
+
+.power-profile-performance {
+    font-size: 26px;
+    font-weight: 600;
+    color: $peach;
+}
+
+.power-profile-unknown {
+    font-size: 26px;
+    font-weight: 600;
+    color: $red;
+}

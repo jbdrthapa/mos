@@ -8,7 +8,7 @@ export function DisplayControlsWidget() {
     const descriptionTooltip = createBinding(displayService, "display_device").as(d => d ?? "");
     const description = createBinding(displayService, "display_device").as(d => {
         const s = d ?? "";
-        return s.length > 35 ? s.slice(0, 32) + "…" : s;
+        return s.length > 40 ? s.slice(0, 37) + "…" : s;
     });
 
     return (
@@ -20,7 +20,7 @@ export function DisplayControlsWidget() {
                 <slider
                     cssClasses={["slider-control"]}
                     tooltipText={createBinding(displayService, "brightness_percent").as((value) => String(value))}
-                    widthRequest={360}
+                    widthRequest={320}
                     min={0}
                     max={100}
                     value={createBinding(displayService, "brightness_percent")}

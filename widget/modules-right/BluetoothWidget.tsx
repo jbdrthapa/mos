@@ -7,7 +7,7 @@ import { For, createBinding, createComputed } from "gnim";
 const hscroll_policy = Gtk.PolicyType.NEVER;
 const vscroll_policy = Gtk.PolicyType.AUTOMATIC;
 const min_height = 100;
-const deviceLabelWidth = 18;
+const deviceLabelWidth = 15;
 
 export function BluetoothWidget(controller: AccordionController) {
 
@@ -125,7 +125,7 @@ export function BluetoothWidget(controller: AccordionController) {
                 }
             }}
         >
-            <box orientation={Gtk.Orientation.VERTICAL} spacing={20}>
+            <box orientation={Gtk.Orientation.VERTICAL} spacing={10}>
                 <For each={discoveredDevicesList}>
                     {(device) => {
                         return (

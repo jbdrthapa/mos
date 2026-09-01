@@ -1,28 +1,34 @@
-import { createRoot } from "ags"
-import { Settings } from "./widget/settings/Settings"
+import { Settings } from "./widget/settings/Settings";
+import { LockScreen } from "./widget/LockScreen";
 
-let settingsInstance: ReturnType<typeof Settings> | undefined;
-let dispose: (() => void) | undefined;
-
+let settingsInstance: ReturnType<typeof Settings> | null = null;
+let lockScreenInstance: ReturnType<typeof LockScreen> | null = null;
 
 export function GetSettingsWindow() {
-    if (!settingsInstance) {
-        dispose = createRoot((d) => {
-            settingsInstance = Settings()
-            return d;
-        })
-    }
-    return settingsInstance;
+  if (!settingsInstance) {
+    settingsInstance = Settings();
+  }
+  return settingsInstance;
+}
+
+export function GetLockScreenWindow() {
+  if (!lockScreenInstance) {
+    lockScreenInstance = LockScreen();
+  }
+  return lockScreenInstance;
 }
 
 export function DisposeSettingsWindow() {
-    dispose?.()
-    dispose = undefined
-    settingsInstance = undefined
+  if (settingsInstance) {
+    settingsInstance.hide();
+    settingsInstance = null;
+  }
 }
 
 const WidgetManager = {
-    GetSettingsWindow,
+  GetSettingsWindow,
+  GetLockScreenWindow,
+  DisposeSettingsWindow,
 };
 
 export default WidgetManager;

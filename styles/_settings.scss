@@ -1,0 +1,145 @@
+@use "theme" as *;
+
+settings-container {
+  background-color: $base-transparent;
+  border: 2px solid $surface1-transparent;
+  padding: 5px;
+  border-radius: $border-radius;
+  min-width: 800px;
+  min-height: 800px;
+  margin-top: 55px;
+}
+
+settings-titlebar {
+  background-color: $base-transparent;
+  color: $overlay0;
+  border-bottom: 2px solid $base;
+  border-top-left-radius: $border-radius;
+  border-top-right-radius: $border-radius;
+  padding: 4px;
+  padding-left: 10px;
+  font-weight: bold;
+}
+
+section-heading {
+  color: $subtext0;
+  font-size: 24px;
+  font-weight: 600;
+  padding: 10px;
+}
+
+section-background {
+  background-color: $base-transparent;
+  padding: 20px;
+  border-radius: $border-radius;
+  border: 1px solid $surface0;
+  min-width: 500px;
+  min-height: 500px;
+}
+
+settings-param-heading {
+  color: $overlay0;
+  font-weight: 600;
+  font-size: 24px;
+}
+
+settings-param-caption,
+settings-param-caption-compact {
+  color: $subtext0;
+  font-weight: 600;
+  min-width: 150px;
+}
+
+settings-param-caption {
+  padding: 10px;
+}
+
+settings-param-caption-compact {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+settings-param-value-box {
+  min-width: 300px;
+}
+
+settings-param-value,
+settings-param-value-compact {
+  background-color: $surface0-transparent;
+  color: $text;
+  border: 1px solid $surface1;
+  border-radius: $border-radius;
+}
+
+settings-param-value {
+  padding: 10px;
+}
+
+settings-param-value-compact {
+  padding: 2px;
+}
+
+settings-param-icon {}
+
+settings-button {
+  background-color: $surface0;
+  color: $overlay1;
+  border-radius: 99px;
+  box-shadow: inset 0 -1px 0 0 $base, 0 4px 6px rgba(0, 0, 0, 0.5);
+  transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 120px;
+  min-height: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+settings-button:hover {
+  background-color: $surface1;
+  box-shadow: inset 0 -1px 0 0 $base, 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+settings-notebook {
+  background-color: $base-transparent;
+  padding: 10px;
+  border-radius: $border-radius;
+  min-width: 800px;
+  min-height: 800px;
+  border: 0px;
+
+  &>stack {
+    background-color: $base-transparent;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  /* The container for the tabs on the left */
+  & header.left {
+    min-width: 200px;
+    background-color: $base-transparent;
+  }
+
+  /* Individual tab styling */
+  & tab {
+    background-color: $surface0;
+    transition: all 350ms cubic-bezier(0.4, 0, 0.2, 1);
+    color: $overlay1;
+    font-weight: 600;
+    min-height: 15px;
+    padding: 4px 8px;
+    margin: 3px;
+    border: 2px solid $surface2;
+    border-radius: 99px;
+  }
+
+  & tab:hover {
+    border: 2px solid $accent-background;
+  }
+
+  & tab:checked {
+    border: 2px solid $accent-background;
+    box-shadow: inset 0 -1px 0 0 $base, 0 4px 6px rgba(0, 0, 0, 0.5);
+  }
+}

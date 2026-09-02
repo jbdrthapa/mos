@@ -1,39 +1,37 @@
 mos my-own-shell, custom shell for Tiling Window Managers
  
 ## Bar
-![Bar 1](screenshots/Bar1.png?v=1)
-![Bar 2](screenshots/Bar2.png?v=1)
-![Bar 3](screenshots/Bar3.png?v=1)
+![Bar 1](screenshots/Bar.png?v=1)
 
 ## Application Launcher
 ![Application Launcher](screenshots/Launcher.png?v=6)
 
 ## Menu
-![Menu 1](screenshots/Menu1.png?v=1)
-![Menu 2](screenshots/Menu2.png?v=1)
-![Menu 3](screenshots/Menu3.png?v=1)
-![Menu 4](screenshots/Menu4.png?v=1)
+![Menu](screenshots/Menu.png?v=1)
 
 ## Notifications
 ![Notification](screenshots/Notification.png?v=6)
- 
-## Date time calendar
-![Time & Calendar](screenshots/Time-Calendar.png?v=6)
 
 ## Lock Screen
 ![Lock Screen](screenshots/LockScreen.png?v=1)
 
-## Power Options
-![Power Options](screenshots/PowerOptions.png?v=1)
+## Power Options 
+![Power Settings](screenshots/Power-Options.png?v=1)
 
-## Power Settings 
-![Power Settings](screenshots/Settings-Power.png?v=5)
+## Today
+![Time & Calendar](screenshots/Settings-Today.png?v=1)
 
-## Display Settings 
-![Display Settings](screenshots/Settings-Display.png?v=5)
+## Apps
+![Time & Calendar](screenshots/Settings-Apps.png?v=1)
 
-## Wallpaper Settings 
-![Wallpaper Settings](screenshots/Settings-Wallpaper.png?v=5)
+## Wallpaper 
+![Wallpaper Settings](screenshots/Settings-Wallpapers.png?v=1)
+
+## Mpris
+![Wallpaper Settings](screenshots/Settings-Mpris.png?v=1)
+
+## Power
+![Power Options](screenshots/Settings-Power.png?v=1)
 
 ## About 
 ![About](screenshots/Settings-About.png?v=5)

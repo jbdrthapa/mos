@@ -1,11 +1,10 @@
 import Gtk from "gi://Gtk?version=4.0";
-import { createBinding, createComputed } from "gnim";
+import { createState, createBinding, createComputed } from "gnim";
 import { AccordionController } from "./AccordionController";
 import { PillWidget } from "./PillWidget";
 import NM from "gi://NM?version=1.0";
 
 const client = NM.Client.new(null);
-
 
 export function isConnectionActive(conn: NM.RemoteConnection): boolean {
     const uuid = conn.get_uuid();
@@ -67,16 +66,16 @@ export function VPNWidget(controller: AccordionController) {
     // pick first VPN connection (you can expand later)
     const vpn = vpnConnections[0];
 
+    const [nmState, setNmState] = createState(0);
+
     const activeState = createComputed(() => {
+        nmState(); // dependency anchor
         return vpn ? (isConnectionActive(vpn) ? "Connected" : "Disconnected") : "No VPN";
     });
 
-
-    // react to NM changes
     client.connect("notify::active-connections", () => {
-        //activeState.update();
+        setNmState(nmState() + 1);
     });
-
 
     const content = (
         <box orientation={Gtk.Orientation.VERTICAL} spacing={12} cssName="pill-content">
@@ -96,7 +95,7 @@ export function VPNWidget(controller: AccordionController) {
     return PillWidget({
         id: "vpn",
         controller: controller,
-        iconName: "󰍹",
+        iconName: "󰯅",
         title: "VPN",
         detail: activeState,
         content,

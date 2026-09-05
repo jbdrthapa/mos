@@ -6,6 +6,8 @@ import { AudioSliderWidget } from "./AudioSliderWidget";
 
 export function SpeakerSliderWidget(controller: SliderAccordionController) {
 
+    const DEVICE_DESCRIPTION_LENGTH = 50;
+
     const { defaultSpeaker: speaker } = AstalWp.get_default()!
 
     const wp = AstalWp.get_default();
@@ -26,11 +28,17 @@ export function SpeakerSliderWidget(controller: SliderAccordionController) {
             <box orientation={Gtk.Orientation.VERTICAL} spacing={10}>
                 <For each={speakersBinding}>
                     {(speaker) => {
-                        const description = createComputed(() => {
-                            const rawDesc = createBinding(speaker, "description");
-                            return rawDesc() ?? "Unknown Device";
+                        const deviceDescriptions = createComputed(() => {
+                            const rawDesc = createBinding(speaker, "description")() ?? "Unknown Device";
+                            const shortDesc = rawDesc.length > DEVICE_DESCRIPTION_LENGTH ? `${rawDesc.slice(0, DEVICE_DESCRIPTION_LENGTH)}...` : rawDesc;
+                            return {
+                                short: shortDesc,
+                                full: rawDesc
+                            };
                         });
 
+                        const shortDescription = createComputed(() => deviceDescriptions().short);
+                        const fullDescription = createComputed(() => deviceDescriptions().full);
                         const isDefault = createBinding(speaker, "isDefault");
 
                         return (
@@ -45,7 +53,7 @@ export function SpeakerSliderWidget(controller: SliderAccordionController) {
                                         onNotifyActive={(self) => {
                                             speaker.isDefault = self.active;
                                         }} />
-                                    <label label={description} cssName="slider-content-param" />
+                                    <label label={shortDescription} tooltipText={fullDescription} cssName="slider-content-param" />
                                 </box>
                             </box>
                         )

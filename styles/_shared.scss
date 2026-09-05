@@ -95,15 +95,17 @@ slider-device-name {
 
 // /* The track background */
 .slider-control trough {
-  background-color: $surface2;
+  background-color: $surface0-transparent;
   border-radius: $border-radius;
-  min-height: 20px;
+  min-height: 15px;
+  border: 1px solid $overlay1;
 }
 
 // /* The part showing current progress */
 .slider-control highlight {
   background-color: $accent-background;
   border-radius: $border-radius;
+  border: 1px solid $base;
 }
 
 .slider-control slider {

@@ -1,7 +1,7 @@
 @use "theme" as *;
 
 brightness-icon {
-    color: $subtext1;
+    color: $overlay1;
     font-size: 28px;
     margin-left: 10px;
 }
@@ -10,8 +10,8 @@ brightness-percent {
     color: $subtext1;
     font-size: 14px;
     font-weight: 600;
-    background-color: $mantle-transparent;
-    border: 1px solid $base;
+    background-color: $surface0;
+    border: 1px solid $overlay0;
     border-radius: $border-radius;
     min-width: 40px;
     min-height: 40px;

@@ -67,7 +67,7 @@ export function AudioSliderWidget({
         });
 
         return (
-            <box orientation={Gtk.Orientation.HORIZONTAL} heightRequest={80}>
+            <box orientation={Gtk.Orientation.HORIZONTAL} hexpand={true} halign={Gtk.Align.CENTER} heightRequest={80}>
                 <image
                     pixelSize={26}
                     iconName={volumeIcon} cssName={"audio-icon"} />

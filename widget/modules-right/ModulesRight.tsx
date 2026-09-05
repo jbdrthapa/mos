@@ -58,6 +58,7 @@ export function ModulesRight() {
                         {systemInfoWidget}
                         {pillWidgets}
                     </box>
+
                     {displayControlsWidget}
                     {audioControlsWidget}
                 </box>

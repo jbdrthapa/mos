@@ -12,7 +12,7 @@ export function DisplayControlsWidget() {
     });
 
     return (
-        <box orientation={Gtk.Orientation.HORIZONTAL} halign={Gtk.Align.CENTER} cssName="display-controls-container" marginTop={30}>
+        <box orientation={Gtk.Orientation.HORIZONTAL} halign={Gtk.Align.CENTER} marginTop={30}>
             <label label={createBinding(displayService, "brightness_icon")} cssName={"brightness-icon"} />
             <label valign={Gtk.Align.CENTER} label={createBinding(displayService, "brightness_percent").as((value) => String(value))} cssName={"brightness-percent"} />
             <box orientation={Gtk.Orientation.VERTICAL}>

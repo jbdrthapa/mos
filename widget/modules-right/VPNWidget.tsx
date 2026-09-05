@@ -63,14 +63,17 @@ export function VPNWidget(controller: AccordionController) {
         return type === "vpn" || type === "wireguard";
     });
 
-    // pick first VPN connection (you can expand later)
-    const vpn = vpnConnections[0];
-
     const [nmState, setNmState] = createState(0);
 
+    const vpn = vpnConnections[0];
+
     const activeState = createComputed(() => {
-        nmState(); // dependency anchor
-        return vpn ? (isConnectionActive(vpn) ? "Connected" : "Disconnected") : "No VPN";
+        nmState();
+        const activeConnection = getActiveConnection(vpn);
+        const connection_id = activeConnection?.get_id();
+        const id = connection_id && connection_id.length > 10 ? connection_id.slice(0, 10) + "…" : connection_id;
+
+        return vpn ? (isConnectionActive(vpn) ? id : "Disconnected") : "No VPN";
     });
 
     client.connect("notify::active-connections", () => {

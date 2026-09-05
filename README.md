@@ -1,4 +1,4 @@
-mos my-own-shell, custom shell for Tiling Window Managers
+crescendo, custom shell for Tiling Window Managers
  
 ## Bar
 ![Bar 1](screenshots/Bar.png?v=1)
@@ -40,4 +40,4 @@ mos my-own-shell, custom shell for Tiling Window Managers
 GJS_ENABLE_PROFILER=1 ags run
 
 ## Bundle the package
-ags bundle app.ts $HOME/.config/mos/mos
+ags bundle app.ts $HOME/.config/crescendo/crescendo

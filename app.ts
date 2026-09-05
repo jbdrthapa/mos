@@ -4,11 +4,11 @@ import Bar from "./widget/Bar";
 import NotificationPopups from "./widget/modules-right/NotificationPopups";
 import Osd from "./widget/osd/Osd";
 
-app.set_application_id("org.mos");
+app.set_application_id("org.crescendo");
 app.set_version("1.0");
 
 app.start({
-  instanceName: "mos",
+  instanceName: "crescendo",
   css: style,
   main() {
     for (const monitor of app.get_monitors()) {

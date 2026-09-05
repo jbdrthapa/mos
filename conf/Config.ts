@@ -6,9 +6,9 @@ let monitor: Gio.FileMonitor | null = null;
 let configPath = GLib.build_filenamev([
     GLib.get_home_dir(),
     ".config",
-    "mos",
+    "crescendo",
     "conf",
-    "mos.json",
+    "crescendo.json",
 ]);
 
 function loadConfig() {
@@ -21,7 +21,7 @@ function loadConfig() {
     try {
         cachedConfig = JSON.parse(new TextDecoder().decode(bytes));
     } catch (e) {
-        print(`mos config parse error: ${e}`);
+        print(`crescendo config parse error: ${e}`);
         cachedConfig = null;
     }
 }
@@ -61,7 +61,7 @@ function saveConfig() {
         return true;
 
     } catch (e) {
-        console.log(`mos config save error: ${e}`);
+        console.log(`crescendo config save error: ${e}`);
         return false;
     }
 }
@@ -78,7 +78,7 @@ function setupWatcher() {
             eventType === Gio.FileMonitorEvent.CHANGED ||
             eventType === Gio.FileMonitorEvent.CREATED) {
 
-            print("mos.json changed, reloading...");
+            print("crescendo.json changed, reloading...");
             loadConfig();
         }
     });

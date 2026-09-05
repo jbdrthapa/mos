@@ -1,3 +1,3 @@
 #!/bin/bash
 
-ags quit -i mos
+ags quit -i crescendo

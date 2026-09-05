@@ -32,7 +32,7 @@ export function AudioSettings() {
     //      Layout: 5.1     |  State: Idle    |  Muted: True
 
 
-    const CONFIG_DIR = `${Utils.GetUserConfigDirectory()}/mos`;
+    const CONFIG_DIR = `${Utils.GetUserConfigDirectory()}/crescendo`;
 
     const CHANNEL_LAYOUT: Record<number, [string, string]> = {
         0: [`${CONFIG_DIR}/assets/speaker_layout/unknown.svg`, "Unknown"],

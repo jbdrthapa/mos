@@ -4,9 +4,9 @@ import Utils from "../../Utils";
 
 export function AboutSettings() {
 
-    const CONFIG_DIR = `${Utils.GetUserConfigDirectory()}/mos`;
+    const CONFIG_DIR = `${Utils.GetUserConfigDirectory()}/crescendo`;
 
-    const mosLogoPath = `${CONFIG_DIR}/assets/general/mos-vibrant-shell.svg`
+    const crescendoLogoPath = `${CONFIG_DIR}/assets/general/crescendo-vibrant-shell.svg`
 
     return (
         <box orientation={Gtk.Orientation.VERTICAL} spacing={10}>
@@ -15,7 +15,7 @@ export function AboutSettings() {
 
             <box spacing={10} orientation={Gtk.Orientation.VERTICAL} cssName="section-background">
 
-                <image file={mosLogoPath} tooltipText={app.instanceName} pixelSize={256} cssName="settings-param-icon" valign={Gtk.Align.START} />
+                <image file={crescendoLogoPath} tooltipText={app.instanceName} pixelSize={256} cssName="settings-param-icon" valign={Gtk.Align.START} />
 
                 <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
                     <label label="Title" xalign={0} cssName="settings-param-caption" />

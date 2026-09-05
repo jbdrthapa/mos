@@ -1,11 +1,11 @@
 export const WindowName = {
-    modulesLeft: "mos-modules-left",
-    modulesCenter: "mos-modules-center",
-    modulesRight: "mos-modules-right",
+    modulesLeft: "crescendo-modules-left",
+    modulesCenter: "crescendo-modules-center",
+    modulesRight: "crescendo-modules-right",
     bar: "bar-background",
-    settings: "mos-modules-settings",
-    osd: "mos-osd",
-    desktopMenu: "mos-desktopmenu",
-    lockScreen: "mos-lockscreen",
-    powerOptions: "mos-poweroptions"
+    settings: "crescendo-modules-settings",
+    osd: "crescendo-osd",
+    desktopMenu: "crescendo-desktopmenu",
+    lockScreen: "crescendo-lockscreen",
+    powerOptions: "crescendo-poweroptions"
 } as const;

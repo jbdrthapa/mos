@@ -1,8 +1,8 @@
 @use "theme" as *;
 
-#mos-modules-left,
-#mos-modules-center,
-#mos-modules-right {
+#crescendo-modules-left,
+#crescendo-modules-center,
+#crescendo-modules-right {
   background-color: $base-transparent;
   border-radius: $border-radius;
   border: 2px solid $surface0;
@@ -14,11 +14,11 @@ popup-window-style {
   background-color: transparent;
 }
 
-#mos-modules-left {
+#crescendo-modules-left {
   padding: 20px;
 }
 
-#mos-desktopmenu {
+#crescendo-desktopmenu {
   background-color: transparent;
   padding: 5px;
 }
